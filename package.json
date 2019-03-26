@@ -1,0 +1,42 @@
+{
+  "name": "af4-college",
+  "version": "0.7.9",
+  "description": "College of Agriculture and Life Sciences variation of the AgriFlex4 theme",
+  "main": "af4-college.php",
+  "scripts": {
+    "start": "git config core.hooksPath hooks && chmod u+x ./hooks/pre-commit && composer install && npm install && grunt",
+    "checkwp": "npm run configphpcs && npm run checkphp",
+    "configphpcs": "vendor/bin/phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs",
+    "checkphp": "vendor/bin/phpcs --standard=WordPress --report=source ./*.php ./src && vendor/bin/phpcs --standard=WordPress ./*.php ./src"
+  },
+  "author": "Zachary Watkins",
+  "license": "GPL-2.0+",
+  "bugs": {
+    "url": "https://github.com/agrilife/af4-college/issues",
+    "email": "first-call@tamu.edu"
+  },
+  "dependencies": {
+    "autoprefixer": "^9.2.1",
+    "foundation-sites": "^6.4.3",
+    "grunt": "^1.0.3",
+    "grunt-contrib-coffee": "^2.0.0",
+    "grunt-contrib-compress": "^1.4.3",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-postcss": "^0.9.0",
+    "jquery": "^3.3.1",
+    "underscore": "^1.9.1",
+    "what-input": "^5.1.2"
+  },
+  "devDependencies": {
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-sass-lint": "^0.2.4"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/agrilife/af4-college.git"
+  },
+  "homepage": "https://github.com/agrilife/af4-college#readme"
+}

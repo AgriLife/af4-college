@@ -1,0 +1,71 @@
+#!/bin/sh
+PATH="/usr/local/bin:$PATH"
+. $HOME/.nvm/nvm.sh
+nvm use 6
+
+#
+# Run WordPress coding standards tasks.
+#
+vendor/bin/phpcs --config-set installed_paths vendor/wp-coding-standards/wpcs
+PHPFILES=`git diff --cached --name-only --diff-filter=AM | grep '.php' | tr '\n' ' '`
+if [[ -z $PHPFILES ]]
+then
+	echo ""
+else
+	for file in ${PHPFILES}
+	do
+		phpFilesStr="$phpFilesStr$phpFilesSeparator$file"
+		phpFilesSeparator=" "
+	done
+
+	phplint=`vendor/bin/phpcs --standard=WordPress $phpFilesStr`
+	echo $phpFilesStr;
+
+	# Try to fix files automatically with phpcbf
+	if [[ "$phplint" == *"FOUND"* ]]
+		then
+			vendor/bin/phpcbf --standard=WordPress $phpFilesStr
+			git add $phpFilesStr
+			phplint=`vendor/bin/phpcs --standard=WordPress $phpFilesStr`
+	fi
+
+	echo "$phplint"
+
+	if [[ "$phplint" == *"FOUND"* ]]
+		then
+			hasLintErrors="true"
+	fi
+fi
+
+#
+# Run Sass lint task.
+#
+SASSFILES=`git diff --cached --name-only --diff-filter=AM | grep '.scss$'`
+if [[ -z $SASSFILES ]]
+then
+	echo ""
+else
+	for file in ${SASSFILES}
+	do
+		cssFilesStr="$cssFilesStr$cssFilesSeparator$file"
+		cssFilesSeparator=", "
+	done
+
+	lint=`node_modules/.bin/sass-lint "$cssFilesStr" -v -q`
+	echo "$lint"
+
+	if [[ "$lint" == *"problem"* ]]
+		then
+			hasLintErrors="true"
+	fi
+fi
+
+#
+# Report errors
+#
+if [ $hasLintErrors ]; then
+	echo "Fix all issues before commit."
+	exit 1
+fi
+
+exit 0

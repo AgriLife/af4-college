@@ -1,0 +1,76 @@
+# Linter Options
+# https://github.com/sasstools/sass-lint/tree/master/docs/rules
+options:
+  # Don't merge default rules
+  merge-default-rules: false
+# File Options
+files:
+  include: 'css/src/**/*.s+(a|c)ss'
+  ignore:
+    - 'sass/vendor/**/*.*'
+# Rule Configuration
+rules:
+  brace-style:
+    - 2
+    - style: '1tbs'
+    - allow-single-line: false
+  no-color-keywords: 2
+  no-duplicate-properties:
+    - 2
+    -
+      exclude:
+        - background
+        - background-color
+        - border
+        - white-space
+  no-mergeable-selectors: 2
+  no-misspelled-properties:
+    - 2
+    -
+      'extra-properties':
+        - 'ms-filter'
+        - '*text-indent'
+        - '*zoom'
+  space-after-colon: true
+  space-after-comma: true
+  trailing-semicolon: true
+  extends-before-mixins: 2
+  no-warn: 1
+  no-debug: 1
+  no-important: 1
+  hex-notation:
+    - 2
+    -
+      style: uppercase
+  indentation:
+    - 1
+    -
+      size: tab
+  quotes:
+    - 1
+    -
+      style: double
+  border-zero: 0
+  empty-args: 0
+  empty-line-between-blocks: 1
+  final-newline: 1
+  force-element-nesting: 0
+  force-pseudo-nesting: 0
+  hex-length: 1
+  mixins-before-declarations: 1
+  nesting-depth: 0
+  no-color-literals: 0
+  no-css-comments: 0
+  no-empty-rulesets: 1
+  no-ids: 0
+  no-qualifying-elements: 0
+  no-trailing-whitespace: 1
+  no-vendor-prefixes: 1
+  property-sort-order: 0
+  single-line-per-selector: 1
+  space-before-brace: 1
+  zero-unit: 0
+  max-line-length:
+    - 1
+    -
+      length: 100

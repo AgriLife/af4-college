@@ -1,4 +1,5 @@
 # College of Agriculture and Life Sciences variation of the AgriFlex4 theme
+[![Codeship Status for AgriLife/af4-college](https://app.codeship.com/projects/4ae66d50-32cf-0137-114c-6a255f9975f4/status?branch=master)](https://app.codeship.com/projects/332235)
 
 This WordPress plugin should only be used on https://aglifesciences.tamu.edu/, other College of Agriculture and Life Sciences websites, or testing versions of them. No permission is given to install this on any other website, as it contains visual and informational aspects unique to those colleges. You may repurpose code from this repository for your own WordPress development since we use a GPL-2.0+ license.
 

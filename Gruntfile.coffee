@@ -51,9 +51,8 @@ module.exports = (grunt) ->
           archive: '<%= pkg.name %>.zip'
         files: [
           {src: ['css/*.css']},
-          {src: ['images/**']},
           {src: ['src/*.php']},
-          {src: ['af4-college.php']},
+          {src: ['*.php']},
           {src: ['readme.md']},
         ]
 

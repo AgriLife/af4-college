@@ -20,9 +20,6 @@
  * License URI:  http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
-/* Autoload */
-require 'vendor/autoload.php';
-
 /* Define some useful constants */
 define( 'COLAF4_DIRNAME', 'af4-college' );
 define( 'COLAF4_DIR_PATH', plugin_dir_path( __FILE__ ) );

@@ -26,7 +26,6 @@ define( 'COLAF4_DIR_PATH', plugin_dir_path( __FILE__ ) );
 define( 'COLAF4_DIR_FILE', __FILE__ );
 define( 'COLAF4_DIR_URL', plugin_dir_url( __FILE__ ) );
 define( 'COLAF4_TEXTDOMAIN', 'af4-college' );
-define( 'COLAF4_TEMPLATE_PATH', COLAF4_DIR_PATH . 'templates' );
 
 /**
  * The core plugin class that is used to initialize the plugin

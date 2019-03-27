@@ -33,3 +33,29 @@ define( 'COLAF4_TEXTDOMAIN', 'af4-college' );
 require COLAF4_DIR_PATH . 'src/class-college.php';
 spl_autoload_register( 'College::autoload' );
 College::get_instance();
+
+/**
+ * Notify user of missing dependencies
+ */
+register_activation_hook( __FILE__, 'af4_college_activation' );
+
+/**
+ * Check for missing dependencies
+ *
+ * @since 0.1.1
+ * @return void
+ */
+function af4_college_activation() {
+	$theme = wp_get_theme();
+	if ( 'AgriFlex4' !== $theme->name ) {
+		$error = sprintf(
+			/* translators: %s: URL for plugins dashboard page */
+			__(
+				'Plugin NOT activated: The <strong>College - AgriFlex4 Plugin</strong> needs the <strong>AgriFlex4 Theme</strong> to be installed and activated first. <a href="%s">Back to plugins page</a>',
+				'af4-college'
+			),
+			get_admin_url( null, '/plugins.php' )
+		);
+		wp_die( wp_kses_post( $error ) );
+	}
+}

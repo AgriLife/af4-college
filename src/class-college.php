@@ -15,7 +15,6 @@
  * The core plugin class
  *
  * @since 0.1.0
- * @return void
  */
 class College {
 

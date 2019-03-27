@@ -31,7 +31,5 @@ define( 'COLAF4_TEXTDOMAIN', 'af4-college' );
  * The core plugin class that is used to initialize the plugin
  */
 require COLAF4_DIR_PATH . 'src/class-college.php';
-
-/* Autoload all classes */
 spl_autoload_register( 'College::autoload' );
 College::get_instance();

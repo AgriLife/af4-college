@@ -11,7 +11,7 @@
  * Plugin Name:  College - AgriFlex4
  * Plugin URI:   https://github.com/AgriLife/af4-college
  * Description:  College of Agriculture and Life Sciences variation of the AgriFlex4 theme.
- * Version:      0.1.0
+ * Version:      0.1.1
  * Author:       Zachary Watkins
  * Author URI:   https://github.com/ZachWatkins
  * Author Email: zachary.watkins@ag.tamu.edu

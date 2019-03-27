@@ -2,7 +2,7 @@
 /**
  * College - AgriFlex4
  *
- * @package      College
+ * @package      af4-college
  * @author       Zachary Watkins
  * @copyright    2019 Texas A&M AgriLife Communications
  * @license      GPL-2.0+

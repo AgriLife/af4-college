@@ -11,12 +11,11 @@
  * @subpackage af4-college/src
  */
 
-namespace Agrilife;
+namespace College;
 
 /**
  * Add assets
  *
- * @package Agrilife.org
  * @since 0.1.0
  */
 class Assets {

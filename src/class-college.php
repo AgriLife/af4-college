@@ -42,6 +42,9 @@ class College {
 
 		add_action( 'init', array( $this, 'init' ) );
 
+		// Add Widgets.
+		add_action( 'widgets_init', array( $this, 'register_widgets' ) );
+
 	}
 
 	/**
@@ -55,6 +58,23 @@ class College {
 		/* Set up asset files */
 		require_once COLAF4_DIR_PATH . 'src/class-assets.php';
 		$ado_assets = new \College\Assets();
+
+		/* Genesis modifications */
+		require_once COLAF4_DIR_PATH . 'src/class-genesis.php';
+		$genesis = new \College\Genesis();
+
+	}
+
+	/**
+	 * Register widgets
+	 *
+	 * @since 0.1.0
+	 * @return void
+	 */
+	public function register_widgets() {
+
+		require_once COLAF4_DIR_PATH . 'src/class-widget-af4c-contact.php';
+		register_widget( 'Widget_AF4C_Contact' );
 
 	}
 

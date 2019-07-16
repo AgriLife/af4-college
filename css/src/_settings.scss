@@ -1,0 +1,128 @@
+/* Copy from github.com/agrilife/agriflex4/css/src/_settings.scss */
+
+/* Typography
+--------------------------------------------- */
+// $base-font-size: 16px;
+
+/* Breakpoints
+--------------------------------------------- */
+$break-medium: map-get($breakpoints, medium);
+$break-large: map-get($breakpoints, large);
+$break-xlarge: map-get($breakpoints, xlarge);
+$break-xxlarge: map-get($breakpoints, xlarge);
+$break-medium: map-get($breakpoints, medium);
+$breakpoint-classes: (small medium);
+
+/* Colors
+--------------------------------------------- */
+$white: #F8F8F8; // Because sometimes white isn't always white
+$whiter: #FEFEFE;
+$gray-darker: #222;
+$gray-dark: #333;
+$gray-medium: #5E564E;
+$gray-light-medium: #58585B;
+$gray-light: #717074;
+$gray-lighter: #D6D6D6;
+$gray-lightest: #F7F7F9;
+$maroon-alt: #4B1111;
+$maroon: #500000;
+$dark-blue: #02233B;
+$light-blue: #27A9E1;
+$light-blue-alt: #1DAFED;
+$robins-egg-blue: #00AEEF;
+$green: #337845;
+$light-green: #B4D234;
+$purple: #5D0025;
+$beige: #FDE1B4;
+$primary-color: $maroon;
+$yellow: #FFE400;
+
+/* Fonts
+--------------------------------------------- */
+$tungsten: "Tungsten A", "Tungsten B", "Oswald", sans-serif;
+$monoton: "Monoton", cursive;
+$opensans: "Open Sans", sans-serif;
+$header-font-family: $tungsten;
+$template-header-font-family: $monoton;
+$header-color-alt: lighten( $maroon, 12% );
+
+/* Global
+--------------------------------------------- */
+$anchor-color: $primary-color;
+$anchor-color-hover: scale-color($anchor-color, $lightness: -14%);
+$anchor-text-decoration: underline;
+$anchor-text-decoration-hover: underline;
+$site-padding: 1rem;
+$body-font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+$paragraph-margin-bottom: 2rem;
+$paragraph-lineheight: 1.35;
+$header-lineheight: 1.1;
+$grid-margin-gutters: 2rem;
+$grid-padding-gutters: 2rem;
+
+/* Header
+--------------------------------------------- */
+$site-title: $gray-light;
+$site-title-font-weight: 500;
+$site-title-font-size: 2.75rem;
+$site-title-font-family: "minion-pro", sans-serif;
+$site-description: $gray-dark;
+$site-title-color: $whiter;
+$site-title-background: $dark-blue;
+
+/* Navigation
+--------------------------------------------- */
+$topbar-padding: 0;
+$topbar-background: $site-title-background;
+$topbar-submenu-background: lighten($site-title-background, 5%);
+$topbar-input-width: auto;
+$dropdown-menu-item-background-active: $site-title-background;
+$dropdownmenu-arrow-color: $gray-lighter;
+$dropdownmenu-border: 0 none;
+$dropdownmenu-border-width: 0;
+$accordion-menu-item-background-active: $site-title-background;
+$accordionmenu-arrow-color: $gray-lighter;
+$nav-item-color: $gray-lighter;
+$dropdown-menu-item-color-active: $gray-lighter;
+$menu-item-color-active: $gray-lighter;
+$menu-item-background-active: $site-title-background;
+
+/* Title Bar
+--------------------------------------------- */
+$titlebar-background: transparent;
+$titlebar-color: $whiter;
+$titlebar-padding: 0.5rem;
+$titlebar-icon-color: $whiter;
+$titlebar-icon-color-hover: $whiter;
+$titlebar-icon-spacing: 0.6rem;
+$titlebar-text-font-weight: normal;
+
+/* Content
+--------------------------------------------- */
+$small-side-spacing: 9%;
+$blockquote-border: none;
+$blockquote-color: darken($light-blue, 20%);
+$blockquote-padding: rem-calc(9 20 9 19);
+$cite-font-size: 0.9rem;
+$cite-color: darken($light-blue, 20%);
+$hr-border-color: $light-blue;
+$hr-border: 2px dashed $light-blue;
+$table-border-color: $light-blue;
+$table-border: 1px solid $table-border-color;
+$flow-margin-x: rem-calc(24);
+
+/* Buttons
+--------------------------------------------- */
+$button-radius: 2rem;
+$button-background: $light-blue;
+$button-background-hover: $dark-blue;
+
+/* Footer
+--------------------------------------------- */
+$footer-background: $site-title-background;
+$footer-text: #F8F8F8;
+$footer-link-active: $light-blue;
+$footer-font-family: $header-font-family;
+$footer-font-weight: 400;
+
+/* END copy from github.com/agrilife/agriflex4/css/src/_settings.scss */

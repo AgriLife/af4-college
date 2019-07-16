@@ -46,8 +46,27 @@ class Genesis {
 			)
 		);
 
-		add_action( 'genesis_footer', array( $this, 'genesis_footer_widget_area' ) );
+		add_filter( 'genesis_structural_wrap-footer', array( $this, 'class_footer_wrap' ), 12 );
+		add_action( 'genesis_footer', array( $this, 'genesis_footer_widget_area' ), 7 );
+		add_action( 'genesis_footer', array( $this, 'add_copyright' ), 9 );
 
+	}
+
+	/**
+	 * Change footer wrap class names
+	 *
+	 * @since 0.1.0
+	 * @param string $output The wrap HTML.
+	 * @return string
+	 */
+	public function class_footer_wrap( $output ) {
+
+		$output = preg_replace( '/\s?grid-container\s?/', ' ', $output );
+		$output = preg_replace( '/\s?grid-x\s?/', ' ', $output );
+		$output = preg_replace( '/\s?grid-padding-x\s?/', ' ', $output );
+		$output = preg_replace( '/class=" /', 'class="', $output );
+
+		return $output;
 	}
 
 	/**
@@ -58,12 +77,21 @@ class Genesis {
 	 */
 	public function genesis_footer_widget_area() {
 
-		$logo          = sprintf(
-			'<a href="%s" title="College of Agriculture and Life Sciences"><img src="%s"></a>',
+		echo '<div class="footer-info grid-container">';
+
+		genesis_widget_area(
+			'footer-right',
+			array(
+				'before' => '',
+				'after'  => '',
+			)
+		);
+
+		$logo = sprintf(
+			'<a class="logo" href="%s" title="College of Agriculture and Life Sciences"><img src="%s"></a>',
 			trailingslashit( home_url() ),
 			COLAF4_DIR_URL . '/images/logo-coals-light.svg'
 		);
-		$accessibility = '<a href="#">Website Accessibility Assistance</a>';
 
 		echo wp_kses_post( $logo );
 
@@ -75,15 +103,22 @@ class Genesis {
 			)
 		);
 
+		$accessibility = '<a class="waa underline" href="#">Website Accessibility Assistance</a>';
 		echo wp_kses_post( $accessibility );
 
-		genesis_widget_area(
-			'footer-right',
-			array(
-				'before' => '',
-				'after'  => '',
-			)
-		);
+		echo '</div>';
+
+	}
+
+	/**
+	 * Add copyright notice
+	 *
+	 * @since 0.1.1
+	 * @return void
+	 */
+	public function add_copyright() {
+
+		echo wp_kses_post( '<p class="center">&copy; ' . date( 'Y' ) . ' Texas A&amp;M University. All rights reserved.</p>' );
 
 	}
 }

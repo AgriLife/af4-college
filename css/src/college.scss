@@ -2,3 +2,107 @@
 
 @import "foundation";
 @import "settings";
+
+.site-footer {
+	padding: 0;
+	background-color: $maroon;
+
+	.wrap {
+		padding: 0;
+	}
+
+	.footer-info,
+	.footer-container {
+		padding: 1rem 0;
+	}
+
+	.footer-container {
+		background-color: darken( $maroon, 5% );
+
+		&,
+		a {
+			font-family: $opensans;
+		}
+
+		p {
+			margin-bottom: 1rem;
+		}
+	}
+
+	.req-links {
+		@include xy-grid-container;
+		margin-bottom: 0;
+		text-align: center;
+	}
+
+	.footer-info {
+		font-family: $opensans;
+		line-height: 1.6;
+	}
+
+	.waa {
+		font-family: $tungsten;
+	}
+
+	.widget_nav_menu h4 {
+		padding-bottom: 1rem;
+		margin-bottom: 1rem;
+		border-bottom: 1px solid #894244;
+		font-size: 2rem;
+	}
+
+	.widget_a2a_share_save_widget {
+		padding-bottom: 1rem;
+		margin-bottom: 1rem;
+		border-bottom: 1px solid #894244;
+	}
+
+	@include breakpoint(medium) {
+		.footer-info,
+		.footer-container {
+			padding: 30px 0;
+		}
+
+		.footer-container p {
+			margin-bottom: 1rem;
+		}
+
+		.college-contact,
+		.widget_a2a_share_save_widget {
+			margin-top: 30px;
+		}
+
+		.widget_nav_menu {
+			width: 50%;
+			float: right;
+		}
+
+		.logo img {
+			width: 360px;
+		}
+
+		.widget_a2a_share_save_widget {
+			display: inline-block;
+		}
+
+		.waa {
+			display: block;
+			font-size: 1.6rem;
+		}
+
+		.widget .menu-item {
+			width: 50%;
+
+			a {
+				padding: 0;
+				line-height: 1.6;
+
+				&:hover,
+				&:focus {
+					color: $yellow;
+					background-color: transparent;
+				}
+			}
+		}
+	}
+}

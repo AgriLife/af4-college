@@ -49,6 +49,7 @@ class Genesis {
 		add_filter( 'genesis_structural_wrap-footer', array( $this, 'class_footer_wrap' ), 12 );
 		add_action( 'genesis_footer', array( $this, 'genesis_footer_widget_area' ), 7 );
 		add_action( 'genesis_footer', array( $this, 'add_copyright' ), 9 );
+		add_filter( 'dynamic_sidebar_params', array( $this, 'add_widget_class' ) );
 
 	}
 
@@ -88,7 +89,7 @@ class Genesis {
 		);
 
 		$logo = sprintf(
-			'<a class="logo" href="%s" title="College of Agriculture and Life Sciences"><img src="%s"></a>',
+			'<a class="logo fcell" href="%s" title="College of Agriculture and Life Sciences"><img src="%s"></a>',
 			trailingslashit( home_url() ),
 			COLAF4_DIR_URL . '/images/logo-coals-light.svg'
 		);
@@ -103,7 +104,7 @@ class Genesis {
 			)
 		);
 
-		$accessibility = '<a class="waa underline" href="#">Website Accessibility Assistance</a>';
+		$accessibility = '<a class="waa fcell underline" href="#">Website Accessibility Assistance</a>';
 		echo wp_kses_post( $accessibility );
 
 		echo '</div>';
@@ -119,6 +120,40 @@ class Genesis {
 	public function add_copyright() {
 
 		echo wp_kses_post( '<p class="center">&copy; ' . date( 'Y' ) . ' Texas A&amp;M University. All rights reserved.</p>' );
+
+	}
+
+	/**
+	 * Add class name to widget elements
+	 *
+	 * @since 0.1.9
+	 * @param array $params Widget parameters.
+	 * @return array
+	 */
+	public function add_widget_class( $params ) {
+
+		// Add class to outer widget container.
+		$str = $params[0]['before_widget'];
+		preg_match( '/class="([^"]+)"/', $str, $match );
+		$classes = explode( ' ', $match[1] );
+
+		if ( in_array( 'widget', $classes, true ) ) {
+
+			// Invert footer widgets.
+			if ( in_array( $params[0]['id'], array( 'footer-left', 'footer-right' ), true ) ) {
+				$classes[] = 'fcell';
+			}
+
+			$class_output               = implode( ' ', $classes );
+			$params[0]['before_widget'] = str_replace( $match[0], "class=\"{$class_output}\"", $params[0]['before_widget'] );
+		}
+
+		// Remove blank space from between Add To Any widgets for styling purposes.
+		if ( in_array( $params[0]['widget_name'], array( 'AddToAny Share', 'AddToAny Follow' ), true ) ) {
+			$params[0]['after_widget'] = preg_replace( '/\s/', '', $params[0]['after_widget'] );
+		}
+
+		return $params;
 
 	}
 }

@@ -89,9 +89,9 @@ class Genesis {
 		);
 
 		$logo = sprintf(
-			'<a class="logo fcell" href="%s" title="College of Agriculture and Life Sciences"><img src="%s"></a>',
+			'<div class="logo fcell small-order-5"><a href="%s" title="College of Agriculture and Life Sciences"><img src="%s"></a></div>',
 			trailingslashit( home_url() ),
-			COLAF4_DIR_URL . '/images/logo-coals-light.svg'
+			COLAF4_DIR_URL . 'images/logo-coals-light.svg'
 		);
 
 		echo wp_kses_post( $logo );
@@ -104,7 +104,7 @@ class Genesis {
 			)
 		);
 
-		$accessibility = '<a class="waa fcell underline" href="#">Website Accessibility Assistance</a>';
+		$accessibility = '<div class="waa fcell small-order-3"><a class="underline" href="#">Website Accessibility Assistance</a></div>';
 		echo wp_kses_post( $accessibility );
 
 		echo '</div>';
@@ -139,9 +139,18 @@ class Genesis {
 
 		if ( in_array( 'widget', $classes, true ) ) {
 
-			// Invert footer widgets.
+			// Add class to all footer widgets.
 			if ( in_array( $params[0]['id'], array( 'footer-left', 'footer-right' ), true ) ) {
 				$classes[] = 'fcell';
+			}
+
+			// Add small order classes to widgets.
+			if ( 'footer-right' === $params[0]['id'] ) {
+				$classes[] = 'small-order-1';
+			} elseif ( false !== strpos( $params[0]['widget_id'], 'college_contact' ) ) {
+				$classes[] = 'small-order-2';
+			} elseif ( in_array( $params[0]['widget_name'], array( 'AddToAny Share', 'AddToAny Follow' ), true ) ) {
+				$classes[] = 'small-order-4';
 			}
 
 			$class_output               = implode( ' ', $classes );

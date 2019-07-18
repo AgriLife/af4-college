@@ -3,6 +3,17 @@
 @import "foundation";
 @import "settings";
 
+@mixin separator( $space: 1rem, $location: after ) {
+	&::#{$location} {
+		content: "";
+		display: block;
+		width: 100%;
+		padding-top: $space;
+		margin-top: $space;
+		border-top: 1px solid #894244;
+	}
+}
+
 %icon {
 	content: "";
 	display: inline-block;
@@ -42,6 +53,7 @@
 .site-footer {
 	padding: 0;
 	background-color: $maroon;
+	text-align: center;
 
 	.fcell {
 		@include xy-gutters( $grid-padding-gutters, padding );
@@ -67,6 +79,7 @@
 
 		p {
 			margin-bottom: 1rem;
+			line-height: 1;
 		}
 	}
 
@@ -81,21 +94,55 @@
 		line-height: 1.6rem;
 	}
 
+	.logo {
+		display: block;
+	}
+
 	.waa {
 		font-family: $tungsten;
+		display: block;
+		font-size: 1.5rem;
+	}
+
+	.widget {
+		.menu-item {
+			width: 50%;
+			margin-top: $paragraph-margin-bottom / 3;
+			line-height: 1.2;
+
+			&:first-child,
+			&:first-child + .menu-item {
+				margin-top: 0;
+			}
+
+			&:nth-child(even) {
+				padding-left: $grid-padding-gutters / 4;
+			}
+
+			&:nth-child(odd) {
+				padding-right: $grid-padding-gutters / 4;
+			}
+
+			a {
+				padding: 0;
+
+				&:hover,
+				&:focus {
+					color: $yellow;
+					background-color: transparent;
+				}
+			}
+		}
 	}
 
 	.widget_nav_menu h4 {
-		padding-bottom: 1rem;
-		margin-bottom: 1rem;
-		border-bottom: 1px solid #894244;
-		font-size: 2rem;
+		@include separator(1rem);
+		margin-bottom: 0;
+		font-size: 1.5rem;
 	}
 
-	.widget_a2a_share_save_widget .widget-wrap {
-		padding-bottom: 1rem;
-		margin-bottom: 1rem;
-		border-bottom: 1px solid #894244;
+	.widget_a2a_share_save_widget {
+		display: inline-block;
 	}
 
 	.college-contact .pipe {
@@ -106,7 +153,47 @@
 		vertical-align: sub;
 	}
 
+	@include breakpoint(small only) {
+
+		.footer-info {
+			display: flex;
+			flex: 0 1 100%;
+			flex-flow: row wrap;
+
+			.fcell {
+				width: 100%;
+
+				&:not(.small-order-1) {
+					@include separator(1rem, before);
+				}
+			}
+
+			.small-order-1 {
+				order: 1;
+			}
+
+			.small-order-2 {
+				order: 2;
+			}
+
+			.small-order-3 {
+				order: 3;
+			}
+
+			.small-order-4 {
+				order: 4;
+			}
+
+			.small-order-5 {
+				order: 5;
+			}
+		}
+	}
+
 	@include breakpoint(medium) {
+
+		text-align: left;
+
 		.fcell {
 			width: 50%;
 		}
@@ -121,12 +208,13 @@
 		}
 
 		.footer-container p {
-			margin-bottom: 1rem;
+			margin-bottom: 15px;
 		}
 
 		.college-contact,
-		.widget_a2a_share_save_widget {
-			margin-top: 30px;
+		.widget_a2a_share_save_widget,
+		.waa {
+			margin-top: 15px;
 		}
 
 		.widget_nav_menu {
@@ -135,10 +223,13 @@
 			top: 50%;
 			right: 0;
 			transform: translateY(-50%);
+
+			h4 {
+				font-size: 2rem;
+			}
 		}
 
 		.logo {
-			display: block;
 			width: 50%;
 
 			img {
@@ -147,36 +238,8 @@
 			}
 		}
 
-		.widget_a2a_share_save_widget {
-			display: inline-block;
-		}
-
 		.waa {
-			display: block;
 			font-size: 1.6rem;
-		}
-
-		.widget .menu-item {
-			width: 50%;
-
-			&:nth-child(even) {
-				padding-left: $grid-padding-gutters / 4;
-			}
-
-			&:nth-child(odd) {
-				padding-right: $grid-padding-gutters / 4;
-			}
-
-			a {
-				padding: 0;
-				line-height: 1.6;
-
-				&:hover,
-				&:focus {
-					color: $yellow;
-					background-color: transparent;
-				}
-			}
 		}
 	}
 }

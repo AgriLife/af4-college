@@ -1,0 +1,94 @@
+.site-header .nav-primary {
+	clear: none;
+	position: relative;
+	padding-left: $logo-width + $grid-padding-gutters / 2;
+
+	@at-root .site-header .is-stuck .nav-primary {
+		padding-left: $logo-width-stuck + $grid-padding-gutters / 2;
+	}
+
+	// Reset positioning for custom menu.
+	.menu-primary,
+	.is-dropdown-submenu-parent {
+		position: static;
+	}
+
+	.is-dropdown-submenu {
+		min-width: auto;
+	}
+
+	.dropdown.menu > li > a {
+		position: relative;
+	}
+
+	.is-dropdown-submenu.menu-depth-1 .is-dropdown-submenu-parent.opens-right > a::after {
+		display: none;
+	}
+
+	.top-bar ul {
+		background-color: $whiter;
+	}
+
+	.submenu {
+		&.menu-depth-1 {
+			width: 100%;
+			flex: 0 0 33.33%;
+			flex-wrap: nowrap;
+			padding: {
+				left: .8rem;
+				right: .8rem;
+			}
+
+			&.js-dropdown-active {
+				display: flex;
+			}
+
+			> li {
+				background-color: $whiter;
+				width: 33.33%;
+				padding: 1rem .2rem 1.7rem;
+				border-left: none;
+
+				> a {
+					color: $nav-blue;
+
+					&[href="#"] {
+						cursor: default;
+						color: $maroon;
+						background-color: $whiter;
+						font-weight: bold;
+					}
+				}
+			}
+		}
+
+		&.menu-depth-2 {
+			display: block;
+			position: static;
+			background-color: $whiter;
+			margin: 0 .8rem;
+
+			&.is-dropdown-submenu {
+				display: block;
+			}
+
+			> li {
+				border-bottom: 1px dashed $dark-blue;
+				border-left: none;
+
+				> a {
+					color: $nav-blue;
+					padding: {
+						left: .2rem;
+						right: .2rem;
+					}
+
+					&:focus,
+					&:hover {
+						background-color: $nav-bg-gray;
+					}
+				}
+			}
+		}
+	}
+}

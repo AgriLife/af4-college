@@ -1,0 +1,240 @@
+@mixin separator( $space: 1rem, $location: after ) {
+	&::#{$location} {
+		content: "";
+		display: block;
+		width: 100%;
+		padding-top: $space;
+		margin-top: $space;
+		border-top: 1px solid #894244;
+	}
+}
+
+%icon {
+	content: "";
+	display: inline-block;
+	vertical-align: top;
+	margin-right: $grid-margin-gutters / 4;
+	background: transparent none no-repeat center/contain;
+}
+
+.icon-location {
+	&::before {
+		@extend %icon;
+		width: 14px;
+		height: 1.6rem;
+		background-image: url("../images/icon-location.svg");
+	}
+}
+
+.icon-phone {
+	&::before {
+		@extend %icon;
+		width: 16px;
+		height: 1.6rem;
+		background-image: url("../images/icon-phone.svg");
+		background-position: left 6px;
+	}
+}
+
+.icon-email {
+	&::before {
+		@extend %icon;
+		width: 16px;
+		height: 1.6rem;
+		background-image: url("../images/icon-email.svg");
+	}
+}
+
+.site-footer {
+	padding: 0;
+	background-color: $maroon;
+	text-align: center;
+
+	.fcell {
+		@include xy-gutters( $grid-padding-gutters, padding );
+		display: block;
+	}
+
+	.wrap {
+		padding: 0;
+	}
+
+	.footer-info,
+	.footer-container {
+		padding: 1rem 0;
+	}
+
+	.footer-container {
+		background-color: darken( $maroon, 5% );
+
+		&,
+		a {
+			font-family: $opensans;
+		}
+
+		p {
+			margin-bottom: 1rem;
+			line-height: 1;
+		}
+	}
+
+	.req-links {
+		@include xy-grid-container;
+		margin-bottom: 0;
+		text-align: center;
+	}
+
+	.footer-info {
+		font-family: $opensans;
+		line-height: 1.6rem;
+	}
+
+	.logo {
+		display: block;
+	}
+
+	.waa {
+		font-family: $tungsten;
+		display: block;
+		font-size: 1.5rem;
+	}
+
+	.widget {
+		.menu-item {
+			width: 50%;
+			margin-top: $paragraph-margin-bottom / 3;
+			line-height: 1.2;
+
+			&:first-child,
+			&:first-child + .menu-item {
+				margin-top: 0;
+			}
+
+			&:nth-child(even) {
+				padding-left: $grid-padding-gutters / 4;
+			}
+
+			&:nth-child(odd) {
+				padding-right: $grid-padding-gutters / 4;
+			}
+
+			a {
+				padding: 0;
+
+				&:hover,
+				&:focus {
+					color: $yellow;
+					background-color: transparent;
+				}
+			}
+		}
+	}
+
+	.widget_nav_menu h4 {
+		@include separator(1rem);
+		margin-bottom: 0;
+		font-size: 1.5rem;
+	}
+
+	.widget_a2a_share_save_widget {
+		display: inline-block;
+	}
+
+	.college-contact .pipe {
+		@include xy-gutters( $grid-padding-gutters / 2, margin );
+		border-left: 1px solid $white;
+		display: inline-block;
+		height: 1.1rem;
+		vertical-align: sub;
+	}
+
+	@include breakpoint(small only) {
+
+		.footer-info {
+			display: flex;
+			flex: 0 1 100%;
+			flex-flow: row wrap;
+
+			.fcell {
+				width: 100%;
+
+				&:not(.small-order-1) {
+					@include separator(1rem, before);
+				}
+			}
+
+			.small-order-1 {
+				order: 1;
+			}
+
+			.small-order-2 {
+				order: 2;
+			}
+
+			.small-order-3 {
+				order: 3;
+			}
+
+			.small-order-4 {
+				order: 4;
+			}
+
+			.small-order-5 {
+				order: 5;
+			}
+		}
+	}
+
+	@include breakpoint(medium) {
+
+		text-align: left;
+
+		.fcell {
+			width: 50%;
+		}
+
+		.footer-info,
+		.footer-container {
+			padding: 30px 0;
+		}
+
+		.footer-info {
+			position: relative;
+		}
+
+		.footer-container p {
+			margin-bottom: 15px;
+		}
+
+		.college-contact,
+		.widget_a2a_share_save_widget,
+		.waa {
+			margin-top: 15px;
+		}
+
+		.widget_nav_menu {
+			width: 50%;
+			position: absolute;
+			top: 50%;
+			right: 0;
+			transform: translateY(-50%);
+
+			h4 {
+				font-size: 2rem;
+			}
+		}
+
+		.logo {
+			width: 50%;
+
+			img {
+				width: 100%;
+				max-width: 360px;
+			}
+		}
+
+		.waa {
+			font-size: 1.6rem;
+		}
+	}
+}

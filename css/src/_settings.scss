@@ -15,6 +15,7 @@ $breakpoint-classes: (small medium);
 
 /* Colors
 --------------------------------------------- */
+$black: #000;
 $white: #F8F8F8; // Because sometimes white isn't always white
 $whiter: #FEFEFE;
 $gray-darker: #222;
@@ -126,3 +127,9 @@ $footer-font-family: $header-font-family;
 $footer-font-weight: 400;
 
 /* END copy from github.com/agrilife/agriflex4/css/src/_settings.scss */
+
+$header-maroon-bar-height: 2.4rem;
+$logo-width: rem-calc(120);
+$logo-width-stuck: rem-calc(96);
+$nav-blue: #003C71;
+$nav-bg-gray: #E7E7E7;;

@@ -1,5 +1,6 @@
 .site-header {
 	font-family: $opensans;
+	letter-spacing: .05rem;
 
 	&,
 	.wrap.is-at-top {
@@ -53,11 +54,6 @@
 				padding-top: 1rem;
 			}
 		}
-	}
-
-
-	.menu a:hover {
-		background-color: darken($maroon, 15%);
 	}
 
 	.sticky {

@@ -40,7 +40,8 @@ class College {
 	 */
 	private function __construct() {
 
-		add_action( 'init', array( $this, 'init' ) );
+		// Require classes.
+		$this->require_classes();
 
 		// Add Widgets.
 		add_action( 'widgets_init', array( $this, 'register_widgets' ) );
@@ -53,7 +54,7 @@ class College {
 	 * @since 0.1.0
 	 * @return void
 	 */
-	public function init() {
+	private function require_classes() {
 
 		/* Set up asset files */
 		require_once COLAF4_DIR_PATH . 'src/class-assets.php';

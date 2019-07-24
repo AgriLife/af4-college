@@ -248,7 +248,7 @@ class Genesis {
 	 * @return array
 	 */
 	public function class_cell_title_area( $attributes ) {
-		$attributes['class'] .= ' cell small-6 medium-12';
+		$attributes['class'] = 'title-area cell small-12 medium-12';
 		return $attributes;
 	}
 

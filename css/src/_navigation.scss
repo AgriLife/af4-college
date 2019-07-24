@@ -1,10 +1,45 @@
-.site-header .nav-primary {
+.menu .is-active > a,
+.menu .unlinked > a:hover,
+.dropdown.menu > li.is-active > a {
+	background-color: $whiter;
+}
+
+.submenu {
+	li.linked > a:hover,
+	li.linked > a:focus {
+		background-color: $nav-bg-gray;
+		transition: all .1s; // Fixes flicker in background color.
+	}
+
+	.unlinked > a {
+		cursor: default;
+		color: $maroon;
+		font-weight: bold;
+	}
+
+	&.menu-depth-1 {
+		padding: {
+			left: .8rem;
+			right: .8rem;
+		}
+	}
+
+	.menu-item-has-children {
+		padding: 0 .8rem;
+	}
+}
+
+.dropdown .is-dropdown-submenu a {
+	padding: 0.7rem 0.2rem;
+}
+
+.nav-primary {
+	background-color: $maroon;
 	clear: none;
 	position: relative;
-	padding-left: $logo-width + $grid-padding-gutters / 2;
 
-	@at-root .site-header .is-stuck .nav-primary {
-		padding-left: $logo-width-stuck + $grid-padding-gutters / 2;
+	.top-bar ul {
+		background-color: $maroon;
 	}
 
 	.dropdown.menu > li.is-active > a {
@@ -20,18 +55,14 @@
 		border-left-color: darken($maroon, 6%);
 	}
 
-	.top-bar ul {
-		background-color: $whiter;
-	}
-
-	li:hover .submenu a,
-	.submenu a {
+	li:hover .menu-depth-1 a,
+	.menu-depth-1 a {
 		color: $nav-blue;
 	}
 
-	.submenu a:focus,
-	.submenu a:hover {
-		background-color: $nav-bg-gray;
+	.submenu .unlinked > a,
+	li:hover .submenu .unlinked > a {
+		color: $maroon;
 	}
 
 	.dropdown.menu > li > a {
@@ -40,10 +71,27 @@
 
 	.menu-primary {
 		position: static;
-		padding-right: 0;
 	}
 
-	.child-count-3 {
+	.is-dropdown-submenu.js-dropdown-active {
+		display: flex;
+	}
+
+	.submenu {
+		.site-header & li {
+			&,
+			&:hover {
+				border-left: none;
+			}
+		}
+
+		li:not(.menu-item-has-children) + li {
+			border-top: 1px dashed $dark-blue;
+		}
+	}
+
+	// Row of submenu columns.
+	.grid {
 
 		&.is-dropdown-submenu-parent {
 			position: static;
@@ -60,60 +108,36 @@
 		.submenu {
 			&.menu-depth-1 {
 				width: 100%;
-				flex: 0 0 33.33%;
+				flex: 0 0 auto;
 				flex-wrap: nowrap;
-				padding: {
-					left: .8rem;
-					right: .8rem;
-				}
-
-				&.js-dropdown-active {
-					display: flex;
-				}
-
-				> li {
-					background-color: $whiter;
-					width: 33.33%;
-					padding: 1rem .2rem 1.7rem;
-					border-left: none;
-
-					> a[href="#"] {
-						cursor: default;
-						color: $maroon;
-						background-color: $whiter;
-						font-weight: bold;
-					}
-				}
 			}
 
 			&.menu-depth-2 {
 				display: block;
 				position: static;
-				background-color: $whiter;
-				margin: 0 .8rem;
-
-				&.is-dropdown-submenu {
-					display: block;
-				}
-
-				> li {
-					border-bottom: 1px dashed $dark-blue;
-					border-left: none;
-
-					> a {
-						color: $nav-blue;
-						padding: {
-							left: .2rem;
-							right: .2rem;
-						}
-
-						&:focus,
-						&:hover {
-							background-color: $nav-bg-gray;
-						}
-					}
-				}
 			}
+		}
+
+		.submenu.menu-depth-1 > li:not(.menu-item-has-children) + li {
+			border-top: none;
+		}
+	}
+
+	@include breakpoint(medium) {
+		.site-header & {
+			padding-left: $logo-width + $grid-padding-gutters / 2;
+		}
+
+		@at-root .site-header .is-stuck .nav-primary {
+			padding-left: $logo-width-stuck + $grid-padding-gutters / 2;
+		}
+
+		.top-bar ul {
+			background-color: $whiter;
+		}
+
+		.menu-primary {
+			padding-right: 0;
 		}
 	}
 }

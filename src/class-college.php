@@ -62,7 +62,7 @@ class College {
 
 		/* Genesis modifications */
 		require_once COLAF4_DIR_PATH . 'src/class-genesis.php';
-		$genesis = new \College\Genesis();
+		new \College\Genesis();
 
 	}
 

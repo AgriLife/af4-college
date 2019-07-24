@@ -31,23 +31,6 @@ class Genesis {
 
 		global $af_required;
 
-		// Footer.
-		genesis_register_sidebar(
-			array(
-				'name'        => __( 'Footer - Contact and Social', 'af4-college' ),
-				'id'          => 'footer-left',
-				'description' => __( 'This is the first widget area for the site footer.', 'af4-college' ),
-			)
-		);
-
-		genesis_register_sidebar(
-			array(
-				'name'        => __( 'Footer - Menu', 'af4-college' ),
-				'id'          => 'footer-right',
-				'description' => __( 'This is the second widget area for the site footer.', 'af4-college' ),
-			)
-		);
-
 		add_action( 'init', array( $this, 'init' ), 12 );
 		add_filter( 'genesis_structural_wrap-footer', array( $this, 'class_footer_wrap' ), 12 );
 		add_action( 'genesis_footer', array( $this, 'genesis_footer_widget_area' ), 7 );
@@ -100,7 +83,38 @@ class Genesis {
 	 * @return void
 	 */
 	public function init() {
+
 		remove_action( 'genesis_header', array( 'AgriFlex\RequiredDOM', 'add_header_right_widgets' ), 10 );
+
+		$this->add_widget_areas();
+
+	}
+
+	/**
+	 * Adds sidebars
+	 *
+	 * @since 0.1.1
+	 * @return void
+	 */
+	private function add_widget_areas() {
+
+		// Footer.
+		genesis_register_sidebar(
+			array(
+				'name'        => __( 'Footer - Contact and Social', 'af4-college' ),
+				'id'          => 'footer-left',
+				'description' => __( 'This is the first widget area for the site footer.', 'af4-college' ),
+			)
+		);
+
+		genesis_register_sidebar(
+			array(
+				'name'        => __( 'Footer - Menu', 'af4-college' ),
+				'id'          => 'footer-right',
+				'description' => __( 'This is the second widget area for the site footer.', 'af4-college' ),
+			)
+		);
+
 	}
 
 	/**

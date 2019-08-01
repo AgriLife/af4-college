@@ -123,13 +123,49 @@
 		}
 	}
 
+	#header-search {
+		position: relative;
+	}
+
+	.search-form {
+		input[type="submit"] {
+			background: {
+				image: url("../images/search-agrilife-white.svg");
+				position: center;
+			}
+			margin: 0;
+			cursor: pointer;
+			width: 26px;
+		}
+	}
+
 	@include breakpoint(medium) {
-		.site-header & {
-			padding-left: $logo-width + $grid-padding-gutters / 2;
+		.title-bar-search {
+			position: relative;
+
+			.search-icon {
+				height: $nav-height;
+			}
 		}
 
-		@at-root .site-header .is-stuck .nav-primary {
-			padding-left: $logo-width-stuck + $grid-padding-gutters / 2;
+		#header-search {
+			position: absolute;
+			bottom: 100%;
+			right: -8px;
+			background-color: $maroon;
+			padding: .5rem;
+			width: 225px;
+		}
+
+		.search-form {
+			input[type="search"] {
+				width: calc(100% - 34px);
+				margin-right: 8px;
+			}
+		}
+
+		.site-header & {
+			padding-left: $logo-width + $grid-padding-gutters / 2;
 		}
 
 		.top-bar ul {
@@ -138,6 +174,32 @@
 
 		.menu-primary {
 			padding-right: 0;
+		}
+
+		.is-stuck & {
+			padding-left: $logo-width-stuck + $grid-padding-gutters / 2;
+
+			.title-bar-search .search-icon {
+				height: $nav-height-stuck;
+			}
+
+			.menu-primary {
+				line-height: $nav-height-stuck;
+			}
+
+			.dropdown.menu > li > a {
+				font-size: 14px;
+				line-height: 1rem;
+				padding: {
+					top: $nav-item-padding-top-stuck;
+					bottom: $nav-item-padding-top-stuck;
+				}
+			}
+
+			.search-form input[type="submit"] {
+				height: $nav-height-stuck;
+				width: 22px;
+			}
 		}
 	}
 }

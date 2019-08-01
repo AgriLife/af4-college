@@ -29,50 +29,24 @@ class Genesis {
 	 */
 	public function __construct() {
 
-		global $af_required;
-
 		add_action( 'init', array( $this, 'init' ), 12 );
 		add_filter( 'genesis_structural_wrap-footer', array( $this, 'class_footer_wrap' ), 12 );
 		add_action( 'genesis_footer', array( $this, 'genesis_footer_widget_area' ), 7 );
 		add_action( 'genesis_footer', array( $this, 'add_copyright' ), 9 );
 		add_filter( 'dynamic_sidebar_params', array( $this, 'add_widget_class' ) );
 		add_filter( 'af4_header_logo', array( $this, 'header_logo' ), 11, 4 );
-		add_filter( 'genesis_attr_title-area', array( $this, 'class_cell_title_area' ) );
+		add_filter( 'genesis_attr_title-area', array( $this, 'class_cell_title_area' ), 11 );
 		add_filter( 'af4_header_right_attr', array( $this, 'af4_header_right_attr' ) );
-
-		// Move right header widget area attached to the AgriFlex\RequiredDOM class.
-		remove_action( 'genesis_header', array( $af_required, 'add_header_right_widgets' ), 10 );
-		add_filter( 'af4_primary_nav_menu', array( 'AgriFlex\RequiredDOM', 'add_header_right_widgets' ) );
 
 		// Improve layout of navigation menu through classes.
 		add_filter( 'af4_top_bar_left_attr', array( $this, 'af4_top_bar_left_attr' ) );
-		add_filter(
-			'wp_nav_menu_args',
-			function( $args ) {
+		add_filter( 'wp_nav_menu_args', array( $this, 'nav_menu_args' ) );
 
-				if ( 'primary' === $args['theme_location'] && false === strpos( $args['menu_class'], 'cell' ) ) {
-					$args['menu_class'] .= ' cell medium-auto';
-				}
-
-				return $args;
-
-			}
-		);
+		// Remove span tags from nav link elements.
+		add_filter( 'af4_primary_nav_class', array( $this, 'af4_primary_nav_class' ) );
 
 		// Add maroon bar behind navigation menu.
-		add_filter(
-			'genesis_structural_wrap-menu-primary',
-			function( $output, $original_output ) {
-				if ( '</div>' !== $output ) {
-					$output .= '<span class="bar-wrap"></span>';
-				}
-				return $output;
-			},
-			10,
-			3
-		);
-
-		remove_action( 'genesis_footer', array( $af_required, 'render_tamus_logo' ), 10 );
+		add_filter( 'genesis_structural_wrap-menu-primary', array( $this, 'wrap_menu_primary' ) );
 
 	}
 
@@ -84,9 +58,124 @@ class Genesis {
 	 */
 	public function init() {
 
-		remove_action( 'genesis_header', array( 'AgriFlex\RequiredDOM', 'add_header_right_widgets' ), 10 );
+		global $af_required;
 
+		// Move right header widget area attached to the AgriFlex\RequiredDOM class.
+		remove_action( 'genesis_header', array( $af_required, 'add_header_right_widgets' ), 10 );
+		add_filter( 'af4_primary_nav_menu', array( $this, 'add_search_widget' ), 9 );
+
+		// Remove default mobile navigation menu toggle elements.
+		remove_filter( 'af4_before_nav', array( $af_required, 'af4_nav_primary_title_bar_open' ), 9 );
+		remove_filter( 'af4_before_nav', array( $af_required, 'add_menu_toggle' ), 10 );
+		remove_filter( 'af4_before_nav', array( $af_required, 'add_search_toggle' ), 11 );
+		remove_filter( 'af4_before_nav', array( $af_required, 'af4_nav_primary_title_bar_close' ), 12 );
+		add_filter( 'genesis_markup_title-area_open', array( $this, 'college_mobile_nav_toggle' ), 10, 2 );
+
+		// Add new widget areas.
 		$this->add_widget_areas();
+
+		// Remove footer tamu logo.
+		remove_action( 'genesis_footer', array( $af_required, 'render_tamus_logo' ), 10 );
+
+	}
+
+	/**
+	 * Add search widget and toggle button.
+	 *
+	 * @since 0.1.2
+	 * @param string $output Output for the primary menu.
+	 * @return string
+	 */
+	public function add_search_widget( $output ) {
+
+		global $af_required;
+
+		$search  = '<div class="title-bars cell medium-shrink title-bar-right">';
+		$search .= '<div class="title-bar title-bar-search show-for-medium"><button class="search-icon" type="button" data-toggle="header-search" data-toggle-focus="header-search"></button><div class="title-bar-title">Search</div>';
+		$search  = $af_required->add_header_right_widgets( $search );
+		$search  = str_replace( 'id="header-search', 'data-toggler=".hide-for-medium" id="header-search', $search );
+		$search .= '</div></div>';
+
+		return $output . $search;
+
+	}
+
+	/**
+	 * Add bar wrap which sits behind the primary navigation menu
+	 *
+	 * @since 0.1.2
+	 * @param string $output Output for the primary menu wrap.
+	 * @return string
+	 */
+	public function wrap_menu_primary( $output ) {
+
+		if ( '</div>' !== $output ) {
+
+			$output .= '<span class="bar-wrap show-for-medium"></span>';
+
+		}
+
+		return $output;
+
+	}
+
+	/**
+	 * Replace Foundation class in primary nav menu
+	 *
+	 * @since 0.1.2
+	 * @param array $class Array of classes for AgriFlex4 primary nav menu.
+	 * @return array
+	 */
+	public function af4_primary_nav_class( $class ) {
+
+		$key           = array_search( 'medium-auto', $class, true );
+		$class[ $key ] = 'medium-12';
+
+		return $class;
+
+	}
+
+	/**
+	 * Change class for primary nav menu
+	 *
+	 * @since 0.1.2
+	 * @param array $args Arguments for menu.
+	 * @return array
+	 */
+	public function nav_menu_args( $args ) {
+
+		if ( 'primary' === $args['theme_location'] ) {
+
+			$args['menu_class'] .= ' cell medium-auto';
+
+		}
+
+		return $args;
+
+	}
+
+	/**
+	 * Add AgriFlex4 menu and nav primary toggles for mobile
+	 *
+	 * @since 0.1.2
+	 * @param string $output Current output for Genesis title area open element.
+	 * @param array  $args Arguments for Genesis title area open element.
+	 * @return string
+	 */
+	public function college_mobile_nav_toggle( $output, $args ) {
+
+		if ( ! empty( $args['open'] ) ) {
+
+			global $af_required;
+			$open   = str_replace( 'small-6', 'small-2', $af_required->af4_nav_primary_title_bar_open() );
+			$open   = str_replace( 'title-bar-right', 'title-bar-left', $open );
+			$menu   = $af_required->add_menu_toggle();
+			$close  = $af_required->af4_nav_primary_title_bar_close();
+			$output = $open . $menu . $close . $output;
+
+		}
+
+		return $output;
 
 	}
 
@@ -243,7 +332,7 @@ class Genesis {
 	public function header_logo( $inside, $old_inside, $logo_html, $home ) {
 
 		$inside = sprintf(
-			'<a href="%s" title="%s"><img src="%s"><small>Texas A&M University</small><br><span class="title">%s</span></a>',
+			'<div class="grid-x grid-padding-x"><div class="cell logo shrink"><a href="%s" title="%s"><img src="%s"></a></div><div class="cell auto"><small>Texas A&M University</small><div class="title">%s</div></div></div>',
 			$home,
 			get_bloginfo( 'name' ),
 			COLAF4_DIR_URL . 'images/logo-coals-box.svg',
@@ -262,7 +351,7 @@ class Genesis {
 	 * @return array
 	 */
 	public function class_cell_title_area( $attributes ) {
-		$attributes['class'] = 'title-area cell small-12 medium-12';
+		$attributes['class'] = 'title-area cell small-10 medium-12';
 		return $attributes;
 	}
 
@@ -274,7 +363,7 @@ class Genesis {
 	 * @return array
 	 */
 	public function af4_header_right_attr( $attributes ) {
-		$attributes['class'] = 'header-right-widget-area cell medium-shrink';
+		$attributes['class'] = 'header-right-widget-area hide-for-medium';
 		return $attributes;
 	}
 

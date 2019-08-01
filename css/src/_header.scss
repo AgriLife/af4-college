@@ -4,7 +4,7 @@
 
 	&,
 	.wrap.is-at-top {
-		background-color: $whiter;
+		background-color: $maroon;
 	}
 
 	.top-bar,
@@ -17,48 +17,32 @@
 	}
 
 	.site-title {
+		font-size: 1.5rem;
+		line-height: 1.2;
+		color: $whiter;
+
 		a {
-			text-decoration: none;
-			font-size: 1.5rem;
-			line-height: 1.2;
+			background-color: $maroon;
+			display: table-cell;
+			vertical-align: middle;
 		}
 
-		img {
-			width: $logo-width;
-			float: left;
-			box-shadow: 2px 2px 2px $black;
+		.grid-x {
+			align-items: center;
+		}
+
+		.cell.logo {
+			border-right: 2px solid $whiter;
 			position: relative;
 			z-index: 3;
-
-			@at-root .site-header .is-stuck .site-title img {
-				width: $logo-width-stuck;
-			}
-		}
-
-		small,
-		span {
-			padding-left: $grid-padding-gutters / 2;
-			white-space: nowrap;
-			display: inline-block;
 		}
 
 		small {
 			text-transform: uppercase;
-			padding-top: 1.5rem;
-
-			@at-root .site-header .is-stuck .site-title small {
-				padding-top: 1rem;
-			}
 		}
 	}
 
 	.sticky {
-		&::before {
-			content: "";
-			display: block;
-			height: $header-maroon-bar-height;
-		}
-
 		> .grid-container > .grid-x {
 			align-items: flex-end;
 		}
@@ -71,31 +55,77 @@
 	}
 
 	.grid-container {
-		padding-top: $header-maroon-bar-height / 2;
+		padding-top: $nav-height / 2;
 		padding-bottom: 0;
 	}
 
-	#header-search {
-		position: relative;
-		padding: {
-			top: .4rem;
-			bottom: .4rem;
-		}
-
-		input[type="search"] {
-			color: #FFF;
-			display: none;
-		}
-
-		.search-form input[type="submit"] {
-			background-image: url("../images/search-agrilife-white.svg");
-			height: 24px;
-			margin: 0;
-			cursor: pointer;
+	.title-bars {
+		.title-bar,
+		.title-bar.title-bar-navigation .title-bar-title {
+			padding: 0;
 		}
 	}
 
 	@include breakpoint(medium) {
+		&,
+		.wrap.is-at-top {
+			background-color: $whiter;
+		}
+
+		.sticky {
+			border-top: $nav-height solid $maroon;
+		}
+
+		.is-stuck {
+			border-top-width: 0.4rem;
+
+			.grid-container {
+				padding-top: .4rem;
+			}
+
+			.site-title {
+				line-height: 1;
+
+				a {
+					width: $logo-width-stuck;
+					height: $logo-width-stuck;
+					padding: .7rem;
+				}
+
+				small {
+					font-size: 65%;
+				}
+
+				.title {
+					font-size: 1.2rem;
+				}
+
+				.cell {
+					max-height: $logo-width-stuck - $nav-height-stuck / 2;
+				}
+			}
+		}
+
+		.site-title {
+			color: $maroon;
+
+			.cell {
+				max-height: $logo-width - $nav-height / 2;
+			}
+
+			a {
+				width: $logo-width;
+				height: $logo-width;
+				padding: $grid-padding-gutters / 2;
+				box-shadow: 2px 2px 2px $black;
+			}
+
+			.cell.logo {
+				border-right: none;
+				padding-right: 0;
+			}
+		}
+
 		.top-bar {
 			width: 100%;
 		}
@@ -116,8 +146,4 @@
 			background-color: $maroon;
 		}
 	}
-}
-
-.title-area {
-	margin-bottom: 0 - $header-maroon-bar-height / 2;
 }

@@ -34,6 +34,12 @@ class Assets {
 		// Enqueue extension styles.
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
 
+		// Register scripts used in the plugin.
+		add_action( 'wp_enqueue_scripts', array( $this, 'register_scripts' ), 14 );
+
+		// Enqueue scripts used in the plugin.
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ), 15 );
+
 	}
 
 	/**
@@ -63,6 +69,36 @@ class Assets {
 	public function enqueue_styles() {
 
 		wp_enqueue_style( 'college-styles' );
+
+	}
+
+	/**
+	 * Register js files.
+	 *
+	 * @since 0.1.2
+	 * @return void
+	 */
+	public function register_scripts() {
+
+		wp_register_script(
+			'foundation-college',
+			COLAF4_DIR_URL . 'js/foundation.concat.js',
+			array( 'jquery', 'foundation' ),
+			filemtime( COLAF4_DIR_PATH . '/js/foundation.concat.js' ),
+			true
+		);
+
+	}
+
+	/**
+	 * Enqueue js files.
+	 *
+	 * @since 0.1.2
+	 * @return void
+	 */
+	public function enqueue_scripts() {
+
+		wp_enqueue_script( 'foundation-college' );
 
 	}
 

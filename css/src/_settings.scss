@@ -88,6 +88,9 @@ $nav-item-color: $gray-lighter;
 $dropdown-menu-item-color-active: $gray-lighter;
 $menu-item-color-active: $gray-lighter;
 $menu-item-background-active: $site-title-background;
+$global-menu-padding-top: 0.7rem;
+$global-menu-padding-side: 1rem;
+$global-menu-padding: $global-menu-padding-top $global-menu-padding-side;
 
 /* Title Bar
 --------------------------------------------- */
@@ -129,8 +132,10 @@ $footer-font-weight: 400;
 
 /* END copy from github.com/agrilife/agriflex4/css/src/_settings.scss */
 
-$header-maroon-bar-height: 2.4rem;
 $logo-width: rem-calc(120);
-$logo-width-stuck: rem-calc(96);
+$logo-width-stuck: rem-calc(80);
+$nav-item-padding-top-stuck: $global-menu-padding-top - .3rem;
+$nav-height: 1rem + $global-menu-padding-top * 2;
+$nav-height-stuck: 1rem + $nav-item-padding-top-stuck * 2;
 $nav-blue: #003C71;
 $nav-bg-gray: #E7E7E7;;

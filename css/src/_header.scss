@@ -12,13 +12,17 @@
 		background-color: $maroon;
 	}
 
+	.grid-container {
+		padding: 2.1rem rem-calc(26);
+	}
+
 	.top-bar-left {
 		margin-right: 0;
 	}
 
 	.site-title {
-		font-size: 1.5rem;
-		line-height: 1.2;
+		font-size: 4.3vw;
+		line-height: 1.1;
 		color: $whiter;
 
 		a {
@@ -27,18 +31,29 @@
 			vertical-align: middle;
 		}
 
+		small {
+			text-transform: uppercase;
+			font-size: 65%;
+			line-height: 1;
+		}
+
 		.grid-x {
 			align-items: center;
 		}
 
 		.cell.logo {
-			border-right: 2px solid $whiter;
 			position: relative;
 			z-index: 3;
+			padding-right: 1.2rem;
 		}
 
-		small {
-			text-transform: uppercase;
+		.cell + .cell {
+			border-left: 2px solid $whiter;
+			padding: {
+				top: .3rem;
+				bottom: .3rem;
+				left: 1.2rem;
+			}
 		}
 	}
 
@@ -49,20 +64,49 @@
 	}
 
 	.is-stuck {
+		.site-title {
+			font-size: 3.5vw;
+		}
+
+		.cell.logo {
+			width: 20%;
+			min-width: 82px;
+		}
+
 		.grid-container {
-			padding-bottom: 0;
+			padding: .75rem rem-calc(26);
+		}
+
+		.site-title img {
+			max-width: 100%;
 		}
 	}
 
-	.grid-container {
-		padding-top: $nav-height / 2;
-		padding-bottom: 0;
-	}
-
 	.title-bars {
+		align-self: center;
+
 		.title-bar,
 		.title-bar.title-bar-navigation .title-bar-title {
 			padding: 0;
+		}
+	}
+
+	@include breakpoint(425px down) {
+		.site-title {
+			.cell.logo {
+				padding-left: .1rem;
+				padding-right: .9rem;
+			}
+
+			.cell + .cell {
+				padding-left: .9rem;
+			}
+		}
+
+		.is-stuck .site-title {
+			.cell.logo {
+				min-width: 62px;
+			}
 		}
 	}
 
@@ -70,6 +114,10 @@
 		&,
 		.wrap.is-at-top {
 			background-color: $whiter;
+		}
+
+		.grid-container {
+			padding: 1rem 1rem 0;
 		}
 
 		.sticky {
@@ -81,6 +129,7 @@
 
 			.grid-container {
 				padding-top: .4rem;
+				padding-bottom: 0;
 			}
 
 			.site-title {
@@ -108,6 +157,7 @@
 
 		.site-title {
 			color: $maroon;
+			font-size: 1.5rem;
 
 			.cell {
 				max-height: $logo-width - $nav-height / 2;
@@ -121,8 +171,12 @@
 			}
 
 			.cell.logo {
-				border-right: none;
 				padding-right: 0;
+				width: auto;
+			}
+
+			.cell + .cell {
+				border-left: none;
 			}
 		}
 

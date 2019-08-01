@@ -91,7 +91,7 @@ class Genesis {
 		global $af_required;
 
 		$search  = '<div class="title-bars cell medium-shrink title-bar-right">';
-		$search .= '<div class="title-bar title-bar-search show-for-medium"><button class="search-icon" type="button" data-toggle="header-search" data-toggle-focus="header-search"></button><div class="title-bar-title">Search</div>';
+		$search .= '<div class="title-bar title-bar-search show-for-medium"><button class="search-icon hide-for-small-only" type="button" data-toggle="header-search" data-toggle-focus="header-search"></button><div class="title-bar-title">Search</div>';
 		$search  = $af_required->add_header_right_widgets( $search );
 		$search  = str_replace( 'id="header-search', 'data-toggler=".hide-for-medium" id="header-search', $search );
 		$search .= '</div></div>';
@@ -167,9 +167,10 @@ class Genesis {
 		if ( ! empty( $args['open'] ) ) {
 
 			global $af_required;
-			$open   = str_replace( 'small-6', 'small-2', $af_required->af4_nav_primary_title_bar_open() );
+			$open   = str_replace( 'small-6', 'shrink', $af_required->af4_nav_primary_title_bar_open() );
 			$open   = str_replace( 'title-bar-right', 'title-bar-left', $open );
 			$menu   = $af_required->add_menu_toggle();
+			$menu   = str_replace( '<div class="title-bar-title" data-toggle="nav-menu-primary">Menu</div>', '', $menu );
 			$close  = $af_required->af4_nav_primary_title_bar_close();
 			$output = $open . $menu . $close . $output;
 
@@ -332,7 +333,7 @@ class Genesis {
 	public function header_logo( $inside, $old_inside, $logo_html, $home ) {
 
 		$inside = sprintf(
-			'<div class="grid-x grid-padding-x"><div class="cell logo shrink"><a href="%s" title="%s"><img src="%s"></a></div><div class="cell auto"><small>Texas A&M University</small><div class="title">%s</div></div></div>',
+			'<div class="grid-x grid-padding-x"><div class="cell logo small-3 medium-shrink"><a href="%s" title="%s"><img src="%s"></a></div><div class="cell auto"><small>Texas A&M University</small><div class="title">%s</div></div></div>',
 			$home,
 			get_bloginfo( 'name' ),
 			COLAF4_DIR_URL . 'images/logo-coals-box.svg',
@@ -351,7 +352,7 @@ class Genesis {
 	 * @return array
 	 */
 	public function class_cell_title_area( $attributes ) {
-		$attributes['class'] = 'title-area cell small-10 medium-12';
+		$attributes['class'] = 'title-area cell auto medium-12';
 		return $attributes;
 	}
 

@@ -4,16 +4,16 @@
 
 	&,
 	.wrap.is-at-top {
-		background-color: $maroon;
-	}
-
-	.top-bar,
-	.sticky::before {
-		background-color: $maroon;
+		background-color: $whiter;
 	}
 
 	.grid-container {
-		padding: 2.1rem rem-calc(26);
+		padding: 0;
+
+		> .grid-x {
+			background-color: $maroon;
+			padding: 2.1rem rem-calc(26);
+		}
 	}
 
 	.top-bar-left {
@@ -84,6 +84,10 @@
 
 	.title-bars {
 		align-self: center;
+		padding: {
+			left: .63rem;
+			right: .63rem;
+		}
 
 		.title-bar,
 		.title-bar.title-bar-navigation .title-bar-title {
@@ -116,7 +120,8 @@
 			background-color: $whiter;
 		}
 
-		.grid-container {
+		.grid-container > .grid-x {
+			background-color: $whiter;
 			padding: 1rem 1rem 0;
 		}
 
@@ -178,10 +183,6 @@
 			.cell + .cell {
 				border-left: none;
 			}
-		}
-
-		.top-bar {
-			width: 100%;
 		}
 
 		.bar-wrap {

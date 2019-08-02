@@ -60,6 +60,10 @@ class Genesis {
 
 		global $af_required;
 
+		// Move navigation menu to after the header structural wrap but within the sticky container.
+		remove_action( 'genesis_header', 'genesis_do_nav', 10 );
+		add_action( 'genesis_structural_wrap-header', array( $this, 'genesis_do_nav' ), 16 );
+
 		// Move right header widget area attached to the AgriFlex\RequiredDOM class.
 		remove_action( 'genesis_header', array( $af_required, 'add_header_right_widgets' ), 10 );
 		add_filter( 'af4_primary_nav_menu', array( $this, 'add_search_widget' ), 9 );
@@ -80,6 +84,26 @@ class Genesis {
 	}
 
 	/**
+	 * Add nav menu in grid container
+	 *
+	 * @since 0.1.2
+	 * @param string $output Output for the site header wrap.
+	 * @return string
+	 */
+	public function genesis_do_nav( $output ) {
+
+		ob_start();
+		genesis_do_nav();
+		$nav = ob_get_contents();
+		ob_end_clean();
+
+		$output = preg_replace( '/<\/div><\/div><\/div>$/', $nav . '</div></div></div>', $output );
+
+		return $output;
+
+	}
+
+	/**
 	 * Add search widget and toggle button.
 	 *
 	 * @since 0.1.2
@@ -91,7 +115,7 @@ class Genesis {
 		global $af_required;
 
 		$search  = '<div class="title-bars cell medium-shrink title-bar-right">';
-		$search .= '<div class="title-bar title-bar-search show-for-medium"><button class="search-icon hide-for-small-only" type="button" data-toggle="header-search" data-toggle-focus="header-search"></button><div class="title-bar-title">Search</div>';
+		$search .= '<div class="title-bar title-bar-search"><button class="search-icon" type="button" data-toggle="header-search" data-toggle-focus="header-search"></button><div class="title-bar-title">Search</div>';
 		$search  = $af_required->add_header_right_widgets( $search );
 		$search  = str_replace( 'id="header-search', 'data-toggler=".hide-for-medium" id="header-search', $search );
 		$search .= '</div></div>';

@@ -239,6 +239,11 @@
 			}
 		}
 
+		.is-stuck #header-depts {
+			top: 0;
+			transform: none;
+		}
+
 		.title-bar-departments {
 			color: $maroon;
 			font-size: 14px;

@@ -19,7 +19,8 @@ This WordPress plugin should only be used on https://aglifesciences.tamu.edu/, o
 
 * Visual styles unique to College of Agriculture and Life Sciences websites.
 * Add a "grid" class name to top level navigation menu items to have its child menu items arranged in a row instead of a single column.
-* Footer Widget Areas
+* Departments menu location in header.
+* Footer widget areas.
 
 ## Development Installation
 

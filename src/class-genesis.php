@@ -50,7 +50,6 @@ class Genesis {
 
 		// Add department header menu.
 		add_action( 'init', array( $this, 'register_additional_menu' ) );
-		add_filter( 'genesis_markup_title-area_close', array( $this, 'department_nav_menu' ), 10, 2 );
 		add_filter( 'nav_menu_css_class', array( $this, 'dept_nav_item_class' ), 10, 3 );
 
 	}
@@ -147,6 +146,10 @@ class Genesis {
 	public function register_additional_menu() {
 
 		register_nav_menu( 'college-dept-menu', __( 'Department Navigation Menu' ) );
+
+		if ( has_nav_menu( 'college-dept-menu' ) ) {
+			add_filter( 'genesis_markup_title-area_close', array( $this, 'department_nav_menu' ), 10, 2 );
+		}
 
 	}
 

@@ -8,11 +8,11 @@
 	}
 
 	.grid-container {
-		padding: 0;
+		padding: 0 $grid-padding-gutters / 2;
 
 		> .grid-x {
 			background-color: $maroon;
-			padding: 2.1rem rem-calc(26);
+			padding: 2.1rem 10px;
 		}
 	}
 
@@ -66,6 +66,17 @@
 	.is-stuck {
 		.site-title {
 			font-size: 3.5vw;
+
+			img {
+				max-width: 100%;
+			}
+
+			.cell + .cell {
+				padding: {
+					top: 0;
+					bottom: 0;
+				}
+			}
 		}
 
 		.cell.logo {
@@ -74,20 +85,23 @@
 		}
 
 		.grid-container {
-			padding: .75rem rem-calc(26);
-		}
+			padding: {
+				top: 0;
+				bottom: 0;
+			}
 
-		.site-title img {
-			max-width: 100%;
+			> .grid-x {
+				padding: {
+					top: .5rem;
+					bottom: .5rem;
+				}
+			}
 		}
 	}
 
 	.title-bars {
 		align-self: center;
-		padding: {
-			left: .63rem;
-			right: .63rem;
-		}
+		padding-right: .63rem;
 
 		.title-bar,
 		.title-bar.title-bar-navigation .title-bar-title {

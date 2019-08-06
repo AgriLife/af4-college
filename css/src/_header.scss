@@ -211,5 +211,58 @@
 			height: 100%;
 			background-color: $maroon;
 		}
+
+		.dept-nav-menu {
+			position: relative;
+			padding-left: 0;
+
+			.menu {
+				display: flex;
+				flex: 0 0 50%;
+			}
+		}
+
+		#header-depts {
+			position: absolute;
+			right: 100%;
+			top: 50%;
+			transform: translateY(-50%);
+			padding: 0 .9rem .9rem 0;
+			border: 1px solid $maroon;
+			width: 430px;
+			z-index: 9;
+			background-color: $whiter;
+
+			li {
+				padding: .9rem 0 0 .9rem;
+				line-height: 1.1;
+			}
+		}
+
+		.title-bar-departments {
+			color: $maroon;
+			font-size: 14px;
+			position: relative;
+
+			button {
+				cursor: pointer;
+
+				&::before {
+					@include css-triangle( 6px, $maroon, left );
+					position: absolute;
+					left: 5px;
+					top: 50%;
+					margin-top: -6px;
+				}
+			}
+		}
+
+		#menu-departments {
+			margin: 0;
+		}
+
+		.title-bars .title-bar-departments {
+			padding: 0.7rem 1rem;
+		}
 	}
 }

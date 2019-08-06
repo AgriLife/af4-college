@@ -48,6 +48,11 @@ class Genesis {
 		// Add maroon bar behind navigation menu.
 		add_filter( 'genesis_structural_wrap-menu-primary', array( $this, 'wrap_menu_primary' ) );
 
+		// Add department header menu.
+		add_action( 'init', array( $this, 'register_additional_menu' ) );
+		add_filter( 'genesis_markup_title-area_close', array( $this, 'department_nav_menu' ), 10, 2 );
+		add_filter( 'nav_menu_css_class', array( $this, 'dept_nav_item_class' ), 10, 3 );
+
 	}
 
 	/**
@@ -80,6 +85,68 @@ class Genesis {
 
 		// Remove footer tamu logo.
 		remove_action( 'genesis_footer', array( $af_required, 'render_tamus_logo' ), 10 );
+
+	}
+
+	/**
+	 * Add classes to department nav menu items
+	 *
+	 * @since 0.1.6
+	 * @param array  $classes Nav menu item classes.
+	 * @param object $item Nav menu item data object.
+	 * @param array  $args Nav menu arguments.
+	 * @return array
+	 */
+	public function dept_nav_item_class( $classes, $item, $args ) {
+
+		if ( 'college-dept-menu' === $args->theme_location ) {
+			$classes[] = 'cell medium-6';
+		}
+
+		return $classes;
+
+	}
+
+	/**
+	 * Add department menu to header
+	 *
+	 * @since 0.1.2
+	 * @param string $output Current output for Genesis title area close element.
+	 * @param array  $args Arguments for Genesis title area close element.
+	 * @return string
+	 */
+	public function department_nav_menu( $output, $args ) {
+
+		if ( ! empty( $args['close'] ) ) {
+
+			$menu = array(
+				'theme_location' => 'college-dept-menu',
+				'menu_class'     => 'grid-x reset',
+			);
+			$icon = '<div class="dept-nav-menu title-bars cell shrink title-bar-right hide-for-small-only"><div id="header-depts" class="hide-for-medium" data-toggler=".hide-for-medium">%s</div><div class="title-bar title-bar-departments"><button type="button" data-toggle="header-depts" data-toggle-focus="header-depts">Departments</button></div></div>';
+
+			ob_start();
+			wp_nav_menu( $menu );
+			$nav = ob_get_contents();
+			ob_end_clean();
+
+			$output .= sprintf( $icon, $nav );
+
+		}
+
+		return $output;
+
+	}
+
+	/**
+	 * Register nav menu location
+	 *
+	 * @since 0.1.6
+	 * @return void
+	 */
+	public function register_additional_menu() {
+
+		register_nav_menu( 'college-dept-menu', __( 'Department Navigation Menu' ) );
 
 	}
 
@@ -376,7 +443,7 @@ class Genesis {
 	 * @return array
 	 */
 	public function class_cell_title_area( $attributes ) {
-		$attributes['class'] = 'title-area cell auto medium-12';
+		$attributes['class'] = 'title-area cell auto';
 		return $attributes;
 	}
 

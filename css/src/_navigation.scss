@@ -220,7 +220,8 @@
 			}
 		}
 
-		.dropdown.menu > li.is-dropdown-submenu-parent:hover > a::after {
+		.dropdown.menu > li.is-dropdown-submenu-parent:hover > a::after,
+		.dropdown.menu > li.is-dropdown-submenu-parent.is-active > a::after {
 			border-color: $nav-yellow transparent transparent;
 		}
 

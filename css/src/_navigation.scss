@@ -42,6 +42,10 @@
 		}
 	}
 
+	input[type="search"] {
+		color: $black;
+	}
+
 	a,
 	a:hover,
 	li:hover a,
@@ -146,6 +150,10 @@
 
 		.site-header & {
 			padding-left: $logo-width + $grid-padding-gutters / 2;
+		}
+
+		input[type="search"] {
+			color: $whiter;
 		}
 
 		a,

@@ -28,7 +28,7 @@ module.exports = (grunt) ->
       pkg:
         options:
           loadPath: 'node_modules/foundation-sites/scss'
-          sourcemap: 'none'
+          noSourceMap: true
           style: 'compressed'
           precision: 2
         files:
@@ -44,7 +44,7 @@ module.exports = (grunt) ->
     sasslint:
       options:
         configFile: '.sass-lint.yaml'
-      target: ['scss/**/*.s+(a|c)ss']
+      target: ['css/**/*.s+(a|c)ss']
     compress:
       main:
         options:

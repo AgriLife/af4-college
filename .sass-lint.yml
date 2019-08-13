@@ -1,5 +1,6 @@
 # Linter Options
 # https://github.com/sasstools/sass-lint/tree/master/docs/rules
+# Copy of https://github.com/AgriLife/agriflex4/blob/master/.sass-lint.yml
 options:
   # Don't merge default rules
   merge-default-rules: false
@@ -31,9 +32,9 @@ rules:
         - 'ms-filter'
         - '*text-indent'
         - '*zoom'
-  space-after-colon: true
-  space-after-comma: true
-  trailing-semicolon: true
+  space-after-colon: 1
+  space-after-comma: 1
+  trailing-semicolon: 1
   extends-before-mixins: 2
   no-warn: 1
   no-debug: 1
@@ -67,6 +68,10 @@ rules:
   no-trailing-whitespace: 1
   no-vendor-prefixes: 1
   property-sort-order: 0
+  property-units:
+    - 1
+    -
+      per-property: { transition: ['s'] }
   single-line-per-selector: 1
   space-before-brace: 1
   zero-unit: 0

@@ -1,4 +1,5 @@
 module.exports = (grunt) ->
+  sass = require 'node-sass'
   @initConfig
     pkg: @file.readJSON('package.json')
     watch:
@@ -27,23 +28,25 @@ module.exports = (grunt) ->
     sass:
       pkg:
         options:
-          loadPath: 'node_modules/foundation-sites/scss'
+          implementation: sass
           noSourceMap: true
-          style: 'compressed'
+          outputStyle: 'compressed'
           precision: 2
+          includePaths: ['node_modules/foundation-sites/scss']
         files:
           'css/college.css': 'css/src/college.scss'
       dev:
         options:
-          loadPath: 'node_modules/foundation-sites/scss'
-          style: 'expanded'
+          implementation: sass
+          sourceMap: true
+          includePaths: ['node_modules/foundation-sites/scss']
+          outputStyle: 'nested'
           precision: 2
-          trace: true
         files:
           'css/college.css': 'css/src/college.scss'
     sasslint:
       options:
-        configFile: '.sass-lint.yaml'
+        configFile: '.sass-lint.yml'
       target: ['css/**/*.s+(a|c)ss']
     compress:
       main:
@@ -74,11 +77,11 @@ module.exports = (grunt) ->
         ]
         dest: 'js/foundation.concat.js'
 
-  @loadNpmTasks 'grunt-contrib-sass'
   @loadNpmTasks 'grunt-contrib-watch'
   @loadNpmTasks 'grunt-contrib-compress'
   @loadNpmTasks 'grunt-contrib-concat'
   @loadNpmTasks 'grunt-sass-lint'
+  @loadNpmTasks 'grunt-sass'
   @loadNpmTasks 'grunt-postcss'
 
   @registerTask 'default', ['sass:pkg', 'concat:dist', 'postcss:pkg']

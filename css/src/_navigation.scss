@@ -15,15 +15,24 @@
 		color: $maroon;
 	}
 
-	&.menu-depth-1 {
-		padding: {
-			left: .8rem;
-			right: .8rem;
+	li {
+		padding: 0 .8rem;
+	}
+
+	.grid &.menu-depth-1 {
+		padding: .7rem .8rem;
+
+		li li {
+			padding: 0;
 		}
 	}
 
-	.menu-item-has-children {
+	&.grid .menu-item-has-children {
 		padding: 0 .8rem;
+	}
+
+	.menu-item:not(.grid) & .is-dropdown-submenu-parent.opens-right > a {
+		padding-right: rem-calc(10) + 0.2rem;
 	}
 }
 
@@ -34,7 +43,6 @@
 .nav-primary {
 	background-color: $whiter;
 	clear: none;
-	position: relative;
 
 	a {
 		&:hover {
@@ -54,10 +62,25 @@
 		color: $nav-blue;
 	}
 
+	#nav-menu-primary {
+		margin-top: 0;
+	}
+
 	.top-bar {
+		position: relative;
+		padding: 1rem;
+		margin-top: 0;
+
 		&,
 		ul {
 			background-color: $whiter;
+		}
+
+		.submenu {
+			&,
+			ul {
+				background-color: $whiter;
+			}
 		}
 	}
 
@@ -148,8 +171,25 @@
 	@include breakpoint(medium) {
 		background-color: $maroon;
 
-		.site-header & {
-			padding-left: $logo-width + $grid-padding-gutters / 2;
+		> .wrap {
+			display: block;
+		}
+
+		.top-bar {
+			padding: {
+				top: 0;
+				bottom: 0;
+				left: $logo-width + $grid-padding-gutters;
+			}
+
+			&,
+			ul {
+				background-color: $maroon;
+			}
+		}
+
+		#nav-menu-primary {
+			margin: auto;
 		}
 
 		input[type="search"] {
@@ -248,7 +288,9 @@
 		}
 
 		.is-stuck & {
-			padding-left: $logo-width-stuck + $grid-padding-gutters / 2;
+			.top-bar {
+				padding-left: $logo-width-stuck + $grid-padding-gutters;
+			}
 
 			.title-bar-search .search-icon {
 				height: $nav-height-stuck;

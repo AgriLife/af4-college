@@ -40,13 +40,14 @@ class Genesis {
 
 		// Improve layout of navigation menu through classes.
 		add_filter( 'af4_top_bar_left_attr', array( $this, 'af4_top_bar_left_attr' ) );
+		add_filter( 'af4_top_bar_attr', array( $this, 'af4_top_bar_attr' ) );
 		add_filter( 'wp_nav_menu_args', array( $this, 'nav_menu_args' ) );
 
 		// Remove span tags from nav link elements.
 		add_filter( 'af4_primary_nav_class', array( $this, 'af4_primary_nav_class' ) );
 
 		// Add maroon bar behind navigation menu.
-		add_filter( 'genesis_structural_wrap-menu-primary', array( $this, 'wrap_menu_primary' ) );
+		add_filter( 'genesis_attr_nav-primary', array( $this, 'attr_nav_primary' ) );
 
 		// Add department header menu.
 		add_action( 'init', array( $this, 'register_additional_menu' ) );
@@ -167,7 +168,7 @@ class Genesis {
 		$nav = ob_get_contents();
 		ob_end_clean();
 
-		$output = preg_replace( '/<\/div><\/div><\/div>$/', $nav . '</div></div></div>', $output );
+		$output = preg_replace( '/<\/div><\/div><\/div>$/', '</div>' . $nav . '</div></div>', $output );
 
 		return $output;
 
@@ -195,22 +196,15 @@ class Genesis {
 	}
 
 	/**
-	 * Add bar wrap which sits behind the primary navigation menu
+	 * Add header nav primary cell class names
 	 *
-	 * @since 0.1.2
-	 * @param string $output Output for the primary menu wrap.
-	 * @return string
+	 * @since 0.2.1
+	 * @param array $attributes HTML attributes.
+	 * @return array
 	 */
-	public function wrap_menu_primary( $output ) {
-
-		if ( '</div>' !== $output ) {
-
-			$output .= '<span class="bar-wrap show-for-medium"></span>';
-
-		}
-
-		return $output;
-
+	public function attr_nav_primary( $attributes ) {
+		$attributes['class'] = 'nav-p';
+		return $attributes;
 	}
 
 	/**
@@ -222,8 +216,13 @@ class Genesis {
 	 */
 	public function af4_primary_nav_class( $class ) {
 
-		$key           = array_search( 'medium-auto', $class, true );
-		$class[ $key ] = 'medium-12';
+		$key1 = array_search( 'medium-auto', $class, true );
+		$key2 = array_search( 'small-12', $class, true );
+		$key3 = array_search( 'cell', $class, true );
+
+		unset( $class[ $key1 ] );
+		unset( $class[ $key2 ] );
+		unset( $class[ $key3 ] );
 
 		return $class;
 
@@ -462,7 +461,6 @@ class Genesis {
 		return $attributes;
 	}
 
-
 	/**
 	 * Change attributes for top bar left
 	 *
@@ -472,6 +470,18 @@ class Genesis {
 	 */
 	public function af4_top_bar_left_attr( $attributes ) {
 		$attributes['class'] .= ' grid-x grid-padding-x';
+		return $attributes;
+	}
+
+	/**
+	 * Change attributes for top bar
+	 *
+	 * @since 0.2.1
+	 * @param array $attributes HTML attributes.
+	 * @return array
+	 */
+	public function af4_top_bar_attr( $attributes ) {
+		$attributes['class'] .= ' grid-container';
 		return $attributes;
 	}
 }

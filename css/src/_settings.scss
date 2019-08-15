@@ -136,7 +136,7 @@ $logo-width: rem-calc(120);
 $logo-width-stuck: rem-calc(80);
 $nav-item-padding-top-stuck: $global-menu-padding-top - .3rem;
 $nav-height: 1rem + $global-menu-padding-top * 2;
-$nav-height-stuck: 1rem + $nav-item-padding-top-stuck * 2;
+$nav-height-stuck: 1.3rem;
 $nav-blue: #003C71;
 $nav-bg-gray: #E7E7E7;
 $nav-yellow: #FFE404;

@@ -123,7 +123,7 @@ class Genesis {
 				'theme_location' => 'college-dept-menu',
 				'menu_class'     => 'grid-x reset',
 			);
-			$icon = '<div class="dept-nav-menu title-bars cell shrink title-bar-right hide-for-small-only"><div id="header-depts" class="hide-for-medium" data-toggler=".hide-for-medium">%s</div><div class="title-bar title-bar-departments"><button type="button" data-toggle="header-depts" data-toggle-focus="header-depts">Departments</button></div></div>';
+			$icon = '<div class="dept-nav-menu title-bars cell shrink title-bar-right hide-for-small-only"><div id="header-depts" class="hide-for-medium" data-toggler=".hide-for-medium">%s</div><div class="title-bar title-bar-departments"><button type="button" data-toggle="header-depts">Departments</button></div></div>';
 
 			ob_start();
 			wp_nav_menu( $menu );

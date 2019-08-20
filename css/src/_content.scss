@@ -1,0 +1,8 @@
+a {
+	color: $anchor-color;
+
+	&:active,
+	&:hover {
+		color: $anchor-color-hover;
+	}
+}

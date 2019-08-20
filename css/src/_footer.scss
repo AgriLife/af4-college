@@ -50,6 +50,13 @@
 	background-color: $maroon;
 	text-align: center;
 
+	a {
+		&:focus,
+		&:hover {
+			color: $nav-yellow;
+		}
+	}
+
 	.fcell {
 		@include xy-gutters( $grid-padding-gutters, padding );
 		display: block;

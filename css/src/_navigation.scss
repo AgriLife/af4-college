@@ -254,12 +254,6 @@
 				right: 0;
 			}
 
-			> li > a:hover,
-			> li.is-active > a,
-			&.dropdown.menu > li.is-active > a {
-				color: $nav-yellow;
-			}
-
 			> li {
 				> a:hover,
 				&.is-active > a {
@@ -270,7 +264,7 @@
 
 		.dropdown.menu > li.is-dropdown-submenu-parent:hover > a::after,
 		.dropdown.menu > li.is-dropdown-submenu-parent.is-active > a::after {
-			border-color: $nav-yellow transparent transparent;
+			border-color: $whiter transparent transparent;
 		}
 
 		.submenu {

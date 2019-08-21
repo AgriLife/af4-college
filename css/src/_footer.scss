@@ -57,6 +57,10 @@
 		}
 	}
 
+	.menu a {
+		color: $whiter;
+	}
+
 	.fcell {
 		@include xy-gutters( $grid-padding-gutters, padding );
 		display: block;

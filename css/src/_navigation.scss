@@ -3,7 +3,21 @@
 	background-color: $whiter;
 }
 
+.menu {
+	a {
+		color: $nav-blue;
+
+		&:hover {
+			color: $nav-blue;
+			background-color: $nav-bg-gray;
+			transition: all .1s; // Fixes flicker in background color.
+		}
+	}
+}
+
 .submenu {
+	padding: 0 .8rem;
+
 	li.linked > a:hover,
 	li.linked > a:focus {
 		background-color: $nav-bg-gray;
@@ -15,8 +29,8 @@
 		color: $maroon;
 	}
 
-	li {
-		padding: 0 .8rem;
+	li:not(.menu-item-has-children) {
+		border-bottom: $nav-submenu-item-border;
 	}
 
 	.grid &.menu-depth-1 {
@@ -33,6 +47,16 @@
 
 	.menu-item:not(.grid) & .is-dropdown-submenu-parent.opens-right > a {
 		padding-right: rem-calc(10) + 0.2rem;
+	}
+
+	@include breakpoint(medium) {
+		li:not(.menu-item-has-children) {
+			border-bottom: none;
+		}
+
+		li:not(.menu-item-has-children) + li {
+			border-top: $nav-submenu-item-border;
+		}
 	}
 }
 
@@ -109,16 +133,11 @@
 				border-left: none;
 			}
 		}
-
-		li:not(.menu-item-has-children) {
-			border-bottom: 1px dashed $dark-blue;
-		}
 	}
 
 	// Row of submenu columns.
 	.grid {
 
-		&.is-dropdown-submenu-parent {
 			position: static;
 		}
 
@@ -132,9 +151,16 @@
 
 		.submenu {
 			&.menu-depth-1 {
-				width: 100%;
 				flex: 0 0 auto;
 				flex-wrap: nowrap;
+
+				> li > a {
+					font-weight: bold;
+				}
+
+				.submenu {
+					padding: 0;
+				}
 			}
 
 			&.menu-depth-2 {
@@ -220,7 +246,7 @@
 
 		#header-search {
 			position: absolute;
-			bottom: 100%;
+			top: 100%;
 			right: -8px;
 			background-color: $maroon;
 			padding: .5rem;
@@ -273,7 +299,7 @@
 			}
 
 			li:not(.menu-item-has-children) + li {
-				border-top: 1px dashed $dark-blue;
+				border-top: $nav-submenu-item-border;
 			}
 
 			li:hover {
@@ -320,6 +346,42 @@
 		.submenu .unlinked > a
 		li:hover .submenu .unlinked > a {
 			color: $maroon;
+		}
+	}
+}
+
+.dept-nav {
+	@include breakpoint(medium) {
+		position: absolute;
+		right: 0;
+		top: -77px;
+
+		.is-stuck & {
+			top: -46px;
+		}
+
+		.nav-primary .dropdown.menu > & {
+			> a,
+			> a:hover,
+			&.is-active > a {
+				color: $black;
+				background-color: transparent;
+			}
+
+			&.is-dropdown-submenu-parent {
+				> a::after,
+				&.is-active > a::after,
+				&:hover > a::after {
+					border-color: $black transparent transparent;
+				}
+			}
+		}
+
+		.menu {
+			position: absolute;
+			left: auto;
+			right: 0;
+			text-align: right;
 		}
 	}
 }

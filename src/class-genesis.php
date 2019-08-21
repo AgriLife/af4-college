@@ -51,7 +51,6 @@ class Genesis {
 
 		// Add department header menu.
 		add_action( 'init', array( $this, 'register_additional_menu' ) );
-		add_filter( 'nav_menu_css_class', array( $this, 'dept_nav_item_class' ), 10, 3 );
 
 	}
 
@@ -89,25 +88,6 @@ class Genesis {
 	}
 
 	/**
-	 * Add classes to department nav menu items
-	 *
-	 * @since 0.1.6
-	 * @param array  $classes Nav menu item classes.
-	 * @param object $item Nav menu item data object.
-	 * @param array  $args Nav menu arguments.
-	 * @return array
-	 */
-	public function dept_nav_item_class( $classes, $item, $args ) {
-
-		if ( 'college-dept-menu' === $args->theme_location ) {
-			$classes[] = 'cell medium-6';
-		}
-
-		return $classes;
-
-	}
-
-	/**
 	 * Add department menu to header
 	 *
 	 * @since 0.1.2
@@ -121,9 +101,9 @@ class Genesis {
 
 			$menu = array(
 				'theme_location' => 'college-dept-menu',
-				'menu_class'     => 'grid-x reset',
+				'menu_class'     => 'grid-x reset dropdown menu submenu',
 			);
-			$icon = '<div class="dept-nav-menu title-bars cell shrink title-bar-right hide-for-small-only"><div id="header-depts" class="hide-for-medium" data-toggler=".hide-for-medium">%s</div><div class="title-bar title-bar-departments"><button type="button" data-toggle="header-depts">Departments</button></div></div>';
+			$icon = '<div id="dept-nav-menu" class="dept-nav-menu title-bars cell small-12 medium-shrink title-bar-right hide-for-small-only" data-toggler=".hide-for-small-only"><div class="title-bar title-bar-departments accordion-submenu-parent"><button type="button" data-toggle="header-depts">Departments</button></div><div id="header-depts" class="hide" data-toggler=".hide">%s</div></div>';
 
 			ob_start();
 			wp_nav_menu( $menu );
@@ -148,10 +128,6 @@ class Genesis {
 
 		register_nav_menu( 'college-dept-menu', __( 'Department Navigation Menu' ) );
 
-		if ( has_nav_menu( 'college-dept-menu' ) ) {
-			add_filter( 'genesis_markup_title-area_close', array( $this, 'department_nav_menu' ), 10, 2 );
-		}
-
 	}
 
 	/**
@@ -167,6 +143,24 @@ class Genesis {
 		genesis_do_nav();
 		$nav = ob_get_contents();
 		ob_end_clean();
+
+		// Add college menu to nav.
+		if ( has_nav_menu( 'college-dept-menu' ) ) {
+			$menu      = array(
+				'theme_location' => 'college-dept-menu',
+				'menu_class'     => 'menu submenu sub-menu vertical medium-horizontal menu-depth-1 is-dropdown-submenu first-sub',
+				'container'      => '',
+			);
+			$dept_item = '<li class="dept-nav menu-item menu-item-type-post_type menu-item-object-page current-menu-ancestor current_page_ancestor menu-item-has-children menu-item-2112 is-dropdown-submenu-parent unlinked opens-right" role="menuitem" aria-haspopup="true" aria-label="Departments"><a href="#" itemprop="url">Departments</a>%s</li>';
+
+			ob_start();
+			wp_nav_menu( $menu );
+			$depnav = ob_get_contents();
+			ob_end_clean();
+
+			$deptmenu = sprintf( $dept_item, $depnav );
+			$nav      = str_replace( 'Home</a></li>', 'Home</a></li>' . $deptmenu, $nav );
+		}
 
 		$output = preg_replace( '/<\/div><\/div><\/div>$/', '</div>' . $nav . '</div></div>', $output );
 
@@ -264,6 +258,8 @@ class Genesis {
 			$open   = str_replace( 'title-bar-right', 'title-bar-left', $open );
 			$menu   = $af_required->add_menu_toggle();
 			$menu   = str_replace( '<div class="title-bar-title" data-toggle="nav-menu-primary">Menu</div>', '', $menu );
+			$menu   = str_replace( 'data-responsive-toggle="nav-menu-primary"', '', $menu );
+			$menu   = str_replace( 'nav-menu-primary', 'nav-menu-primary dept-nav-menu', $menu );
 			$close  = $af_required->af4_nav_primary_title_bar_close();
 			$output = $open . $menu . $close . $output;
 
@@ -481,7 +477,8 @@ class Genesis {
 	 * @return array
 	 */
 	public function af4_top_bar_attr( $attributes ) {
-		$attributes['class'] .= ' grid-container';
+		$attributes['class']       .= ' grid-container hide-for-small-only';
+		$attributes['data-toggler'] = '.hide-for-small-only';
 		return $attributes;
 	}
 }

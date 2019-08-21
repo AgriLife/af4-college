@@ -48,6 +48,11 @@ class College {
 
 		add_image_size( 'medium_cropped', 300, 225, true );
 
+		// Add custom fields.
+		if ( class_exists( 'acf' ) ) {
+			require_once COLAF4_DIR_PATH . 'fields/page-header-fields.php';
+		}
+
 	}
 
 	/**

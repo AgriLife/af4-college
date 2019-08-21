@@ -52,6 +52,9 @@ class Genesis {
 		// Add department header menu.
 		add_action( 'init', array( $this, 'register_additional_menu' ) );
 
+		// Add page header content.
+		add_action( 'genesis_after_header', array( $this, 'add_custom_header' ) );
+
 	}
 
 	/**
@@ -480,5 +483,54 @@ class Genesis {
 		$attributes['class']       .= ' grid-container hide-for-small-only';
 		$attributes['data-toggler'] = '.hide-for-small-only';
 		return $attributes;
+	}
+
+	/**
+	 * Add custom page header from custom fields
+	 *
+	 * @since 0.3.0
+	 * @return void
+	 */
+	public function add_custom_header() {
+
+		$id   = get_the_ID();
+		$show = get_field( 'show_header_group', $id );
+
+		if ( true === $show ) {
+
+			remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_open', 5 );
+			remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_close', 15 );
+			remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
+			add_action( 'af4_college_header', 'genesis_entry_header_markup_open', 5 );
+			add_action( 'af4_college_header', 'genesis_do_post_title' );
+			add_action( 'af4_college_header', array( $this, 'add_custom_header_subtitle' ), 11 );
+			add_action( 'af4_college_header', 'genesis_entry_header_markup_close', 15 );
+
+			$fields = get_field( 'header_group', $id );
+			$image  = $fields['image'];
+			$thumb  = wp_get_attachment_image( $image['id'], 'full' );
+			$open   = sprintf( '<div class="custom-header grid-container full"><div class="header-image grid-x">%s<div class="custom-title grid-container">', $thumb );
+			$close  = '</div></div></div>';
+
+			echo wp_kses_post( $open );
+			do_action( 'af4_college_header' );
+			echo wp_kses_post( $close );
+
+		}
+
+	}
+
+	/**
+	 * Add custom page header subtitle from custom field
+	 *
+	 * @since 0.3.0
+	 * @return void
+	 */
+	public function add_custom_header_subtitle() {
+
+		$fields   = get_field( 'header_group', get_the_ID() );
+		$subtitle = $fields['subtitle'];
+		echo wp_kses_post( '<span class="subtitle">' . $subtitle . '</span>' );
+
 	}
 }

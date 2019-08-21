@@ -137,8 +137,23 @@
 
 	// Row of submenu columns.
 	.grid {
+		&.grid-right {
+			> .submenu {
+				position: absolute;
+				right: 0;
+				top: 100%;
+			}
+		}
 
+		&.grid-full {
 			position: static;
+
+			> .submenu {
+				position: absolute;
+				right: 0;
+				left: 0;
+				top: 100%;
+			}
 		}
 
 		.is-dropdown-submenu.menu-depth-1 .is-dropdown-submenu-parent.opens-right > a::after {
@@ -147,6 +162,14 @@
 
 		.is-dropdown-submenu {
 			min-width: auto;
+		}
+
+		&:not(.grid-full) .submenu.menu-depth-1 > li {
+			@include breakpoint(medium) {
+				padding: 0 .8rem;
+				max-width: 275px;
+				min-width: 185px;
+			}
 		}
 
 		.submenu {

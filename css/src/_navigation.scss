@@ -136,26 +136,22 @@
 	}
 
 	// Row of submenu columns.
-	.grid {
-		&.grid-right {
-			> .submenu {
-				position: absolute;
-				right: 0;
-				top: 100%;
+	@include breakpoint(medium) {
+		@include breakpoint($break-xlarge + 16px down) {
+			.grid {
+				position: static;
 			}
-		}
 
-		&.grid-full {
-			position: static;
-
-			> .submenu {
+			.dropdown.menu > .grid > .is-dropdown-submenu {
 				position: absolute;
 				right: 0;
 				left: 0;
 				top: 100%;
 			}
 		}
+	}
 
+	.grid {
 		.is-dropdown-submenu.menu-depth-1 .is-dropdown-submenu-parent.opens-right > a::after {
 			display: none;
 		}
@@ -164,21 +160,28 @@
 			min-width: auto;
 		}
 
-		&:not(.grid-full) .submenu.menu-depth-1 > li {
-			@include breakpoint(medium) {
-				padding: 0 .8rem;
-				max-width: 275px;
-				min-width: 185px;
-			}
-		}
-
 		.submenu {
 			&.menu-depth-1 {
 				flex: 0 0 auto;
 				flex-wrap: nowrap;
 
-				> li > a {
-					font-weight: bold;
+				@include breakpoint($break-xlarge + 16px) {
+					border: 1px solid $maroon;
+					border-width: 0 1px 1px;
+				}
+
+				> li {
+					padding: 0 .8rem;
+
+					@include breakpoint($break-xlarge + 16px) {
+						padding: 0 .8rem;
+						max-width: 275px;
+						min-width: 185px;
+					}
+
+					> a {
+						font-weight: bold;
+					}
 				}
 
 				.submenu {

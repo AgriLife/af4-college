@@ -16,7 +16,7 @@
 }
 
 .submenu {
-	padding: 0 .8rem;
+	padding: 1.1rem;
 
 	li.linked > a:hover,
 	li.linked > a:focus {
@@ -50,10 +50,6 @@
 	}
 
 	@include breakpoint(medium) {
-		li:not(.menu-item-has-children) {
-			border-bottom: none;
-		}
-
 		li:not(.menu-item-has-children) + li {
 			border-top: $nav-submenu-item-border;
 		}
@@ -61,7 +57,7 @@
 }
 
 .dropdown .is-dropdown-submenu a {
-	padding: 0.7rem 0.2rem;
+	padding: 0.6rem 0.2rem;
 }
 
 .nav-primary {
@@ -386,6 +382,39 @@
 			top: -46px;
 		}
 
+		&.is-active {
+			margin-top: -1px;
+			right: -1px;
+
+			&,
+			> ul {
+				border: 1px solid $gray-lighter;
+			}
+
+			.dropdown.menu > & > .is-dropdown-submenu {
+				right: -1px;
+			}
+		}
+
+		.dropdown.menu > &.is-dropdown-submenu-parent > a {
+			padding: 0.7rem 1rem 0.7rem 2.19rem;
+
+			&::after {
+				right: auto;
+				left: 1rem;
+				border-left-width: 0;
+				margin-top: -5px;
+			}
+		}
+
+		.submenu {
+			min-width: 350px;
+
+			> li:last-child {
+				border-bottom: $nav-submenu-item-border;
+			}
+		}
+
 		.nav-primary .dropdown.menu > & {
 			> a,
 			> a:hover,
@@ -398,7 +427,7 @@
 				> a::after,
 				&.is-active > a::after,
 				&:hover > a::after {
-					border-color: $black transparent transparent;
+					@include css-triangle($dropdownmenu-arrow-size, $black, left);
 				}
 			}
 		}
@@ -407,7 +436,7 @@
 			position: absolute;
 			left: auto;
 			right: 0;
-			text-align: right;
+			text-align: left;
 		}
 	}
 }

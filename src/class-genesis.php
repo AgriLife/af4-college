@@ -55,6 +55,8 @@ class Genesis {
 		// Add page header content.
 		add_action( 'genesis_after_header', array( $this, 'add_custom_header' ) );
 
+		add_action( 'get_header', array( $this, 'move_page_header' ) );
+
 	}
 
 	/**
@@ -533,6 +535,28 @@ class Genesis {
 		$fields   = get_field( 'header_group', get_the_ID() );
 		$subtitle = $fields['subtitle'];
 		echo wp_kses_post( '<span class="subtitle">' . $subtitle . '</span>' );
+
+	}
+
+	/**
+	 * Move default page title.
+	 *
+	 * @since 0.3.4
+	 * @return void
+	 */
+	public function move_page_header() {
+
+		$singular = is_singular( 'page' );
+
+		if ( $singular ) {
+
+			remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_open', 5 );
+			remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_close', 15 );
+			remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
+			add_action( 'genesis_before_content_sidebar_wrap', 'genesis_entry_header_markup_open', 5 );
+			add_action( 'genesis_before_content_sidebar_wrap', 'genesis_entry_header_markup_close', 15 );
+			add_action( 'genesis_before_content_sidebar_wrap', 'genesis_do_post_title', 11 );
+		}
 
 	}
 }

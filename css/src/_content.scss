@@ -6,3 +6,12 @@ a {
 		color: $anchor-color-hover;
 	}
 }
+
+.page-template-default h1 {
+	text-align: left;
+	padding: 0;
+
+	&::after {
+		display: none;
+	}
+}

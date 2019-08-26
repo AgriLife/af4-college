@@ -1,6 +1,6 @@
 .site-header {
 	font-family: $opensans;
-	letter-spacing: .05rem;
+	letter-spacing: 0;
 
 	&,
 	.wrap.is-at-top {
@@ -11,40 +11,26 @@
 		margin: 0;
 	}
 
+	.title-area {
+		padding: 0;
+	}
+
 	.site-title {
-		font-size: 4.3vw;
-		line-height: 1.1;
+		font: {
+			weight: 400;
+			family: $opensans;
+		}
+		text-align: center;
 		color: $whiter;
+		letter-spacing: 0;
 
 		a {
-			background-color: $maroon;
-			display: table-cell;
-			vertical-align: middle;
+			height: 5.2rem;
 		}
 
-		small {
-			text-transform: uppercase;
-			font-size: .65em;
-			line-height: 1;
-		}
-
-		.grid-x {
-			align-items: center;
-		}
-
-		.cell.logo {
-			position: relative;
-			z-index: 3;
-			padding-right: 1.2rem;
-		}
-
-		.cell + .cell {
-			border-left: 2px solid $whiter;
-			padding: {
-				top: .3rem;
-				bottom: .3rem;
-				left: 1.2rem;
-			}
+		img {
+			width: 100%;
+			max-width: 26rem;
 		}
 	}
 
@@ -52,30 +38,14 @@
 		padding: 0 $grid-padding-gutters / 2;
 
 		> .grid-x {
-			padding: 2.1rem 10px;
+			padding: 2.1rem $grid-padding-gutters / 2;
 			align-items: flex-end;
 		}
 	}
 
 	.is-stuck {
-		.site-title {
-			font-size: 3.5vw;
-
-			img {
-				max-width: 100%;
-			}
-
-			.cell + .cell {
-				padding: {
-					top: 0;
-					bottom: 0;
-				}
-			}
-		}
-
-		.cell.logo {
-			width: 20%;
-			min-width: 82px;
+		.site-title img {
+			max-width: rem-calc(240);
 		}
 
 		.top-bar.grid-container {
@@ -102,7 +72,10 @@
 
 	.title-bars {
 		align-self: center;
-		padding-right: .63rem;
+
+		&.title-bar-left {
+			padding-right: $grid-padding-gutters;
+		}
 
 		.title-bar,
 		.title-bar.title-bar-navigation .title-bar-title {
@@ -135,59 +108,40 @@
 			background-color: $whiter;
 		}
 
-		.sticky > .grid-container > .grid-x {
-			padding: 1rem 1rem 0;
+		.site-title {
+			color: $black;
+			text-align: left;
+
+			a {
+				width: 4.125rem;
+				height: 4.125rem;
+				padding: .5rem;
+			}
+
+			img {
+				width: 100%;
+				max-width: 548px;
+			}
 		}
 
 		.sticky {
 			border-top: $nav-height solid $maroon;
+
+			> .grid-container > .grid-x {
+				padding: $grid-padding-gutters / 2;
+			}
 		}
 
 		.is-stuck {
 			border-top-width: 0.4rem;
 
-			.site-title {
-				font-size: 1.2rem;
-				line-height: 1;
-
-				a {
-					width: $logo-width-stuck;
-					height: $logo-width-stuck;
-					padding: .7rem;
-				}
-
-				small {
-					font-size: .65em;
-				}
-
-				.cell {
-					max-height: $logo-width-stuck - $nav-height-stuck / 2;
-				}
-			}
-		}
-
-		.site-title {
-			color: $maroon;
-			font-size: 1.5rem;
-
-			.cell {
-				max-height: $logo-width - $nav-height / 2;
+			> .grid-container > .grid-x {
+				padding: $grid-padding-gutters / 8 $grid-padding-gutters / 2;
 			}
 
-			a {
-				width: $logo-width;
-				height: $logo-width;
-				padding: $grid-padding-gutters / 2;
-				box-shadow: 2px 2px 2px $black;
-			}
-
-			.cell.logo {
-				padding-right: 0;
-				width: auto;
-			}
-
-			.cell + .cell {
-				border-left: none;
+			.site-title img {
+				width: 100%;
+				max-width: 400px;
 			}
 		}
 

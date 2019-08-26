@@ -227,7 +227,6 @@
 			padding: {
 				top: 0;
 				bottom: 0;
-				left: $logo-width + $grid-padding-gutters;
 			}
 
 			&,
@@ -330,10 +329,6 @@
 		}
 
 		.is-stuck & {
-			.top-bar {
-				padding-left: $logo-width-stuck + $grid-padding-gutters;
-			}
-
 			.title-bar-search .search-icon {
 				height: $nav-height-stuck;
 			}
@@ -379,7 +374,7 @@
 		top: -77px;
 
 		.is-stuck & {
-			top: -46px;
+			top: -58px;
 		}
 
 		&.is-active {

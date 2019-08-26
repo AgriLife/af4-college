@@ -425,10 +425,12 @@ class Genesis {
 	public function header_logo( $inside, $old_inside, $logo_html, $home ) {
 
 		$inside = sprintf(
-			'<div class="grid-x grid-padding-x"><div class="cell logo small-3 medium-shrink"><a href="%s" title="%s"><img src="%s"></a></div><div class="cell auto"><small>Texas A&M University</small><div class="title">%s</div></div></div>',
+			'<div class="logo"><a href="%s" title="%s"><img class="show-for-medium" src="%s" alt="%s"><img class="show-for-small-only" src="%s" alt="%s"></a></div>',
 			$home,
 			get_bloginfo( 'name' ),
-			COLAF4_DIR_URL . 'images/logo-coals-box.svg',
+			COLAF4_DIR_URL . 'images/logo-coals-long.svg',
+			get_bloginfo( 'name' ),
+			COLAF4_DIR_URL . 'images/logo-coals-break-white.svg',
 			get_bloginfo( 'name' )
 		);
 

@@ -547,8 +547,10 @@ class Genesis {
 	public function move_page_header() {
 
 		$singular = is_singular( 'page' );
+		$id       = get_the_ID();
+		$show     = get_field( 'show_header_group', $id );
 
-		if ( $singular ) {
+		if ( true !== $show && $singular ) {
 
 			remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_open', 5 );
 			remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_close', 15 );
@@ -556,6 +558,7 @@ class Genesis {
 			add_action( 'genesis_before_content_sidebar_wrap', 'genesis_entry_header_markup_open', 5 );
 			add_action( 'genesis_before_content_sidebar_wrap', 'genesis_entry_header_markup_close', 15 );
 			add_action( 'genesis_before_content_sidebar_wrap', 'genesis_do_post_title', 11 );
+
 		}
 
 	}

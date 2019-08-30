@@ -153,10 +153,10 @@ class Genesis {
 		if ( has_nav_menu( 'college-dept-menu' ) ) {
 			$menu      = array(
 				'theme_location' => 'college-dept-menu',
-				'menu_class'     => 'menu submenu sub-menu vertical medium-horizontal menu-depth-1 is-dropdown-submenu first-sub',
+				'menu_class'     => 'menu submenu sub-menu vertical medium-horizontal menu-depth-1 first-sub',
 				'container'      => '',
 			);
-			$dept_item = '<li class="dept-nav menu-item menu-item-type-post_type menu-item-object-page current-menu-ancestor current_page_ancestor menu-item-has-children menu-item-2112 is-dropdown-submenu-parent unlinked opens-right" role="menuitem" aria-haspopup="true" aria-label="Departments"><a href="#" itemprop="url">Departments</a>%s</li>';
+			$dept_item = '<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children unlinked dept-nav" role="menuitem" aria-haspopup="true" aria-label="Departments"><a href="#" itemprop="url">Departments</a>%s</li>';
 
 			ob_start();
 			wp_nav_menu( $menu );

@@ -38,10 +38,12 @@ body .wp-block-quote {
 	}
 }
 
-blockquote,
-blockquote p {
-	line-height: 1.35;
-	color: #707373;
+blockquote {
+	&,
+	& p {
+		line-height: 1.35;
+		color: #707373;
+	}
 }
 
 cite {

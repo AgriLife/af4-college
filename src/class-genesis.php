@@ -326,7 +326,7 @@ class Genesis {
 	 */
 	public function genesis_footer_widget_area() {
 
-		echo '<div class="footer-info grid-container">';
+		echo '<div class="footer-info grid-container"><div class="grid-x grid-padding-x">';
 
 		genesis_widget_area(
 			'footer-right',
@@ -336,13 +336,7 @@ class Genesis {
 			)
 		);
 
-		$logo = sprintf(
-			'<div class="logo fcell small-order-5"><a href="%s" title="College of Agriculture and Life Sciences"><img src="%s"></a></div>',
-			trailingslashit( home_url() ),
-			COLAF4_DIR_URL . 'images/logo-coals-light.svg'
-		);
-
-		echo wp_kses_post( $logo );
+		echo '<div class="cell medium-order-1 medium-6 small-12"><div class="grid-x">';
 
 		genesis_widget_area(
 			'footer-left',
@@ -352,10 +346,18 @@ class Genesis {
 			)
 		);
 
-		$accessibility = '<div class="waa fcell small-order-3"><a class="underline" href="#">Website Accessibility Assistance</a></div>';
+		$accessibility = '<div class="waa cell medium-order-4"><a class="underline" href="#">Website Accessibility Assistance</a></div>';
 		echo wp_kses_post( $accessibility );
 
-		echo '</div>';
+		$logo = sprintf(
+			'<div class="logo cell medium-order-1"><a href="%s" title="College of Agriculture and Life Sciences"><img src="%s"></a></div>',
+			trailingslashit( home_url() ),
+			COLAF4_DIR_URL . 'images/logo-coals-light.svg'
+		);
+
+		echo wp_kses_post( $logo );
+
+		echo '</div></div></div></div>';
 
 	}
 
@@ -389,16 +391,16 @@ class Genesis {
 
 			// Add class to all footer widgets.
 			if ( in_array( $params[0]['id'], array( 'footer-left', 'footer-right' ), true ) ) {
-				$classes[] = 'fcell';
+				$classes[] = 'cell';
 			}
 
-			// Add small order classes to widgets.
+			// Add order classes to widgets.
 			if ( 'footer-right' === $params[0]['id'] ) {
-				$classes[] = 'small-order-1';
+				$classes[] = 'medium-6 small-12 medium-order-2';
 			} elseif ( false !== strpos( $params[0]['widget_id'], 'college_contact' ) ) {
-				$classes[] = 'small-order-2';
+				$classes[] = 'medium-order-2';
 			} elseif ( in_array( $params[0]['widget_name'], array( 'AddToAny Share', 'AddToAny Follow' ), true ) ) {
-				$classes[] = 'small-order-4';
+				$classes[] = 'medium-order-3';
 			}
 
 			$class_output               = implode( ' ', $classes );

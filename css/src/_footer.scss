@@ -61,8 +61,7 @@
 		color: $whiter;
 	}
 
-	.fcell {
-		@include xy-gutters( $grid-padding-gutters, padding );
+	.cell:not(.grid-x) {
 		display: block;
 	}
 
@@ -72,7 +71,7 @@
 
 	.footer-info,
 	.footer-container {
-		padding: 1rem 0;
+		padding: 1rem;
 	}
 
 	.footer-container {
@@ -162,36 +161,8 @@
 	@include breakpoint(small only) {
 
 		.footer-info {
-			display: flex;
-			flex: 0 1 100%;
-			flex-flow: row wrap;
-
-			.fcell {
-				width: 100%;
-
-				&:not(.small-order-1) {
-					@include separator(1rem, before);
-				}
-			}
-
-			.small-order-1 {
-				order: 1;
-			}
-
-			.small-order-2 {
-				order: 2;
-			}
-
-			.small-order-3 {
-				order: 3;
-			}
-
-			.small-order-4 {
-				order: 4;
-			}
-
-			.small-order-5 {
-				order: 5;
+			.cell:not(.medium-6) {
+				@include separator(1rem, before);
 			}
 		}
 	}
@@ -200,17 +171,43 @@
 
 		text-align: left;
 
-		.fcell {
-			width: 50%;
+		.medium-order-1 {
+			order: 1;
+		}
+
+		.medium-order-2 {
+			order: 2;
+		}
+
+		.medium-order-3 {
+			order: 3;
+		}
+
+		.medium-order-4 {
+			order: 4;
+		}
+
+		.medium-order-5 {
+			order: 5;
 		}
 
 		.footer-info,
 		.footer-container {
-			padding: 30px 0;
+			padding: {
+				top: 30px;
+				bottom: 30px;
+			}
 		}
 
 		.footer-info {
+			display: flex;
+			flex: 0 1 100%;
+			flex-flow: row wrap;
 			position: relative;
+
+			> .grid-x {
+				align-items: center;
+			}
 		}
 
 		.footer-container p {
@@ -224,20 +221,12 @@
 		}
 
 		.widget_nav_menu {
-			width: 50%;
-			position: absolute;
-			top: 50%;
-			right: 0;
-			transform: translateY(-50%);
-
 			h4 {
 				font-size: 2rem;
 			}
 		}
 
 		.logo {
-			width: 50%;
-
 			img {
 				width: 100%;
 				max-width: 360px;

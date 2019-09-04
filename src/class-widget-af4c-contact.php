@@ -65,13 +65,13 @@ class Widget_AF4C_Contact extends WP_Widget {
 
 		$title = '<div class="title-wrap cell medium-12 small-4-collapse">' . $args['before_title'] . $title . $args['after_title'] . '</div>';
 
-		$args['before_widget'] = str_replace( 'class="widget-wrap', 'class="grid-x widget-wrap', $args['before_widget'] );
+		$args['before_widget'] = str_replace( 'class="widget-wrap', 'class="widget-wrap', $args['before_widget'] );
 
 		echo wp_kses_post( $args['before_widget'] );
 		if ( ! empty( $instance['title'] ) ) {
 			echo wp_kses_post( $title );
 		}
-		echo '<div class="textwidget custom-html-widget cell medium-12">'; // The textwidget class is for theme styling compatibility.
+		echo '<div class="textwidget custom-html-widget">'; // The textwidget class is for theme styling compatibility.
 		echo wp_kses(
 			$content,
 			array(

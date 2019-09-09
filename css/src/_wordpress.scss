@@ -1,6 +1,4 @@
-/* BEGIN Gutenberg Styles
- * Do Not Pull Into REPO Yet
- */
+/* BEGIN Gutenberg Styles*/
 h1::after {
 	.page-template-default &,
 	.post-template-default & {
@@ -84,22 +82,11 @@ body .wp-block-pullquote {
 	}
 }
 
-.wp-block-atomic-blocks-ab-columns figure.wp-block-image {
+.wp-block-atomic-blocks-ab-columns figure.wp-block-image,
+.wp-block-atomic-blocks-ab-columns .wp-block-image > figure {
 	display: flex;
-
-	&::after {
-		content: "";
-		height: 45px;
-		width: 33px;
-		background: {
-			image: url(http://aglifesciences.wpengine.com/wp-content/uploads/2019/08/Media-Block-Arrow.png);
-			size: contain;
-			repeat: no-repeat;
-		}
-		flex: 0 0 auto;
-		margin: 20% auto auto -10px;
-	}
 }
+
 /*End Media Block Styles*/
 
 /*Begin Button Styling*/
@@ -138,6 +125,10 @@ body .wp-block-button .wp-block-button__link:hover {
 a.wp-block-button__link:hover {
 	box-shadow: inset 0 0 200px rgba(255, 255, 255, 0.15);
 }
+
+.ab-block-button {
+	margin: 0 0 2.5em 0;
+}
 /*End Button Styling*/
 
 
@@ -156,5 +147,44 @@ a.wp-block-button__link:hover {
 	border-bottom: 2px solid $red;
 }
 /*End Testimonial Styling*/
+
+.page-template-default h2,
+.ab-block-cta .ab-cta-title,
+.post-template-default h2 {
+	display: block;
+}
+
+@include breakpoint(medium only) {
+	/* Rules that only apply to desktop browsers */
+
+	.ab-layout-column-wrap > div:first-of-type figure.wp-block-image::after,
+	.ab-layout-column-wrap > div:first-of-type .wp-block-image > figure::after {
+		content: "";
+		height: 45px;
+		width: 33px;
+		background: {
+			image: url(http://aglifesciences.wpengine.com/wp-content/uploads/2019/08/Media-Block-Arrow.png);
+			size: contain;
+			repeat: no-repeat;
+		}
+		flex: 0 0 auto;
+		margin: 20% auto auto -10px;
+	}
+
+	.ab-layout-column-wrap > div:last-of-type figure.wp-block-image::before,
+	.ab-layout-column-wrap > div:last-of-type .wp-block-image > figure::before {
+		content: "";
+		height: 45px;
+		width: 33px;
+		background: {
+			image: url(http://aglifesciences.wpengine.com/wp-content/uploads/2019/09/ArrowLeft.png);
+			size: contain;
+			repeat: no-repeat;
+		}
+		flex: 0 0 auto;
+		margin: 20% -10px auto auto;
+		z-index: 1;
+	}
+}
 
 /* END Gutenberg Styles */

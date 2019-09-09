@@ -157,8 +157,8 @@ a.wp-block-button__link:hover {
 @include breakpoint(medium only) {
 	/* Rules that only apply to desktop browsers */
 
-	.ab-layout-column-wrap > div:first-of-type figure.wp-block-image::after,
-	.ab-layout-column-wrap > div:first-of-type .wp-block-image > figure::after {
+	.ab-layout-column-wrap > div:not(:last-of-type) figure.wp-block-image::after,
+	.ab-layout-column-wrap > div:not(:last-of-type) .wp-block-image > figure::after {
 		content: "";
 		height: 45px;
 		width: 33px;
@@ -171,8 +171,8 @@ a.wp-block-button__link:hover {
 		margin: 20% auto auto -10px;
 	}
 
-	.ab-layout-column-wrap > div:last-of-type figure.wp-block-image::before,
-	.ab-layout-column-wrap > div:last-of-type .wp-block-image > figure::before {
+	.ab-layout-column-wrap > div:not(:first-of-type) figure.wp-block-image::before,
+	.ab-layout-column-wrap > div:not(:first-of-type) .wp-block-image > figure::before {
 		content: "";
 		height: 45px;
 		width: 33px;

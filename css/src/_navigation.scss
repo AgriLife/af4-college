@@ -1,3 +1,8 @@
+// Temporary fix for flash of submenu content.
+html:not(.no-js) *[data-responsive-menu*="dropdown"] .submenu:not(.is-dropdown-submenu) {
+	display: none;
+}
+
 .menu .is-active > a,
 .dropdown.menu > li.is-active > a {
 	background-color: $whiter;

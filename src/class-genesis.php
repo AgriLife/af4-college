@@ -55,7 +55,24 @@ class Genesis {
 		// Add page header content.
 		add_action( 'genesis_after_header', array( $this, 'add_custom_header' ) );
 
-		add_action( 'get_header', array( $this, 'move_page_header' ) );
+		add_filter(
+			'body_class',
+			function( $classes ) {
+
+				$singular = is_singular( 'page' );
+				$id       = get_the_ID();
+				$show     = get_field( 'show_header_group', $id );
+
+				if ( true === $show && $singular ) {
+
+					$classes[] = 'has-custom-post-header';
+
+				}
+
+				return $classes;
+
+			}
+		);
 
 	}
 
@@ -499,69 +516,78 @@ class Genesis {
 	 */
 	public function add_custom_header() {
 
-		$id   = get_the_ID();
-		$show = get_field( 'show_header_group', $id );
-
-		if ( true === $show ) {
-
-			remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_open', 5 );
-			remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_close', 15 );
-			remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
-			add_action( 'af4_college_header', 'genesis_entry_header_markup_open', 5 );
-			add_action( 'af4_college_header', 'genesis_do_post_title' );
-			add_action( 'af4_college_header', array( $this, 'add_custom_header_subtitle' ), 11 );
-			add_action( 'af4_college_header', 'genesis_entry_header_markup_close', 15 );
-
-			$fields = get_field( 'header_group', $id );
-			$image  = $fields['image'];
-			$thumb  = wp_get_attachment_image( $image['id'], 'full' );
-			$open   = sprintf( '<div class="custom-header grid-container full"><div class="header-image grid-x">%s<div class="custom-title grid-container">', $thumb );
-			$close  = '</div></div></div>';
-
-			echo wp_kses_post( $open );
-			do_action( 'af4_college_header' );
-			echo wp_kses_post( $close );
-
-		}
-
-	}
-
-	/**
-	 * Add custom page header subtitle from custom field
-	 *
-	 * @since 0.3.0
-	 * @return void
-	 */
-	public function add_custom_header_subtitle() {
-
-		$fields   = get_field( 'header_group', get_the_ID() );
-		$subtitle = $fields['subtitle'];
-		echo wp_kses_post( '<span class="subtitle">' . $subtitle . '</span>' );
-
-	}
-
-	/**
-	 * Move default page title.
-	 *
-	 * @since 0.3.4
-	 * @return void
-	 */
-	public function move_page_header() {
-
 		$singular = is_singular( 'page' );
 		$id       = get_the_ID();
 		$show     = get_field( 'show_header_group', $id );
 
-		if ( true !== $show && $singular ) {
+		if ( true === $show && $singular ) {
 
-			remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_open', 5 );
-			remove_action( 'genesis_entry_header', 'genesis_entry_header_markup_close', 15 );
-			remove_action( 'genesis_entry_header', 'genesis_do_post_title' );
-			add_action( 'genesis_before_content_sidebar_wrap', 'genesis_entry_header_markup_open', 5 );
-			add_action( 'genesis_before_content_sidebar_wrap', 'genesis_entry_header_markup_close', 15 );
-			add_action( 'genesis_before_content_sidebar_wrap', 'genesis_do_post_title', 11 );
+			add_filter( 'genesis_attr_entry-title', array( $this, 'add_grid_containenr_class' ) );
+			add_action( 'genesis_entry_header', array( $this, 'open_custom_header' ), 4 );
+			add_filter( 'genesis_post_title_output', array( $this, 'custom_header_subtitle' ) );
+			add_action( 'genesis_entry_header', array( $this, 'close_custom_header' ), 16 );
 
 		}
+	}
+
+	/**
+	 * Add grid container class to element.
+	 *
+	 * @since 0.4.0
+	 * @param array $attributes Element html attributes.
+	 * @return array
+	 */
+	public function add_grid_containenr_class( $attributes ) {
+
+		$attributes['class'] .= ' grid-container';
+		return $attributes;
+
+	}
+
+	/**
+	 * Open elements for the customer header.
+	 *
+	 * @since 0.4.0
+	 * @return void
+	 */
+	public function open_custom_header() {
+
+		$id      = get_the_ID();
+		$fields  = get_field( 'header_group', $id );
+		$image   = $fields['image'];
+		$thumb   = wp_get_attachment_image( $image['id'], 'full' );
+		$output  = '<div class="custom-header alignfull grid-container"><div class="header-image grid-x">';
+		$output .= $thumb;
+		$output .= '<div class="custom-title grid-container">';
+		echo wp_kses_post( $output );
+
+	}
+
+	/**
+	 * Add custom header subtitle.
+	 *
+	 * @since 0.4.0
+	 * @param string $output Current header output.
+	 * @return string
+	 */
+	public function custom_header_subtitle( $output ) {
+
+		$fields   = get_field( 'header_group', get_the_ID() );
+		$subtitle = $fields['subtitle'];
+		$output  .= wp_kses_post( '<span class="subtitle">' . $subtitle . '</span>' );
+		return $output;
+
+	}
+
+	/**
+	 * Close elements for the customer header.
+	 *
+	 * @since 0.4.0
+	 * @return void
+	 */
+	public function close_custom_header() {
+
+		echo wp_kses_post( '</div></div></div>' );
 
 	}
 }

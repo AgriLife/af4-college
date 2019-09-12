@@ -1,5 +1,15 @@
+.has-custom-post-header .site-inner > .grid-container {
+	padding-top: 0;
+}
+
 .custom-header {
 	position: relative;
+	padding: 0;
+	margin-bottom: $grid-padding-gutters;
+
+	h1 {
+		padding-left: $grid-padding-gutters / 2;
+	}
 
 	&.grid-container.full {
 		margin: {

@@ -1,0 +1,190 @@
+/* BEGIN Gutenberg Styles*/
+h1::after {
+	.page-template-default &,
+	.post-template-default & {
+		border-bottom: 2px solid $red;
+	}
+}
+
+.page-template-default h2,
+.post-template-default h2::after {
+	border-bottom-color: $nav-blue;
+}
+
+body .wp-block-file .wp-block-file__button {
+	background: $maroon;
+
+}
+
+body .wp-block-button .wp-block-button__link:not(.has-background) {
+	background: $maroon;
+
+}
+
+hr {
+	border-bottom: 2px dashed $yellow;
+}
+
+body .wp-block-separator:not(.is-style-dots) {
+	border-bottom-color: $yellow;
+}
+
+body .wp-block-quote {
+	&::before,
+	&::after {
+		border-color: $nav-blue;
+	}
+}
+
+blockquote {
+	&,
+	& p {
+		line-height: 1.35;
+		color: #707373;
+	}
+}
+
+cite {
+	color: #707373;
+}
+
+body .wp-block-pullquote {
+	&::before,
+	&::after {
+		border-color: $nav-blue;
+	}
+}
+
+.ab-block-profile .ab-social-links li i {
+	background-color: $nav-blue !important; // sass-lint:disable-line no-important
+}
+
+/*Begin Two Column Styling*/
+.has-larger-font-size {
+	font-size: 20px;
+}
+/*End Two Column Styling*/
+
+/*Media Block Styles*/
+.page-template-default h2 {
+	text-align: left;
+
+	&::after {
+		border-bottom: none;
+	}
+}
+
+.ab-button {
+	border-left: {
+		width: 3px;
+		style: solid;
+		color: $red;
+	}
+}
+
+.wp-block-atomic-blocks-ab-columns figure.wp-block-image,
+.wp-block-atomic-blocks-ab-columns .wp-block-image > figure {
+	display: flex;
+}
+
+/*End Media Block Styles*/
+
+/*Begin Button Styling*/
+.ab-button-shape-rounded.ab-button-size-large {
+	border-radius: 0px;
+	font-size: 26px;
+	background-color: $maroon !important; // sass-lint:disable-line no-important
+}
+
+.ab-button-shape-rounded.ab-button-size-medium,
+.ab-button.ab-button-size-medium.ab-button-shape-rounded.ab-newsletter-submit {
+	border-radius: 0px;
+	font-size: 20px;
+	background-color: $maroon !important; // sass-lint:disable-line no-important
+}
+
+body .wp-block-file .wp-block-file__button,
+body .wp-block-button .wp-block-button__link,
+.ab-button-shape-circular,
+.ab-block-cta .ab-button-shape-circular {
+	background-color: $maroon !important; // sass-lint:disable-line no-important
+	border-radius: 0px;
+	border-left: {
+		width: 3px;
+		style: solid;
+		color: $red;
+	}
+	color: $whiter;
+}
+
+body .wp-block-file .wp-block-file__button:hover,
+body .wp-block-button .wp-block-button__link:hover {
+	background-color: $maroon;
+}
+
+a.wp-block-button__link:hover {
+	box-shadow: inset 0 0 200px rgba(255, 255, 255, 0.15);
+}
+
+.ab-block-button {
+	margin: 0 0 2.5em 0;
+}
+/*End Button Styling*/
+
+
+/*Begin Layout Team Styling*/
+.post-template-default .ab-block-profile h2::after {
+	border-bottom: 2px solid $red;
+}
+/*End Layout Team Styling*/
+
+/*Begin Testimonial Styling*/
+.ab-block-testimonial .ab-testimonial-image-wrap img {
+	position: initial !important; // sass-lint:disable-line no-important
+}
+
+.post-template-default .ab-testimonial-info h2::after {
+	border-bottom: 2px solid $red;
+}
+/*End Testimonial Styling*/
+
+.page-template-default h2,
+.ab-block-cta .ab-cta-title,
+.post-template-default h2 {
+	display: block;
+}
+
+@include breakpoint(medium only) {
+	/* Rules that only apply to desktop browsers */
+
+	.ab-layout-column-wrap > div:not(:last-of-type) figure.wp-block-image::after,
+	.ab-layout-column-wrap > div:not(:last-of-type) .wp-block-image > figure::after {
+		content: "";
+		height: 45px;
+		width: 33px;
+		background: {
+			image: url(http://aglifesciences.wpengine.com/wp-content/uploads/2019/08/Media-Block-Arrow.png);
+			size: contain;
+			repeat: no-repeat;
+		}
+		flex: 0 0 auto;
+		margin: 20% auto auto -10px;
+	}
+
+	.ab-layout-column-wrap > div:not(:first-of-type) figure.wp-block-image::before,
+	.ab-layout-column-wrap > div:not(:first-of-type) .wp-block-image > figure::before {
+		content: "";
+		height: 45px;
+		width: 33px;
+		background: {
+			image: url(http://aglifesciences.wpengine.com/wp-content/uploads/2019/09/ArrowLeft.png);
+			size: contain;
+			repeat: no-repeat;
+		}
+		flex: 0 0 auto;
+		margin: 20% -10px auto auto;
+		z-index: 1;
+	}
+}
+
+/* END Gutenberg Styles */

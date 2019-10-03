@@ -54,7 +54,23 @@
 		}
 	}
 
+	.post-tile-search-toggle {
+		display: none;
+	}
+
 	@include breakpoint(small only) {
+		width: 0;
+
+		&.cell {
+			padding: 0;
+		}
+
+		// Before sticking.
+		.sticky.is-anchored {
+			visibility: hidden;
+		}
+		// END Before sticking.
+
 		.invisible-for-small-only {
 			visibility: hidden;
 		}
@@ -78,12 +94,35 @@
 			}
 
 			ul {
-				overflow-y: scroll;
+				overflow: auto;
 				position: absolute;
 				top: auto;
-				bottom: $grid-padding-gutters / 2;
 				left: $grid-padding-gutters / 2;
 				right: $grid-padding-gutters / 2;
+				bottom: $grid-padding-gutters / 2;
+			}
+		}
+	}
+
+	@include breakpoint(700px down) {
+		&.cell {
+			width: 0;
+			padding: 0;
+
+			.sticky {
+				width: 75vw;
+				max-width: 75vw !important; // sass-lint:disable-line no-important
+				z-index: 2;
+			}
+
+			.post-tile-search-toggle {
+				display: block;
+			}
+
+			#filter-wrap {
+				display: none;
+				background-color: $whiter;
+				padding: $grid-padding-gutters / 2;
 			}
 		}
 	}
@@ -92,7 +131,7 @@
 		.is-stuck {
 			&.sticky {
 				bottom: $grid-padding-gutters / 2 !important; // sass-lint:disable-line no-important
-				overflow-y: scroll;
+				overflow: auto;
 				z-index: 2;
 			}
 		}

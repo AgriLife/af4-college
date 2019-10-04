@@ -446,10 +446,12 @@ class Genesis {
 	public function header_logo( $inside, $old_inside, $logo_html, $home ) {
 
 		$inside = sprintf(
-			'<div class="logo"><a href="%s" title="%s"><img class="logo-long show-for-medium" src="%s" alt="%s"><img class="logo-break show-for-small-only" src="%s" alt="%s"></a></div>',
+			'<div class="logo"><a href="%s" title="%s"><img class="logo-long" src="%s" alt="%s"><img class="logo-long-light" src="%s" alt="%s"><img class="logo-break" src="%s" alt="%s"></a></div>',
 			$home,
 			get_bloginfo( 'name' ),
 			COLAF4_DIR_URL . 'images/logo-coals-long.svg',
+			get_bloginfo( 'name' ),
+			COLAF4_DIR_URL . 'images/logo-coals-long-white.svg',
 			get_bloginfo( 'name' ),
 			COLAF4_DIR_URL . 'images/logo-coals-break-white.svg',
 			get_bloginfo( 'name' )

@@ -45,7 +45,7 @@
 
 	.is-stuck {
 		.site-title img {
-			max-width: rem-calc(240);
+			max-width: 30rem;
 		}
 
 		.top-bar.grid-container {
@@ -63,8 +63,8 @@
 
 			> .grid-x {
 				padding: {
-					top: .5rem;
-					bottom: .5rem;
+					top: 1rem;
+					bottom: 1rem;
 				}
 			}
 		}
@@ -80,6 +80,30 @@
 		.title-bar,
 		.title-bar.title-bar-navigation .title-bar-title {
 			padding: 0;
+		}
+	}
+
+	// Show the long, light logo on mobile when sticky header is active.
+	.logo-break,
+	.logo-long-light {
+		display: none;
+	}
+
+	@include breakpoint(small only) {
+		.logo-long {
+			display: none;
+		}
+
+		.is-anchored {
+			.logo-break {
+				display: inline-block;
+			}
+		}
+
+		.is-stuck {
+			.logo-long-light {
+				display: inline-block;
+			}
 		}
 	}
 

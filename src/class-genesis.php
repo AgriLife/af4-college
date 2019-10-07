@@ -576,7 +576,9 @@ class Genesis {
 
 		$fields   = get_field( 'header_group', get_the_ID() );
 		$subtitle = $fields['subtitle'];
-		$output  .= wp_kses_post( '<span class="subtitle">' . $subtitle . '</span>' );
+		if ( ! empty( $subtitle ) ) {
+			$output .= wp_kses_post( '<span class="subtitle">' . $subtitle . '</span>' );
+		}
 		return $output;
 
 	}

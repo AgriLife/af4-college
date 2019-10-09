@@ -60,23 +60,11 @@
 
 	@include breakpoint(small only) {
 		width: 0;
+		left: -#{rem-calc(map-get($grid-container-padding, small) / 2)};
+		z-index: 2;
 
 		&.cell {
 			padding: 0;
-		}
-
-		// Before sticking.
-		.sticky.is-anchored {
-			visibility: hidden;
-		}
-		// END Before sticking.
-
-		.invisible-for-small-only {
-			visibility: hidden;
-		}
-
-		> .wrap {
-			left: 0;
 		}
 
 		&.sticky-container {
@@ -105,18 +93,15 @@
 	}
 
 	@include breakpoint(700px down) {
+		/* Show search filters in a toggled container */
+		z-index: 2;
+
 		&.cell {
 			width: 0;
 			padding: 0;
 
-			.sticky {
-				width: 75vw;
-				max-width: 75vw !important; // sass-lint:disable-line no-important
-				z-index: 2;
-			}
-
 			.post-tile-search-toggle {
-				display: block;
+				display: inline-block;
 			}
 
 			#filter-wrap {
@@ -124,6 +109,16 @@
 				background-color: $whiter;
 				padding: $grid-padding-gutters / 2;
 			}
+		}
+
+		&.active .sticky {
+			width: 75vw;
+			max-width: 75vw !important; // sass-lint:disable-line no-important
+			z-index: 2;
+		}
+
+		@include breakpoint(medium) {
+			left: -$grid-margin-gutters / 2;
 		}
 	}
 

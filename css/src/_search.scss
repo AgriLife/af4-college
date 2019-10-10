@@ -58,89 +58,6 @@
 		display: none;
 	}
 
-	@include breakpoint(small only) {
-		width: 0;
-		left: -#{rem-calc(map-get($grid-container-padding, small) / 2)};
-		z-index: 2;
-
-		&.cell {
-			padding: 0;
-		}
-
-		&.sticky-container {
-			z-index: 1;
-		}
-
-		.is-stuck {
-			max-width: none !important; // sass-lint:disable-line no-important
-			bottom: $grid-padding-gutters / 2 !important; // sass-lint:disable-line no-important
-
-			#filter-wrap {
-				position: absolute;
-				bottom: 0;
-				width: 100%;
-			}
-
-			ul {
-				overflow: auto;
-				position: absolute;
-				top: auto;
-				left: $grid-padding-gutters / 2;
-				right: $grid-padding-gutters / 2;
-				bottom: $grid-padding-gutters / 2;
-			}
-		}
-	}
-
-	@include breakpoint(700px down) {
-		/* Show search filters in a toggled container */
-		z-index: 2;
-
-		&.cell {
-			width: 0;
-			padding: 0;
-
-			.post-tile-search-toggle {
-				display: inline-block;
-			}
-
-			#filter-wrap {
-				display: none;
-				background-color: $whiter;
-				padding: $grid-padding-gutters / 2;
-			}
-		}
-
-		&.active .sticky {
-			width: 75vw;
-			max-width: 75vw !important; // sass-lint:disable-line no-important
-			z-index: 2;
-		}
-
-		@include breakpoint(medium) {
-			left: -$grid-margin-gutters / 2;
-		}
-	}
-
-	@include breakpoint(medium) {
-		.is-stuck {
-			&.sticky {
-				bottom: $grid-padding-gutters / 2 !important; // sass-lint:disable-line no-important
-				overflow: auto;
-				z-index: 2;
-			}
-		}
-
-		> .wrap {
-			padding-bottom: $grid-padding-gutters / 2;
-		}
-
-		#filter-wrap,
-		.is-stuck #filter-wrap {
-			padding: 0;
-		}
-	}
-
 	ul {
 		hyphens: auto;
 		padding-bottom: $grid-margin-gutters / 2;
@@ -205,6 +122,109 @@
 
 		@include breakpoint(medium) {
 			padding-bottom: 0;
+		}
+	}
+
+	@include breakpoint(small only) {
+		&.cell {
+			padding: 0;
+		}
+
+		&.sticky-container {
+			z-index: 1;
+		}
+
+		.is-stuck {
+			max-width: none !important; // sass-lint:disable-line no-important
+			bottom: $grid-padding-gutters / 2 !important; // sass-lint:disable-line no-important
+
+			#filter-wrap {
+				position: absolute;
+				bottom: 0;
+				width: 100%;
+			}
+
+			ul {
+				overflow: auto;
+				position: absolute;
+				top: auto;
+				left: $grid-padding-gutters / 2;
+				right: $grid-padding-gutters / 2;
+				bottom: $grid-padding-gutters / 2;
+			}
+		}
+	}
+
+	@include breakpoint(700px down) {
+		/* Show search filters in a toggled container */
+		position: fixed;
+		top: 14rem;
+		bottom: 0;
+		left: 0;
+		z-index: 3;
+
+		.logged-in & {
+			transform: translateY( 3rem );
+		}
+
+		&.cell {
+			padding: 1rem 0 0;
+			width: 0;
+		}
+
+		ul {
+			padding-bottom: 0;
+		}
+
+		.sticky-target {
+			display: flex;
+			flex-wrap: nowrap;
+			flex: 1 1 auto;
+			align-items: flex-start;
+			height: 100%;
+		}
+
+		.post-tile-search-toggle {
+			display: block;
+			position: relative;
+			top: 14rem;
+		}
+
+		#filter-wrap {
+			display: none;
+			background-color: $whiter;
+			box-shadow: .5rem -.5rem .5rem rgba($black, .5);
+			width: calc(100% - 4.5rem);
+			max-height: 100%;
+			overflow: auto;
+		}
+
+		&.active {
+			width: 100%;
+
+			#filter-wrap {
+				display: block;
+				padding: $grid-padding-gutters / 2 $grid-padding-gutters;
+			}
+		}
+	}
+
+	@include breakpoint(medium) {
+		.is-stuck {
+			&.sticky {
+				bottom: $grid-padding-gutters / 2 !important; // sass-lint:disable-line no-important
+				overflow: auto;
+				z-index: 2;
+			}
+		}
+
+		> .wrap {
+			padding-bottom: $grid-padding-gutters / 2;
+		}
+
+		#filter-wrap,
+		.is-stuck #filter-wrap {
+			padding: 0;
 		}
 	}
 }

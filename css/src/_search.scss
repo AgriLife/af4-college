@@ -1,6 +1,6 @@
 .post-tile-search-toggle {
 	background-color: $maroon;
-	font-family: $tungsten;
+	font-family: $oswald;
 	padding: 1.07rem .6rem .6rem;
 	color: $whiter;
 	text-align: center;
@@ -35,6 +35,7 @@
 
 *[data-post-tile-search] {
 	position: relative;
+	z-index: 2;
 
 	h2 {
 		color: $maroon;
@@ -54,57 +55,8 @@
 		}
 	}
 
-	@include breakpoint(small only) {
-		.invisible-for-small-only {
-			visibility: hidden;
-		}
-
-		> .wrap {
-			left: 0;
-		}
-
-		&.sticky-container {
-			z-index: 1;
-		}
-
-		.is-stuck {
-			max-width: none !important; // sass-lint:disable-line no-important
-			bottom: $grid-padding-gutters / 2 !important; // sass-lint:disable-line no-important
-
-			#filter-wrap {
-				position: absolute;
-				bottom: 0;
-				width: 100%;
-			}
-
-			ul {
-				overflow-y: scroll;
-				position: absolute;
-				top: auto;
-				bottom: $grid-padding-gutters / 2;
-				left: $grid-padding-gutters / 2;
-				right: $grid-padding-gutters / 2;
-			}
-		}
-	}
-
-	@include breakpoint(medium) {
-		.is-stuck {
-			&.sticky {
-				bottom: $grid-padding-gutters / 2 !important; // sass-lint:disable-line no-important
-				overflow-y: scroll;
-				z-index: 2;
-			}
-		}
-
-		> .wrap {
-			padding-bottom: $grid-padding-gutters / 2;
-		}
-
-		#filter-wrap,
-		.is-stuck #filter-wrap {
-			padding: 0;
-		}
+	.post-tile-search-toggle {
+		display: none;
 	}
 
 	ul {
@@ -171,6 +123,105 @@
 
 		@include breakpoint(medium) {
 			padding-bottom: 0;
+		}
+	}
+
+	@include breakpoint(small only) {
+		&.cell {
+			padding: 0;
+		}
+
+		&.sticky-container {
+			z-index: 1;
+		}
+
+		.is-stuck {
+			max-width: none !important; // sass-lint:disable-line no-important
+			bottom: $grid-padding-gutters / 2 !important; // sass-lint:disable-line no-important
+
+			#filter-wrap {
+				position: absolute;
+				bottom: 0;
+				width: 100%;
+			}
+
+			ul {
+				overflow: auto;
+				position: absolute;
+				top: auto;
+				left: $grid-padding-gutters / 2;
+				right: $grid-padding-gutters / 2;
+				bottom: $grid-padding-gutters / 2;
+			}
+		}
+	}
+
+	@include breakpoint(700px down) {
+		/* Show search filters in a toggled container */
+		position: fixed;
+		top: 14rem;
+		bottom: 1rem;
+		left: 0;
+		z-index: 3;
+
+		&.cell {
+			padding: 1rem 0 0;
+			width: 0;
+		}
+
+		ul {
+			padding-bottom: 0;
+		}
+
+		.sticky-target {
+			display: flex;
+			flex-wrap: nowrap;
+			flex: 1 1 auto;
+			align-items: flex-start;
+			height: 100%;
+		}
+
+		.post-tile-search-toggle {
+			display: block;
+			position: relative;
+			top: 14vh;
+		}
+
+		#filter-wrap {
+			display: none;
+			background-color: $whiter;
+			box-shadow: .2rem -.2rem .6rem rgba($black, .5);
+			width: calc(100% - 4.5rem);
+			max-height: 100%;
+			overflow: auto;
+		}
+
+		&.active {
+			width: 100%;
+
+			#filter-wrap {
+				display: block;
+				padding: $grid-padding-gutters / 4 $grid-padding-gutters / 2;
+			}
+		}
+	}
+
+	@include breakpoint(medium) {
+		.is-stuck {
+			&.sticky {
+				bottom: $grid-padding-gutters / 2 !important; // sass-lint:disable-line no-important
+				overflow: auto;
+				z-index: 2;
+			}
+		}
+
+		> .wrap {
+			padding-bottom: $grid-padding-gutters / 2;
+		}
+
+		#filter-wrap,
+		.is-stuck #filter-wrap {
+			padding: 0;
 		}
 	}
 }

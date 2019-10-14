@@ -40,7 +40,7 @@ class Genesis {
 
 		// Improve layout of navigation menu through classes.
 		add_filter( 'af4_top_bar_left_attr', array( $this, 'af4_top_bar_left_attr' ) );
-		add_filter( 'af4_top_bar_attr', array( $this, 'af4_top_bar_attr' ) );
+		add_filter( 'af4_top_bar_attr', array( $this, 'add_grid_container_class' ) );
 		add_filter( 'wp_nav_menu_args', array( $this, 'nav_menu_args' ) );
 
 		// Remove span tags from nav link elements.
@@ -498,19 +498,6 @@ class Genesis {
 	}
 
 	/**
-	 * Change attributes for top bar
-	 *
-	 * @since 0.2.1
-	 * @param array $attributes HTML attributes.
-	 * @return array
-	 */
-	public function af4_top_bar_attr( $attributes ) {
-		$attributes['class']       .= ' grid-container hide-for-small-only';
-		$attributes['data-toggler'] = '.hide-for-small-only';
-		return $attributes;
-	}
-
-	/**
 	 * Add custom page header from custom fields
 	 *
 	 * @since 0.3.0
@@ -524,7 +511,7 @@ class Genesis {
 
 		if ( true === $show && $singular ) {
 
-			add_filter( 'genesis_attr_entry-title', array( $this, 'add_grid_containenr_class' ) );
+			add_filter( 'genesis_attr_entry-title', array( $this, 'add_grid_container_class' ) );
 			add_action( 'genesis_entry_header', array( $this, 'open_custom_header' ), 4 );
 			add_filter( 'genesis_post_title_output', array( $this, 'custom_header_subtitle' ) );
 			add_action( 'genesis_entry_header', array( $this, 'close_custom_header' ), 16 );
@@ -539,7 +526,7 @@ class Genesis {
 	 * @param array $attributes Element html attributes.
 	 * @return array
 	 */
-	public function add_grid_containenr_class( $attributes ) {
+	public function add_grid_container_class( $attributes ) {
 
 		$attributes['class'] .= ' grid-container';
 		return $attributes;

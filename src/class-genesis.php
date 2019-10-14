@@ -280,8 +280,6 @@ class Genesis {
 			$open   = str_replace( 'title-bar-right', 'title-bar-left', $open );
 			$menu   = $af_required->add_menu_toggle();
 			$menu   = str_replace( '<div class="title-bar-title" data-toggle="nav-menu-primary">Menu</div>', '', $menu );
-			$menu   = str_replace( 'data-responsive-toggle="nav-menu-primary"', '', $menu );
-			$menu   = str_replace( 'nav-menu-primary', 'nav-menu-primary dept-nav-menu', $menu );
 			$close  = $af_required->af4_nav_primary_title_bar_close();
 			$output = $open . $menu . $close . $output;
 

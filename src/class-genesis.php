@@ -52,27 +52,9 @@ class Genesis {
 		// Add department header menu.
 		add_action( 'init', array( $this, 'register_additional_menu' ) );
 
-		// Add page header content.
+		// Add custom page header content.
 		add_action( 'genesis_after_header', array( $this, 'add_custom_header' ) );
-
-		add_filter(
-			'body_class',
-			function( $classes ) {
-
-				$singular = is_singular( 'page' );
-				$id       = get_the_ID();
-				$show     = get_field( 'show_header_group', $id );
-
-				if ( true === $show && $singular ) {
-
-					$classes[] = 'has-custom-post-header';
-
-				}
-
-				return $classes;
-
-			}
-		);
+		add_filter( 'body_class', array( $this, 'add_custom_header_class' ) );
 
 	}
 
@@ -515,6 +497,29 @@ class Genesis {
 			add_action( 'genesis_entry_header', array( $this, 'close_custom_header' ), 16 );
 
 		}
+	}
+
+	/**
+	 * Add custom class to body for custom page header
+	 *
+	 * @since 0.5.3
+	 * @param array $classes The current body classes.
+	 * @return array
+	 */
+	public function add_custom_header_class( $classes ) {
+
+		$singular = is_singular( 'page' );
+		$id       = get_the_ID();
+		$show     = get_field( 'show_header_group', $id );
+
+		if ( true === $show && $singular ) {
+
+			$classes[] = 'has-custom-post-header';
+
+		}
+
+		return $classes;
+
 	}
 
 	/**

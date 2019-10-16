@@ -90,6 +90,8 @@
 	}
 
 	@include breakpoint(small only) {
+		text-align: left;
+
 		.logo-long {
 			display: none;
 		}
@@ -149,7 +151,7 @@
 		}
 
 		.sticky {
-			border-top: $nav-height solid $maroon;
+			border-top: none;
 
 			> .grid-container > .grid-x {
 				padding: $grid-padding-gutters / 2;

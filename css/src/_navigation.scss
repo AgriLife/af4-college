@@ -370,6 +370,19 @@ html:not(.no-js) *[data-responsive-menu*="dropdown"] .submenu:not(.is-dropdown-s
 			color: $maroon;
 		}
 	}
+
+	.menu-depth-1 {
+		border: 1px solid $whiter;
+		padding: .7rem 0;
+	}
+
+	.is-dropdown-submenu-parent.opens-right>.is-dropdown-submenu {
+		padding: 0 1rem .5rem;
+	}
+
+	#menu-departments-1 {
+		padding: 0 1em 1em 1em;
+	}
 }
 
 .dept-nav {

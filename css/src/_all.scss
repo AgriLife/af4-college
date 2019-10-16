@@ -1,0 +1,15 @@
+.arrow-right::after {
+	width: 0.9rem;
+	height: 0.9rem;
+	top: -0.05rem;
+
+	@include breakpoint(medium) {
+		width: 1.1rem;
+		height: 1.1rem;
+		top: -0.2rem;
+	}
+}
+
+.custom-title .subtitle {
+	font-size: 2rem;
+}

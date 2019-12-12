@@ -34,6 +34,9 @@ class Assets {
 		// Enqueue extension styles.
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
 
+		// Remove registered scripts.
+		add_action( 'wp_enqueue_scripts', array( $this, 'remove_af4_scripts' ), 12 );
+
 		// Register scripts used in the plugin.
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_scripts' ), 14 );
 
@@ -73,12 +76,32 @@ class Assets {
 	}
 
 	/**
+	 * Remove registered js files.
+	 *
+	 * @since 0.5.6
+	 * @return void
+	 */
+	public function remove_af4_scripts() {
+
+		wp_deregister_script( 'agriflex-public' );
+
+	}
+
+	/**
 	 * Register js files.
 	 *
 	 * @since 0.1.2
 	 * @return void
 	 */
 	public function register_scripts() {
+
+		wp_register_script(
+			'agriflex-college-public',
+			COLAF4_DIR_URL . 'js/public.min.js',
+			false,
+			filemtime( COLAF4_DIR_PATH . '/js/public.min.js' ),
+			true
+		);
 
 		wp_register_script(
 			'foundation-college',
@@ -98,6 +121,7 @@ class Assets {
 	 */
 	public function enqueue_scripts() {
 
+		wp_enqueue_script( 'agriflex-college-public' );
 		wp_enqueue_script( 'foundation-college' );
 
 	}

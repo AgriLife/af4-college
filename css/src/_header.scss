@@ -13,6 +13,10 @@
 
 	.title-area {
 		padding: 0;
+
+		@include breakpoint(small only) {
+			padding-right: $grid-padding-gutters / 2;
+		}
 	}
 
 	.site-title {

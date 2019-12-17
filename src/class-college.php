@@ -47,6 +47,7 @@ class College {
 		add_action( 'widgets_init', array( $this, 'register_widgets' ) );
 
 		add_image_size( 'medium_cropped', 300, 225, true );
+		add_image_size( 'three_two_medium', 640, 427, true );
 
 		// Add custom fields.
 		if ( class_exists( 'acf' ) ) {

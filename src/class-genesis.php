@@ -346,9 +346,6 @@ class Genesis {
 			)
 		);
 
-		$accessibility = '<div class="waa cell medium-order-4"><a class="underline" href="#">Website Accessibility Assistance</a></div>';
-		echo wp_kses_post( $accessibility );
-
 		$logo = sprintf(
 			'<div class="logo cell medium-order-1"><a href="%s" title="College of Agriculture and Life Sciences"><img src="%s"></a></div>',
 			trailingslashit( home_url() ),

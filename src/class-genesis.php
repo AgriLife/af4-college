@@ -347,7 +347,7 @@ class Genesis {
 		);
 
 		$logo = sprintf(
-			'<div class="logo cell medium-order-1"><a href="%s" title="College of Agriculture and Life Sciences"><img src="%s"></a></div>',
+			'<div class="logo cell medium-order-1"><a href="%s" title="College of Agriculture and Life Sciences"><img src="%s" alt="Texas A&M University" /></a></div>',
 			trailingslashit( home_url() ),
 			COLAF4_DIR_URL . 'images/logo-coals-light.svg'
 		);

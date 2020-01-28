@@ -2,6 +2,13 @@ module.exports = (grunt) ->
   sass = require 'node-sass'
   @initConfig
     pkg: @file.readJSON('package.json')
+    release:
+      branch: ''
+      repofullname: ''
+      lasttag: ''
+      msg: ''
+      post: ''
+      url: ''
     watch:
       files: [
         'css/src/*.scss'
@@ -93,6 +100,7 @@ module.exports = (grunt) ->
     # Define simple properties for release object
     grunt.config 'release.key', process.env.RELEASE_KEY
     grunt.config 'release.file', grunt.template.process '<%= pkg.name %>.zip'
+    grunt.config 'release.msg', grunt.template.process 'Upload <%= pkg.name %>.zip to your dashboard.'
 
     grunt.util.spawn {
       cmd: 'git'
@@ -118,45 +126,8 @@ module.exports = (grunt) ->
         grunt.log.writeln 'Remote origin url: ' + result
         matches = result.stdout.match /([^\/:]+)\/([^\/.]+)(\.git)?$/
         grunt.config 'release.repofullname', matches[1] + '/' + matches[2]
-        grunt.task.run 'setlasttag'
+        grunt.task.run 'setpostdata'
 
-      done(err)
-      return
-    return
-  @registerTask 'setlasttag', 'Set release message as range of commits', ->
-    done = @async()
-
-    grunt.util.spawn {
-      cmd: 'git'
-      args: [ 'describe', '--tags' ]
-    }, (err, result, code) ->
-      if result.stdout isnt ''
-        matches = result.stdout.match /([^\n]+)/
-        grunt.config 'release.lasttag', matches[1] + '..'
-
-      grunt.task.run 'setmsg'
-
-      done(err)
-      return
-    return
-  @registerTask 'setmsg', 'Set gh_release body with commit messages since last release', ->
-    done = @async()
-
-    releaserange = grunt.template.process '<%= release.lasttag %>HEAD'
-
-    grunt.util.spawn {
-      cmd: 'git'
-      args: ['shortlog', releaserange, '--no-merges']
-    }, (err, result, code) ->
-      msg = grunt.template.process 'Upload <%= release.file %> to your dashboard.'
-
-      if result.stdout isnt ''
-        message = result.stdout.replace /(\n)\s\s+/g, '$1- '
-        message = message.replace /\s*\[skip ci\]/g, ''
-        msg += '\n\n# Changes\n' + message
-
-      grunt.config 'release.msg', msg
-      grunt.task.run 'setpostdata'
       done(err)
       return
     return
@@ -167,7 +138,6 @@ module.exports = (grunt) ->
       body: grunt.config.get 'release.msg'
       draft: false
       prerelease: false
-      # target_commitish: grunt.config.get 'release.branch'
     grunt.config 'release.post', JSON.stringify val
     grunt.log.write JSON.stringify val
 

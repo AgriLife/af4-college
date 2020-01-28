@@ -34,7 +34,6 @@ class Genesis {
 		add_action( 'genesis_footer', array( $this, 'genesis_footer_widget_area' ), 7 );
 		add_action( 'genesis_footer', array( $this, 'add_copyright' ), 9 );
 		add_filter( 'dynamic_sidebar_params', array( $this, 'add_widget_class' ) );
-		add_filter( 'af4_header_logo', array( $this, 'header_logo' ), 11, 4 );
 		add_filter( 'genesis_attr_title-area', array( $this, 'class_cell_title_area' ), 11 );
 		add_filter( 'af4_header_right_attr', array( $this, 'af4_header_right_attr' ) );
 
@@ -410,34 +409,6 @@ class Genesis {
 		}
 
 		return $params;
-
-	}
-
-	/**
-	 * Header logo and title
-	 *
-	 * @since 0.1.1
-	 * @param string $inside Current title inner HTML.
-	 * @param string $old_inside Previous title inner HTML.
-	 * @param string $logo_html HTML template string.
-	 * @param string $home Homepage url.
-	 * @return string
-	 */
-	public function header_logo( $inside, $old_inside, $logo_html, $home ) {
-
-		$inside = sprintf(
-			'<div class="logo"><a href="%s" title="%s"><img class="logo-long" src="%s" alt="%s"><img class="logo-long-light" src="%s" alt="%s"><img class="logo-break" src="%s" alt="%s"></a></div>',
-			$home,
-			get_bloginfo( 'name' ),
-			COLAF4_DIR_URL . 'images/logo-coals-long.svg',
-			get_bloginfo( 'name' ),
-			COLAF4_DIR_URL . 'images/logo-coals-long-white.svg',
-			get_bloginfo( 'name' ),
-			COLAF4_DIR_URL . 'images/logo-coals-break-white.svg',
-			get_bloginfo( 'name' )
-		);
-
-		return $inside;
 
 	}
 

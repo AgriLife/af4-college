@@ -153,8 +153,9 @@
 			}
 
 			img {
-				width: 100%;
-				max-width: 548px;
+				width: auto;
+				max-width: 100%;
+				max-height: 64px;
 			}
 		}
 

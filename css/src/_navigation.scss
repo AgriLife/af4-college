@@ -152,6 +152,13 @@ html:not(.no-js) *[data-responsive-menu*="dropdown"] .submenu:not(.is-dropdown-s
 		}
 	}
 
+	@include breakpoint($break-xlarge + 16px) {
+		.submenu.menu-depth-1 {
+			border: 1px solid $maroon;
+			border-width: 0 1px 1px;
+		}
+	}
+
 	.grid {
 		.is-dropdown-submenu.menu-depth-1 .is-dropdown-submenu-parent.opens-right > a::after {
 			display: none;
@@ -165,11 +172,6 @@ html:not(.no-js) *[data-responsive-menu*="dropdown"] .submenu:not(.is-dropdown-s
 			&.menu-depth-1 {
 				flex: 0 0 auto;
 				flex-wrap: nowrap;
-
-				@include breakpoint($break-xlarge + 16px) {
-					border: 1px solid $maroon;
-					border-width: 0 1px 1px;
-				}
 
 				> li {
 					padding: 0 .8rem;

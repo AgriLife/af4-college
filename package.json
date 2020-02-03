@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "autoprefixer": "^9.2.1",
-    "foundation-sites": "^6.4.3",
+    "foundation-sites": "^6.6.1",
     "grunt": "^1.0.3",
     "grunt-contrib-coffee": "^2.0.0",
     "grunt-contrib-compress": "^1.4.3",

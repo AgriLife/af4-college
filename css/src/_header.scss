@@ -87,32 +87,6 @@
 		}
 	}
 
-	// Show the long, light logo on mobile when sticky header is active.
-	.logo-break,
-	.logo-long-light {
-		display: none;
-	}
-
-	@include breakpoint(small only) {
-		text-align: left;
-
-		.logo-long {
-			display: none;
-		}
-
-		.is-anchored {
-			.logo-break {
-				display: inline-block;
-			}
-		}
-
-		.is-stuck {
-			.logo-long-light {
-				display: inline-block;
-			}
-		}
-	}
-
 	@include breakpoint(425px down) {
 		.site-title {
 			.cell.logo {

@@ -78,7 +78,7 @@
 		align-self: center;
 
 		&.title-bar-left {
-			padding-right: $grid-padding-gutters;
+			padding-right: $grid-padding-gutters * .75;
 		}
 
 		.title-bar,
@@ -119,6 +119,7 @@
 		.site-title {
 			color: $black;
 			text-align: left;
+			padding-left: 1.7rem;
 
 			a {
 				width: 4.125rem;

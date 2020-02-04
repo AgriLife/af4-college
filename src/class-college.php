@@ -67,13 +67,15 @@ class College {
 	 */
 	private function require_classes() {
 
-		/* Set up asset files */
 		require_once COLAF4_DIR_PATH . 'src/class-assets.php';
+		require_once COLAF4_DIR_PATH . 'src/class-genesis.php';
+
+		/* Set up asset files */
 		$ado_assets = new \College\Assets();
 
 		/* Genesis modifications */
-		require_once COLAF4_DIR_PATH . 'src/class-genesis.php';
-		new \College\Genesis();
+		global $afc_genesis;
+		$afc_genesis = new \College\Genesis();
 
 	}
 

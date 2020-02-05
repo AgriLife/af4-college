@@ -34,10 +34,6 @@ html:not(.no-js) *[data-responsive-menu*="dropdown"] .submenu:not(.is-dropdown-s
 		color: $maroon;
 	}
 
-	li:not(.menu-item-has-children) {
-		border-bottom: $nav-submenu-item-border;
-	}
-
 	.grid &.menu-depth-1 {
 		padding: .7rem .8rem;
 
@@ -324,10 +320,6 @@ html:not(.no-js) *[data-responsive-menu*="dropdown"] .submenu:not(.is-dropdown-s
 		.submenu {
 			li:not(.menu-item-has-children) {
 				border-bottom: none;
-			}
-
-			li:not(.menu-item-has-children) + li {
-				border-top: $nav-submenu-item-border;
 			}
 
 			li:hover {

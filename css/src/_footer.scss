@@ -97,6 +97,12 @@
 	.footer-info {
 		font-family: $opensans;
 		line-height: 1.6rem;
+
+		@include breakpoint(medium) {
+			> .grid-x {
+				width: 100%;
+			}
+		}
 	}
 
 	.logo {

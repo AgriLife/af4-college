@@ -53,13 +53,26 @@ class Assets {
 	 */
 	public function register_styles() {
 
+		global $wp_query;
+		$template_name = get_post_meta( $wp_query->post->ID, '_wp_page_template', true );
+
 		wp_register_style(
 			'college-styles',
 			COLAF4_DIR_URL . 'css/college.css',
-			array(),
+			array( 'agriflex-default-styles' ),
 			filemtime( COLAF4_DIR_PATH . 'css/college.css' ),
 			'screen'
 		);
+
+		if ( ! $template_name || 'default' === $template_name ) {
+			wp_register_style(
+				'college-default-template-styles',
+				COLAF4_DIR_URL . 'css/template-default.css',
+				array( 'college-styles' ),
+				filemtime( COLAF4_DIR_PATH . 'css/template-default.css' ),
+				'screen'
+			);
+		}
 
 	}
 
@@ -71,7 +84,14 @@ class Assets {
 	 */
 	public function enqueue_styles() {
 
+		global $wp_query;
+		$template_name = get_post_meta( $wp_query->post->ID, '_wp_page_template', true );
+
 		wp_enqueue_style( 'college-styles' );
+
+		if ( ! $template_name || 'default' === $template_name ) {
+			wp_enqueue_style( 'college-default-template-styles' );
+		}
 
 	}
 

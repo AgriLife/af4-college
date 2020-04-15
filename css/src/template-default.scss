@@ -1,0 +1,25 @@
+/* Default Page and Post styles */
+@charset "utf-8";
+
+@import "foundation";
+@import "settings";
+
+h1 {
+	text-align: left;
+	padding: 0;
+
+	&::after {
+		display: none;
+		border-bottom-color: $red;
+	}
+}
+
+h2 {
+	text-align: left;
+	border-bottom-color: $nav-blue;
+	display: block;
+
+	&::after {
+		border-bottom: none;
+	}
+}

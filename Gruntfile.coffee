@@ -23,6 +23,7 @@ module.exports = (grunt) ->
           failOnError: true
         files:
           'css/college.css': 'css/college.css'
+          'css/template-default.css': 'css/template-default.css'
       dev:
         options:
           map: true
@@ -32,6 +33,7 @@ module.exports = (grunt) ->
           failOnError: true
         files:
           'css/college.css': 'css/college.css'
+          'css/template-default.css': 'css/template-default.css'
     sass:
       pkg:
         options:
@@ -42,6 +44,7 @@ module.exports = (grunt) ->
           includePaths: ['node_modules/foundation-sites/scss']
         files:
           'css/college.css': 'css/src/college.scss'
+          'css/template-default.css': 'css/src/template-default.scss'
       dev:
         options:
           implementation: sass
@@ -51,6 +54,7 @@ module.exports = (grunt) ->
           precision: 2
         files:
           'css/college.css': 'css/src/college.scss'
+          'css/template-default.css': 'css/src/template-default.scss'
     sasslint:
       options:
         configFile: '.sass-lint.yml'

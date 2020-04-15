@@ -1,16 +1,4 @@
 /* BEGIN Gutenberg Styles*/
-h1::after {
-	.page-template-default &,
-	.post-template-default & {
-		border-bottom: 2px solid $red;
-	}
-}
-
-.page-template-default h2,
-.post-template-default h2::after {
-	border-bottom-color: $nav-blue;
-}
-
 body .wp-block-file .wp-block-file__button {
 	background: $maroon;
 
@@ -66,14 +54,6 @@ body .wp-block-pullquote {
 /*End Two Column Styling*/
 
 /*Media Block Styles*/
-.page-template-default h2 {
-	text-align: left;
-
-	&::after {
-		border-bottom: none;
-	}
-}
-
 .ab-button {
 	border-left: {
 		width: 3px;
@@ -148,9 +128,7 @@ a.wp-block-button__link:hover {
 }
 /*End Testimonial Styling*/
 
-.page-template-default h2,
-.ab-block-cta .ab-cta-title,
-.post-template-default h2 {
+.ab-block-cta .ab-cta-title {
 	display: block;
 }
 

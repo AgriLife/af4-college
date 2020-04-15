@@ -4,22 +4,22 @@
 @import "foundation";
 @import "settings";
 
-h1 {
-	text-align: left;
-	padding: 0;
-
-	&::after {
-		display: none;
-		border-bottom-color: $red;
-	}
-}
-
+h1,
 h2 {
-	text-align: left;
-	border-bottom-color: $nav-blue;
-	display: block;
+	text: {
+		align: left;
+		decoration: none;
+	}
 
 	&::after {
 		border-bottom: none;
 	}
+}
+
+h1 {
+	padding: 0;
+}
+
+h2 {
+	border-bottom-color: $nav-blue;
 }

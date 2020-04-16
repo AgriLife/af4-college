@@ -59,7 +59,7 @@ class Assets {
 		wp_register_style(
 			'college-styles',
 			COLAF4_DIR_URL . 'css/college.css',
-			array( 'agriflex-default-styles', 'agriflex-default-template-styles' ),
+			array( 'agriflex-default-styles' ),
 			filemtime( COLAF4_DIR_PATH . 'css/college.css' ),
 			'screen'
 		);

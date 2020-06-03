@@ -522,7 +522,7 @@ class Genesis {
 		$fields  = get_field( 'header_group', $id );
 		$image   = $fields['image'];
 		$thumb   = wp_get_attachment_image( $image['id'], 'full' );
-		$output  = '<div class="custom-header alignfull grid-container"><div class="header-image grid-x">';
+		$output  = '<div class="custom-page-header alignfull grid-container"><div class="header-image grid-x">';
 		$output .= $thumb;
 		$output .= '<div class="custom-title grid-container">';
 		echo wp_kses_post( $output );

@@ -52,6 +52,8 @@ class College {
 		add_image_size( 'af4c_page_header_desktop_medium', 1440, 336, true );
 		add_image_size( 'af4c_page_header_desktop_medium', 1366, 336, true );
 
+		add_theme_support( 'custom-header', array( 'header-text' => true ) );
+
 		// Add custom fields.
 		if ( class_exists( 'acf' ) ) {
 			require_once COLAF4_DIR_PATH . 'fields/page-header-fields.php';

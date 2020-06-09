@@ -58,6 +58,9 @@ class Genesis {
 		// Remove sticky attributes from site header.
 		add_filter( 'af4_header_wrap', array( $this, 'remove_sticky_header' ), 11, 1 );
 
+		// Add default header logo.
+		add_filter( 'af4_header_logo', array( $this, 'default_coals_logo' ), 11, 4 );
+
 	}
 
 	/**
@@ -512,6 +515,7 @@ class Genesis {
 
 	/**
 	 * Open elements for the customer header.
+	 * Todo: Manually add image size af4c_page_header_desktop_large to srcset.
 	 *
 	 * @since 0.4.0
 	 * @return void
@@ -572,6 +576,37 @@ class Genesis {
 			'open'  => '<div class="wrap"><div class="wrap is-anchored"><div class="grid-container"><div class="grid-x grid-padding-x"',
 			'close' => '</div></div></div></div>',
 		);
+
+	}
+
+	/**
+	 * Set default college header logo.
+	 *
+	 * @since 1.1.7
+	 * @param string $logo The full logo output.
+	 * @param string $inside The inner HTML of the title.
+	 * @param string $logo_html The template string for the default logo.
+	 * @param string $home The home URL.
+	 * @return string
+	 */
+	public function default_coals_logo( $logo, $inside, $logo_html, $home ) {
+
+		$logo_field = get_field( 'logos', 'option' );
+
+		// Using a default logo.
+		if ( ! $logo_field && ( ! function_exists( 'get_custom_logo' ) || ! has_custom_logo() ) ) {
+
+			$logo_url = COLAF4_DIR_URL . '/images/logo-coals.svg';
+			$logo     = sprintf(
+				$logo_html,
+				$home,
+				$name,
+				$logo_url
+			);
+
+		}
+
+		return $logo;
 
 	}
 }

@@ -40,11 +40,10 @@ $yellow: #FFE400;
 
 /* Fonts
 --------------------------------------------- */
-$tungsten: "Tungsten A", "Tungsten B", "Oswald", sans-serif;
-$oswald: "Oswald", sans-serif;
+$tamu-header-font: "Oswald", sans-serif;
 $monoton: "Monoton", cursive;
 $opensans: "Open Sans", sans-serif;
-$header-font-family: $tungsten;
+$header-font-family: $tamu-header-font;
 $template-header-font-family: $monoton;
 $header-color-alt: lighten( $maroon, 12% );
 

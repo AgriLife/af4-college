@@ -43,8 +43,6 @@ class College {
 		// Require classes.
 		$this->require_classes();
 
-		add_filter( 'theme_page_templates', array( $this, 'remove_page_templates' ) );
-
 		// Add Widgets.
 		add_action( 'widgets_init', array( $this, 'register_widgets' ) );
 
@@ -93,20 +91,6 @@ class College {
 
 		require_once COLAF4_DIR_PATH . 'src/class-widget-af4c-contact.php';
 		register_widget( 'Widget_AF4C_Contact' );
-
-	}
-
-	/**
-	 * Remove AgriFlex4 child theme templates
-	 *
-	 * @since 1.2.1
-	 * @param array $pages_templates Registered theme page templates.
-	 * @return array
-	 */
-	public function remove_page_templates( $pages_templates ) {
-
-		unset( $pages_templates['members-only.php'] );
-		return $pages_templates;
 
 	}
 

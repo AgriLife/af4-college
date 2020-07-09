@@ -288,21 +288,25 @@ class Genesis {
 	private function add_widget_areas() {
 
 		// Footer.
-		genesis_register_sidebar(
-			array(
-				'name'        => __( 'Footer - Contact and Social', 'af4-college' ),
-				'id'          => 'footer-left',
-				'description' => __( 'This is the first widget area for the site footer.', 'af4-college' ),
-			)
-		);
+		if ( function_exists( 'genesis_register_sidebar' ) ) {
 
-		genesis_register_sidebar(
-			array(
-				'name'        => __( 'Footer - Menu', 'af4-college' ),
-				'id'          => 'footer-right',
-				'description' => __( 'This is the second widget area for the site footer.', 'af4-college' ),
-			)
-		);
+			genesis_register_sidebar(
+				array(
+					'name'        => __( 'Footer - Contact and Social', 'af4-college' ),
+					'id'          => 'footer-left',
+					'description' => __( 'This is the first widget area for the site footer.', 'af4-college' ),
+				)
+			);
+
+			genesis_register_sidebar(
+				array(
+					'name'        => __( 'Footer - Menu', 'af4-college' ),
+					'id'          => 'footer-right',
+					'description' => __( 'This is the second widget area for the site footer.', 'af4-college' ),
+				)
+			);
+
+		}
 
 	}
 

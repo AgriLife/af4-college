@@ -35,7 +35,7 @@ class Genesis {
 		add_action( 'genesis_footer', array( $this, 'add_copyright' ), 9 );
 		add_filter( 'dynamic_sidebar_params', array( $this, 'add_widget_class' ) );
 		add_filter( 'genesis_attr_title-area', array( $this, 'class_cell_title_area' ), 11 );
-		add_filter( 'af4_header_right_attr', array( $this, 'af4_header_right_attr' ) );
+		add_filter( 'af4_nav_search_attr', array( $this, 'af4_nav_search_attr' ) );
 
 		// Improve layout of navigation menu through classes.
 		add_filter( 'af4_top_bar_left_attr', array( $this, 'af4_top_bar_left_attr' ) );
@@ -78,7 +78,7 @@ class Genesis {
 		add_action( 'genesis_structural_wrap-header', array( $this, 'genesis_do_nav' ), 16 );
 
 		// Move right header widget area attached to the AgriFlex\RequiredDOM class.
-		remove_action( 'genesis_header', array( $af_required, 'add_header_right_widgets' ), 10 );
+		remove_action( 'genesis_header', array( $af_required, 'add_nav_search_widget_area' ), 10 );
 		add_filter( 'af4_primary_nav_menu', array( $this, 'add_search_widget' ), 9 );
 
 		// Remove default mobile navigation menu toggle elements.
@@ -190,7 +190,7 @@ class Genesis {
 
 		$search  = '<div class="title-bars cell medium-shrink title-bar-right">';
 		$search .= '<div class="title-bar title-bar-search"><button class="search-icon" type="button" data-toggle="header-search"></button><div class="title-bar-title">Search</div>';
-		$search  = $af_required->add_header_right_widgets( $search );
+		$search  = $af_required->add_nav_search_widget_area( $search );
 		$search  = str_replace( 'id="header-search', 'data-toggler=".hide-for-medium" id="header-search', $search );
 		$search .= '</div></div>';
 
@@ -441,7 +441,7 @@ class Genesis {
 	 * @param array $attributes HTML attributes.
 	 * @return array
 	 */
-	public function af4_header_right_attr( $attributes ) {
+	public function af4_nav_search_attr( $attributes ) {
 		$attributes['class'] = 'header-right-widget-area hide-for-medium';
 		return $attributes;
 	}

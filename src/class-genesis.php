@@ -61,6 +61,11 @@ class Genesis {
 		// Add default header logo.
 		add_filter( 'af4_header_logo', array( $this, 'default_coals_logo' ), 11, 4 );
 
+		// Genesis header right widget area.
+		add_action( 'after_setup_theme', array( $this, 'register_header_right_widget_area' ), 9 );
+		add_filter( 'genesis_markup_header-widget-area_open', array( $this, 'header_right_open' ), 11, 2 );
+		add_filter( 'genesis_markup_header-widget-area_close', array( $this, 'header_right_close' ), 11, 2 );
+
 	}
 
 	/**
@@ -392,6 +397,11 @@ class Genesis {
 
 		if ( in_array( 'widget', $classes, true ) ) {
 
+			// Add class to header right widgets.
+			if ( 'header-right' === $params[0]['id'] ) {
+				$classes[] = 'cell auto';
+			}
+
 			// Add class to all footer widgets.
 			if ( in_array( $params[0]['id'], array( 'footer-left', 'footer-right' ), true ) ) {
 				$classes[] = 'cell';
@@ -610,4 +620,57 @@ class Genesis {
 		return $logo;
 
 	}
+
+	/**
+	 * Register the Genesis header right widget area.
+	 *
+	 * @since 1.3.0
+	 * @return void
+	 */
+	public function register_header_right_widget_area() {
+
+		genesis_register_widget_area(
+			[
+				'id' => 'header-right',
+			]
+		);
+
+	}
+
+	/**
+	 * Change the open header right widget area structure.
+	 *
+	 * @since 1.3.0
+	 * @param string $open The open HTML content.
+	 * @param array  $args The widget area args.
+	 * @return string
+	 */
+	public function header_right_open( $open, $args ) {
+
+		if ( ! empty( $args['open'] ) ) {
+			$open = str_replace( 'class="', 'class="cell shrink show-for-medium ', $open ) . '<div class="grid-x grid-padding-x">';
+		}
+
+		return $open;
+
+	}
+
+	/**
+	 * Change the close header right widget area structure.
+	 *
+	 * @since 1.3.0
+	 * @param string $close The close HTML content.
+	 * @param array  $args  The widget area args.
+	 * @return string
+	 */
+	public function header_right_close( $close, $args ) {
+
+		if ( ! empty( $args['close'] ) ) {
+			$close = '</div>' . $close;
+		}
+
+		return $close;
+
+	}
+
 }

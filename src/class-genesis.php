@@ -188,13 +188,19 @@ class Genesis {
 
 		global $af_required;
 
-		$search  = '<div class="title-bars cell medium-shrink title-bar-right">';
-		$search .= '<div class="title-bar title-bar-search"><button class="search-icon" type="button" data-toggle="header-search"></button><div class="title-bar-title">Search</div>';
-		$search  = $af_required->add_nav_search_widget_area( $search );
-		$search  = str_replace( 'id="header-search', 'data-toggler=".hide-for-medium" id="header-search', $search );
-		$search .= '</div></div>';
+		if ( is_active_sidebar( 'af4-header-right' ) ) {
 
-		return $output . $search;
+			$search  = '<div class="title-bars cell medium-shrink title-bar-right">';
+			$search .= '<div class="title-bar title-bar-search"><button class="search-icon" type="button" data-toggle="header-search"></button><div class="title-bar-title">Search</div>';
+			$search  = $af_required->add_nav_search_widget_area( $search );
+			$search  = str_replace( 'id="header-search', 'data-toggler=".hide-for-medium" id="header-search', $search );
+			$search .= '</div></div>';
+
+			$output .= $search;
+
+		}
+
+		return $output;
 
 	}
 

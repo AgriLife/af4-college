@@ -86,7 +86,7 @@ class Genesis {
 		remove_filter( 'af4_before_nav', array( $af_required, 'add_menu_toggle' ), 10 );
 		remove_filter( 'af4_before_nav', array( $af_required, 'add_search_toggle' ), 11 );
 		remove_filter( 'af4_before_nav', array( $af_required, 'af4_nav_primary_title_bar_close' ), 12 );
-		add_filter( 'genesis_markup_title-area_close', array( $this, 'college_mobile_nav_toggle' ), 99, 2 );
+		add_action( 'genesis_header', array( $this, 'college_mobile_nav_toggle' ) );
 
 		// Add new widget areas.
 		$this->add_widget_areas();
@@ -260,11 +260,9 @@ class Genesis {
 	 * Add AgriFlex4 menu and nav primary toggles for mobile
 	 *
 	 * @since 0.1.2
-	 * @param string $output Current output for Genesis title area open element.
-	 * @param array  $args Arguments for Genesis title area open element.
-	 * @return string
+	 * @return void
 	 */
-	public function college_mobile_nav_toggle( $output, $args ) {
+	public function college_mobile_nav_toggle() {
 
 		global $af_required;
 
@@ -274,14 +272,7 @@ class Genesis {
 		$menu_m  = str_replace( '<div class="title-bar-title" data-toggle="nav-menu-primary">Menu</div>', '', $menu_m );
 		$close_m = $af_required->af4_nav_primary_title_bar_close();
 		$m       = $open_m . $menu_m . $close_m;
-
-		if ( ! empty( $args['close'] ) ) {
-
-			$output .= $m;
-
-		}
-
-		return $output;
+		echo wp_kses_post( $m );
 
 	}
 

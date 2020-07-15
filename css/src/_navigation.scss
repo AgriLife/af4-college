@@ -85,6 +85,15 @@ html:not(.no-js) *[data-responsive-menu*="dropdown"] .submenu:not(.is-dropdown-s
 
 	#nav-menu-primary {
 		margin-top: 0;
+
+		@include breakpoint(small only) {
+			#genesis-nav-primary {
+				padding: {
+					left: 0;
+					right: 0;
+				}
+			}
+		}
 	}
 
 	.top-bar {

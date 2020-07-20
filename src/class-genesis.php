@@ -56,9 +56,6 @@ class Genesis {
 		add_filter( 'body_class', array( $this, 'add_custom_header_class' ) );
 
 		// Remove sticky attributes from site header.
-		global $af_genesis;
-		remove_filter( 'genesis_structural_wrap-header', array( $af_genesis, 'sticky_header_container' ), 10, 2 );
-		remove_action( 'genesis_header', array( $af_genesis, 'sticky_header_wrap_open' ), 6 );
 		add_action( 'genesis_header', array( $this, 'unsticky_header_wrap_open' ), 6 );
 
 		// Add default header logo.
@@ -80,11 +77,16 @@ class Genesis {
 	public function init() {
 
 		global $af_required;
+		global $af_genesis;
+
+		// Remove sticky header attributes.
+		remove_filter( 'genesis_structural_wrap-header', array( $af_genesis, 'sticky_header_container' ), 10, 2 );
+		remove_action( 'genesis_header', array( $af_genesis, 'sticky_header_wrap_open' ), 6 );
 
 		// Move navigation menu to after the header structural wrap but within the sticky container.
 		remove_action( 'genesis_header', 'genesis_do_nav', 10 );
-		add_action( 'genesis_structural_wrap-header', array( $this, 'genesis_do_nav' ), 16 );
-
+		add_action( 'genesis_header', 'genesis_do_nav', 12 );
+		// add_action( 'genesis_structural_wrap-header', array( $this, 'genesis_do_nav' ), 16 );
 		// Move right header widget area attached to the AgriFlex\RequiredDOM class.
 		remove_action( 'genesis_header', array( $af_required, 'add_nav_search_widget_area' ), 10 );
 		add_filter( 'af4_primary_nav_menu', array( $this, 'add_search_widget' ), 9 );
@@ -585,7 +587,7 @@ class Genesis {
 	 */
 	public function unsticky_header_wrap_open() {
 
-		echo wp_kses_post( '<div class="wrap is-anchored"><div class="grid-container"><div class="grid-x grid-padding-x">' );
+		echo wp_kses_post( '<div class="wrap is-anchored">' );
 
 	}
 
@@ -610,7 +612,7 @@ class Genesis {
 			$logo     = sprintf(
 				$logo_html,
 				$home,
-				$name,
+				'College of Agriculture and Life Sciences',
 				$logo_url
 			);
 

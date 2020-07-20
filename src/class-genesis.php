@@ -56,7 +56,10 @@ class Genesis {
 		add_filter( 'body_class', array( $this, 'add_custom_header_class' ) );
 
 		// Remove sticky attributes from site header.
-		add_filter( 'af4_header_wrap', array( $this, 'remove_sticky_header' ), 11, 1 );
+		global $af_genesis;
+		remove_filter( 'genesis_structural_wrap-header', array( $af_genesis, 'sticky_header_container' ), 10, 2 );
+		remove_action( 'genesis_header', array( $af_genesis, 'sticky_header_wrap_open' ), 6 );
+		add_action( 'genesis_header', array( $this, 'unsticky_header_wrap_open' ), 6 );
 
 		// Add default header logo.
 		add_filter( 'af4_header_logo', array( $this, 'default_coals_logo' ), 11, 4 );
@@ -577,16 +580,12 @@ class Genesis {
 	/**
 	 * Remove sticky header attributes from agriflex4 header.
 	 *
-	 * @since 0.5.6
-	 * @param array $atts Open and close attributes of header wrapper.
-	 * @return array
+	 * @since 1.4.0
+	 * @return void
 	 */
-	public function remove_sticky_header( $atts ) {
+	public function unsticky_header_wrap_open() {
 
-		return array(
-			'open'  => '<div class="wrap"><div class="wrap is-anchored"><div class="grid-container"><div class="grid-x grid-padding-x"',
-			'close' => '</div></div></div></div>',
-		);
+		echo wp_kses_post( '<div class="wrap is-anchored"><div class="grid-container"><div class="grid-x grid-padding-x">' );
 
 	}
 

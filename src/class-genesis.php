@@ -48,9 +48,6 @@ class Genesis {
 		// Add maroon bar behind navigation menu.
 		add_filter( 'genesis_attr_nav-primary', array( $this, 'attr_nav_primary' ) );
 
-		// Add department header menu.
-		add_action( 'init', array( $this, 'register_additional_menu' ) );
-
 		// Add custom page header content.
 		add_action( 'genesis_after_header', array( $this, 'add_custom_header' ) );
 		add_filter( 'body_class', array( $this, 'add_custom_header_class' ) );
@@ -86,7 +83,6 @@ class Genesis {
 		// Move navigation menu to after the header structural wrap but within the sticky container.
 		remove_action( 'genesis_header', 'genesis_do_nav', 10 );
 		add_action( 'genesis_header', 'genesis_do_nav', 12 );
-		// add_action( 'genesis_structural_wrap-header', array( $this, 'genesis_do_nav' ), 16 );
 		// Move right header widget area attached to the AgriFlex\RequiredDOM class.
 		remove_action( 'genesis_header', array( $af_required, 'add_nav_search_widget_area' ), 10 );
 		add_filter( 'af4_primary_nav_menu', array( $this, 'add_search_widget' ), 9 );
@@ -132,56 +128,6 @@ class Genesis {
 			$output .= sprintf( $icon, $nav );
 
 		}
-
-		return $output;
-
-	}
-
-	/**
-	 * Register nav menu location
-	 *
-	 * @since 0.1.6
-	 * @return void
-	 */
-	public function register_additional_menu() {
-
-		register_nav_menu( 'college-dept-menu', __( 'Department Navigation Menu' ) );
-
-	}
-
-	/**
-	 * Add nav menu in grid container
-	 *
-	 * @since 0.1.2
-	 * @param string $output Output for the site header wrap.
-	 * @return string
-	 */
-	public function genesis_do_nav( $output ) {
-
-		ob_start();
-		genesis_do_nav();
-		$nav = ob_get_contents();
-		ob_end_clean();
-
-		// Add college menu to nav.
-		if ( has_nav_menu( 'college-dept-menu' ) ) {
-			$menu      = array(
-				'theme_location' => 'college-dept-menu',
-				'menu_class'     => 'menu submenu sub-menu vertical medium-horizontal menu-depth-1 first-sub',
-				'container'      => '',
-			);
-			$dept_item = '<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children unlinked dept-nav" role="menuitem" aria-haspopup="true" aria-label="Departments"><a href="#" itemprop="url">Departments</a>%s</li>';
-
-			ob_start();
-			wp_nav_menu( $menu );
-			$depnav = ob_get_contents();
-			ob_end_clean();
-
-			$deptmenu = sprintf( $dept_item, $depnav );
-			$nav      = str_replace( 'Home</a></li>', 'Home</a></li>' . $deptmenu, $nav );
-		}
-
-		$output = preg_replace( '/<\/div><\/div><\/div>$/', '</div>' . $nav . '</div></div>', $output );
 
 		return $output;
 

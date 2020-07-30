@@ -309,10 +309,36 @@ class Genesis {
 		);
 
 		$logo = sprintf(
-			'<div class="logo cell medium-order-1"><a href="%s" title="College of Agriculture and Life Sciences"><img src="%s" alt="Texas A&M University" /></a></div>',
+			'<a href="%s" title="College of Agriculture and Life Sciences"><img src="%s" alt="Texas A&M University" /></a>',
 			'https://aglifesciences.tamu.edu/',
 			COLAF4_DIR_URL . 'images/logo-coals-light.svg'
 		);
+
+		// Get logo from theme's options page custom field if available.
+		$logo_field = get_field( 'footer_logos', 'option' );
+		if ( $logo_field ) {
+
+			$home = trailingslashit( home_url() );
+			$name = get_bloginfo( 'name' );
+			$logo = sprintf( '<a href="%s" title="%s" rel="home">', $home, $name );
+
+			foreach ( $logo_field as $key => $value ) {
+				$logo_i = wp_get_attachment_image(
+					$value['image']['ID'],
+					'full',
+					false,
+					array(
+						'class' => 'show-for-' . strtolower( $value['screen_size'] ),
+					)
+				);
+				$logo  .= preg_replace( '/\s(width|height)=["]?\d+["]?/', '', $logo_i );
+			}
+
+			$logo .= '</a>';
+
+		}
+
+		$logo = "<div class=\"logo cell medium-order-1\">$logo</div>";
 
 		echo wp_kses_post( $logo );
 

@@ -69,8 +69,13 @@ class College {
 	 */
 	private function require_classes() {
 
+		require_once COLAF4_DIR_PATH . 'src/class-custom-fields.php';
 		require_once COLAF4_DIR_PATH . 'src/class-assets.php';
 		require_once COLAF4_DIR_PATH . 'src/class-genesis.php';
+
+		/* Set up custom fields */
+		global $afc_customfields;
+		$afc_customfields = new \College\Custom_Fields();
 
 		/* Set up asset files */
 		$afc_assets = new \College\Assets();

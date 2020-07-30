@@ -73,7 +73,7 @@ class College {
 		require_once COLAF4_DIR_PATH . 'src/class-genesis.php';
 
 		/* Set up asset files */
-		$ado_assets = new \College\Assets();
+		$afc_assets = new \College\Assets();
 
 		/* Genesis modifications */
 		global $afc_genesis;

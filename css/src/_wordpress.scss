@@ -165,4 +165,19 @@ a.wp-block-button__link:hover {
 	}
 }
 
+.wp-block-cover {
+	&.alignwide,
+	&.alignfull {
+		margin-bottom: 0;
+	}
+}
+
+.alignfull:last-child {
+	margin-bottom: 0 - 2 * $site-padding;
+}
+
+.post-edit-link:last-child {
+	display: block;
+	margin-bottom: 0 - 2 * $site-padding;
+}
 /* END Gutenberg Styles */

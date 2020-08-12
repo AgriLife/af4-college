@@ -49,12 +49,6 @@ html:not(.no-js) *[data-responsive-menu*="dropdown"] .submenu:not(.is-dropdown-s
 	.menu-item:not(.grid) & .is-dropdown-submenu-parent.opens-right > a {
 		padding-right: rem-calc(10) + 0.2rem;
 	}
-
-	@include breakpoint(medium) {
-		li:not(.menu-item-has-children) + li {
-			border-top: $nav-submenu-item-border;
-		}
-	}
 }
 
 .dropdown .is-dropdown-submenu a {

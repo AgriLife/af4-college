@@ -69,7 +69,7 @@
 
 	.subtitle {
 		display: block;
-		font-size: 3rem;
+		font-size: 5vw;
 		line-height: 1.1;
 		margin-top: .5rem;
 	}
@@ -84,9 +84,17 @@
 			font-size: 4rem;
 		}
 
+		.subtitle {
+			font-size: 3rem;
+		}
+
 		@include breakpoint(1014px down) {
 			h1 {
 				font-size: 5vw;
+			}
+
+			.subtitle {
+				font-size: 3vw;
 			}
 		}
 	}

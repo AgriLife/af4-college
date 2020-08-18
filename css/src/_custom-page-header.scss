@@ -1,3 +1,5 @@
+$subtitle-font-ratio: .5;
+
 .has-custom-post-header .site-inner > .grid-container {
 	padding-top: 0;
 }
@@ -17,23 +19,8 @@
 		}
 	}
 
-	img {
-		min-width: 100%;
-		max-width: none;
-		min-height: 336px;
-	}
-
 	.header-image {
-		justify-content: center;
-		align-content: center;
-		align-items: center;
 		position: relative;
-		overflow: hidden;
-		max-height: 500px;
-
-		@include breakpoint(medium) {
-			max-height: 336px;
-		}
 	}
 }
 
@@ -63,13 +50,12 @@
 	.entry-header {
 		display: inline-block;
 		background-color: rgba(0, 0, 0, 0.8);
-		max-width: 75%;
 		padding: 1.5rem 2rem;
 	}
 
 	.subtitle {
 		display: block;
-		font-size: 5vw;
+		font-size: 7vw * $subtitle-font-ratio;
 		line-height: 1.1;
 		margin-top: .5rem;
 	}
@@ -85,7 +71,7 @@
 		}
 
 		.subtitle {
-			font-size: 3rem;
+			font-size: 4rem * $subtitle-font-ratio;
 		}
 
 		@include breakpoint(1014px down) {
@@ -94,7 +80,7 @@
 			}
 
 			.subtitle {
-				font-size: 3vw;
+				font-size: 5vw * $subtitle-font-ratio;
 			}
 		}
 	}

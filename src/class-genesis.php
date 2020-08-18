@@ -510,13 +510,26 @@ class Genesis {
 	 */
 	public function open_custom_header() {
 
-		$id      = get_the_ID();
-		$fields  = get_field( 'header_group', $id );
-		$image   = $fields['image'];
-		$thumb   = wp_get_attachment_image( $image['id'], 'full' );
-		$output  = '<div class="custom-page-header alignfull grid-container"><div class="header-image grid-x">';
-		$output .= $thumb;
-		$output .= '<div class="custom-title grid-container">';
+		$id           = get_the_ID();
+		$fields       = get_field( 'header_group', $id );
+		$image        = $fields['image'];
+		$image_meta   = wp_get_attachment_metadata( $image['id'] );
+		$image_sizes  = array_keys( $image_meta['sizes'] );
+		$desktop_size = '';
+		if ( in_array( 'af4c_page_header_desktop_extra_large', $image_sizes, true ) ) {
+			$desktop_size = 'af4c_page_header_desktop_extra_large';
+		} elseif ( in_array( 'af4c_page_header_desktop_large', $image_sizes, true ) ) {
+			$desktop_size = 'af4c_page_header_desktop_large';
+		} elseif ( in_array( 'af4c_page_header_desktop_medium', $image_sizes, true ) ) {
+			$desktop_size = 'af4c_page_header_desktop_medium';
+		}
+		$mobile_size = 'af4c_page_header_desktop_small';
+		$mobile_img  = wp_get_attachment_image( $image['id'], $mobile_size, false, array( 'class' => "hide-for-medium attachment-$mobile_size size-$mobile_size" ) );
+		$desktop_img = wp_get_attachment_image( $image['id'], $desktop_size, false, array( 'class' => "hide-for-small-only attachment-$desktop_size size-$desktop_size" ) );
+		$output      = '<div class="custom-page-header alignfull grid-container"><div class="header-image grid-x">';
+		$output     .= $mobile_img;
+		$output     .= $desktop_img;
+		$output     .= '<div class="custom-title grid-container">';
 		echo wp_kses_post( $output );
 
 	}

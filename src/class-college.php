@@ -46,13 +46,19 @@ class College {
 		// Add Widgets.
 		add_action( 'widgets_init', array( $this, 'register_widgets' ) );
 
+		// Add theme support.
+		add_theme_support( 'custom-header', array( 'header-text' => true ) );
+
+		// Add image sizes.
 		add_image_size( 'medium_cropped', 300, 225, true );
 		add_image_size( 'three_two_medium', 640, 427, true );
-		add_image_size( 'af4c_page_header_desktop_large', 1920, 336, true );
-		add_image_size( 'af4c_page_header_desktop_medium', 1440, 336, true );
-		add_image_size( 'af4c_page_header_desktop_medium', 1366, 336, true );
-
-		add_theme_support( 'custom-header', array( 'header-text' => true ) );
+		// Custom page header image, 40:7 aspect ratio.
+		add_image_size( 'af4c_page_header_desktop_extra_large', 1920, 336, true );
+		add_image_size( 'af4c_page_header_desktop_large', 1536, 268, true );
+		add_image_size( 'af4c_page_header_desktop_medium', 1440, 252, true );
+		add_image_size( 'af4c_page_header_desktop_medium_small', 1366, 239, true );
+		add_image_size( 'af4c_page_header_desktop_small', 1280, 672, true );
+		add_image_size( 'af4c_page_header_desktop_mobile', 640, 336, true );
 
 		// Add custom fields.
 		if ( class_exists( 'acf' ) ) {

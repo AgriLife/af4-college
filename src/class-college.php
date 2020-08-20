@@ -57,8 +57,8 @@ class College {
 		add_image_size( 'af4c_page_header_desktop_large', 1536, 268, true );
 		add_image_size( 'af4c_page_header_desktop_medium', 1440, 252, true );
 		add_image_size( 'af4c_page_header_desktop_medium_small', 1366, 239, true );
-		add_image_size( 'af4c_page_header_desktop_small', 1280, 672, true );
-		add_image_size( 'af4c_page_header_desktop_mobile', 640, 336, true );
+		add_image_size( 'af4c_page_header_mobile_large', 1280, 672, true );
+		add_image_size( 'af4c_page_header_mobile_small', 640, 336, true );
 
 		// Add custom fields.
 		if ( class_exists( 'acf' ) ) {

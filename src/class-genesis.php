@@ -523,7 +523,7 @@ class Genesis {
 		} elseif ( in_array( 'af4c_page_header_desktop_medium', $image_sizes, true ) ) {
 			$desktop_size = 'af4c_page_header_desktop_medium';
 		}
-		$mobile_size = 'af4c_page_header_desktop_small';
+		$mobile_size = 'af4c_page_header_mobile_large';
 		$mobile_img  = wp_get_attachment_image( $image['id'], $mobile_size, false, array( 'class' => "hide-for-medium attachment-$mobile_size size-$mobile_size" ) );
 		$desktop_img = wp_get_attachment_image( $image['id'], $desktop_size, false, array( 'class' => "hide-for-small-only attachment-$desktop_size size-$desktop_size" ) );
 		$output      = '<div class="custom-page-header alignfull grid-container"><div class="header-image grid-x">';

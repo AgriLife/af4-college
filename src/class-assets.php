@@ -54,7 +54,23 @@ class Assets {
 	public function register_styles() {
 
 		global $wp_query;
-		$template_name = get_post_meta( $wp_query->post->ID, '_wp_page_template', true );
+
+		if ( ! empty( $wp_query->post ) ) {
+
+			$template_name = get_post_meta( $wp_query->post->ID, '_wp_page_template', true );
+
+			// If body class is page-template-default or post-template-default.
+			if ( is_singular( 'post' ) || ( is_singular( 'page' ) && ( ! $template_name || 'default' === $template_name ) ) ) {
+
+				wp_register_style(
+					'college-default-template-styles',
+					COLAF4_DIR_URL . 'css/template-default.css',
+					array( 'college-styles' ),
+					filemtime( COLAF4_DIR_PATH . 'css/template-default.css' ),
+					'screen'
+				);
+			}
+		}
 
 		wp_register_style(
 			'college-styles',
@@ -63,19 +79,6 @@ class Assets {
 			filemtime( COLAF4_DIR_PATH . 'css/college.css' ),
 			'screen'
 		);
-
-		// If body class is page-template-default or post-template-default.
-		if ( is_singular( 'post' ) || ( is_singular( 'page' ) && ( ! $template_name || 'default' === $template_name ) ) ) {
-
-			wp_register_style(
-				'college-default-template-styles',
-				COLAF4_DIR_URL . 'css/template-default.css',
-				array( 'college-styles' ),
-				filemtime( COLAF4_DIR_PATH . 'css/template-default.css' ),
-				'screen'
-			);
-
-		}
 
 	}
 
@@ -88,16 +91,20 @@ class Assets {
 	public function enqueue_styles() {
 
 		global $wp_query;
-		$template_name = get_post_meta( $wp_query->post->ID, '_wp_page_template', true );
+
+		if ( ! empty( $wp_query->post ) ) {
+
+			$template_name = get_post_meta( $wp_query->post->ID, '_wp_page_template', true );
+
+			// If body class is page-template-default or post-template-default.
+			if ( is_singular( 'post' ) || ( is_singular( 'page' ) && ( ! $template_name || 'default' === $template_name ) ) ) {
+
+				wp_enqueue_style( 'college-default-template-styles' );
+
+			}
+		}
 
 		wp_enqueue_style( 'college-styles' );
-
-		// If body class is page-template-default or post-template-default.
-		if ( is_singular( 'post' ) || ( is_singular( 'page' ) && ( ! $template_name || 'default' === $template_name ) ) ) {
-
-			wp_enqueue_style( 'college-default-template-styles' );
-
-		}
 
 	}
 

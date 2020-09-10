@@ -38,7 +38,7 @@
 		}
 	}
 
-	.sticky > .grid-container {
+	.sticky .header-grid-container {
 		padding: 0 $grid-padding-gutters / 2;
 
 		> .grid-x {
@@ -59,7 +59,7 @@
 			}
 		}
 
-		> .grid-container {
+		.header-grid-container {
 			padding: {
 				top: 0;
 				bottom: 0;
@@ -112,7 +112,7 @@
 			background-color: $whiter;
 		}
 
-		.grid-container {
+		.header-grid-container {
 			color: $black;
 		}
 
@@ -136,7 +136,7 @@
 		.sticky {
 			border-top: none;
 
-			> .grid-container > .grid-x {
+			.header-grid-container > .grid-x {
 				padding: $grid-padding-gutters / 2;
 			}
 		}
@@ -144,7 +144,7 @@
 		.is-stuck {
 			border-top-width: 0.4rem;
 
-			> .grid-container > .grid-x {
+			.header-grid-container > .grid-x {
 				padding: $grid-padding-gutters / 8 $grid-padding-gutters / 2;
 			}
 
